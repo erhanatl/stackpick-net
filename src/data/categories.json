@@ -1,0 +1,32 @@
+[
+  {
+    "name": "CI/CD",
+    "slug": "ci-cd",
+    "description": "AI-powered Continuous Integration and Continuous Delivery tools that automate build, test, and deployment pipelines with intelligent optimization."
+  },
+  {
+    "name": "Code Assistant",
+    "slug": "code-assistant",
+    "description": "AI code assistants that help developers write, review, and debug code faster with intelligent suggestions and auto-completion."
+  },
+  {
+    "name": "Monitoring",
+    "slug": "monitoring",
+    "description": "AI-enhanced monitoring and observability tools that provide intelligent alerting, anomaly detection, and root cause analysis."
+  },
+  {
+    "name": "Testing",
+    "slug": "testing",
+    "description": "AI-driven testing tools that automatically generate, maintain, and optimize test suites for better software quality."
+  },
+  {
+    "name": "Security",
+    "slug": "security",
+    "description": "AI-powered security tools that detect vulnerabilities, scan dependencies, and protect your DevOps pipeline from threats."
+  },
+  {
+    "name": "IaC",
+    "slug": "iac",
+    "description": "AI-assisted Infrastructure as Code tools that help define, provision, and manage cloud infrastructure with intelligent automation."
+  }
+]

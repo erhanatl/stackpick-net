@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import tools from '../../data/tools.json';
+
+const toolSlugs = ['cursor', 'github-copilot'];
+const comparedTools = toolSlugs.map(slug => tools.find(t => t.slug === slug)).filter(Boolean) as typeof tools;
+---
+
+<BaseLayout
+  title="Cursor vs GitHub Copilot 2026"
+  description="Detailed comparison of Cursor and GitHub Copilot. Compare features, pricing, pros & cons to pick the best AI code assistant for your DevOps team."
+>
+  <article class="py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-text-muted mb-8">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/compare/" class="hover:text-primary">Comparisons</a>
+        <span class="mx-2">/</span>
+        <span class="text-text">Cursor vs GitHub Copilot</span>
+      </nav>
+
+      <h1 class="text-4xl font-bold mb-4">Cursor vs GitHub Copilot (2026)</h1>
+      <p class="text-lg text-text-muted mb-10">
+        A detailed side-by-side comparison of two leading AI code assistants.
+        Both tools aim to supercharge developer productivity, but they take very different approaches.
+      </p>
+
+      <!-- Comparison Table -->
+      <ComparisonTable tools={comparedTools.map(t => ({
+        name: t.tool_name,
+        slug: t.slug,
+        pricingModel: t.pricing_model,
+        startingPrice: t.starting_price,
+        rating: t.rating,
+        pros: t.pros,
+        cons: t.cons
+      }))} />
+
+      <!-- Verdict -->
+      <section class="mt-12 bg-surface rounded-xl p-8">
+        <h2 class="text-2xl font-bold mb-4">The Verdict</h2>
+        <div class="prose max-w-none">
+          <p class="text-lg leading-relaxed mb-4">
+            <strong>Choose Cursor</strong> if you want a complete AI-first IDE experience with superior multi-file editing
+            and deep codebase understanding. Ideal for teams doing heavy refactoring or working on large codebases.
+          </p>
+          <p class="text-lg leading-relaxed">
+            <strong>Choose GitHub Copilot</strong> if you want seamless integration into your existing VS Code or JetBrains
+            workflow without switching editors. Best for developers who want AI assistance without changing their tools.
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <div class="grid md:grid-cols-2 gap-6 mt-10">
+        {comparedTools.map((tool) => (
+          <div class="bg-white border border-border rounded-xl p-6 text-center">
+            <h3 class="text-lg font-bold mb-2">{tool.tool_name}</h3>
+            <p class="text-text-muted text-sm mb-4">{tool.starting_price} · {tool.pricing_model}</p>
+            <a
+              href={tool.affiliate_url || tool.website_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-semibold transition-colors inline-block text-sm"
+            >
+              Try {tool.tool_name}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- JSON-LD -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Cursor vs GitHub Copilot 2026 Comparison",
+        "description": "Detailed comparison of Cursor and GitHub Copilot AI code assistants",
+        "datePublished": "2026-03-20",
+        "author": {
+          "@type": "Organization",
+          "name": "Stackpick"
+        }
+      })} />
+    </div>
+  </article>
+</BaseLayout>

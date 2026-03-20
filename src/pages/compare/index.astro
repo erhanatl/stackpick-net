@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import tools from '../../data/tools.json';
+
+const comparisons = [
+  {
+    title: "Cursor vs GitHub Copilot",
+    slug: "cursor-vs-github-copilot",
+    description: "Two leading AI code assistants compared — which one is right for your DevOps workflow?",
+    tools: ["cursor", "github-copilot"]
+  }
+];
+---
+
+<BaseLayout
+  title="AI DevOps Tool Comparisons"
+  description="Side-by-side comparisons of the best AI tools for DevOps. Compare features, pricing, and ratings to find the right tools for your team."
+>
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold mb-4">Tool Comparisons</h1>
+      <p class="text-lg text-text-muted mb-10">Side-by-side comparisons to help you pick the right tool.</p>
+
+      <div class="space-y-6">
+        {comparisons.map((comp) => (
+          <a href={`/compare/${comp.slug}/`} class="block bg-white border border-border rounded-xl p-6 hover:shadow-lg transition-shadow">
+            <h2 class="text-xl font-bold mb-2">{comp.title}</h2>
+            <p class="text-text-muted">{comp.description}</p>
+            <span class="inline-block mt-4 text-primary font-medium text-sm">Read comparison &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

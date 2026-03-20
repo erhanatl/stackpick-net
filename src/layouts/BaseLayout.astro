@@ -1,0 +1,146 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const { title, description, canonical, ogImage } = Astro.props;
+const siteUrl = 'https://stackpick.net';
+const pageTitle = title === 'Home' ? 'Stackpick — Best AI Tools for DevOps' : `${title} | Stackpick`;
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage || `${siteUrl}/og-default.png`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Stackpick" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <title>{pageTitle}</title>
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Stackpick",
+      "description": "Best AI Tools for DevOps — Compare, Review, Pick",
+      "url": siteUrl
+    })} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-secondary text-white">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2">
+          <span class="text-2xl font-bold">Stackpick</span>
+          <span class="text-xs bg-accent text-secondary px-2 py-0.5 rounded-full font-medium">BETA</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="/tools/" class="hover:text-accent transition-colors">All Tools</a>
+          <a href="/category/ci-cd/" class="hover:text-accent transition-colors">CI/CD</a>
+          <a href="/category/code-assistant/" class="hover:text-accent transition-colors">Code Assistants</a>
+          <a href="/category/monitoring/" class="hover:text-accent transition-colors">Monitoring</a>
+          <a href="/category/security/" class="hover:text-accent transition-colors">Security</a>
+          <a href="/category/testing/" class="hover:text-accent transition-colors">Testing</a>
+          <a href="/category/iac/" class="hover:text-accent transition-colors">IaC</a>
+        </div>
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </nav>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
+        <div class="flex flex-col gap-3 text-sm">
+          <a href="/tools/" class="hover:text-accent transition-colors">All Tools</a>
+          <a href="/category/ci-cd/" class="hover:text-accent transition-colors">CI/CD</a>
+          <a href="/category/code-assistant/" class="hover:text-accent transition-colors">Code Assistants</a>
+          <a href="/category/monitoring/" class="hover:text-accent transition-colors">Monitoring</a>
+          <a href="/category/security/" class="hover:text-accent transition-colors">Security</a>
+          <a href="/category/testing/" class="hover:text-accent transition-colors">Testing</a>
+          <a href="/category/iac/" class="hover:text-accent transition-colors">IaC</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-lg font-bold mb-4">Stackpick</h3>
+            <p class="text-sm text-gray-400">Independent AI tools comparison for DevOps teams. Unbiased reviews, real comparisons.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-3">Categories</h4>
+            <ul class="text-sm text-gray-400 space-y-2">
+              <li><a href="/category/ci-cd/" class="hover:text-white">CI/CD</a></li>
+              <li><a href="/category/code-assistant/" class="hover:text-white">Code Assistants</a></li>
+              <li><a href="/category/monitoring/" class="hover:text-white">Monitoring</a></li>
+              <li><a href="/category/security/" class="hover:text-white">Security</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-3">Resources</h4>
+            <ul class="text-sm text-gray-400 space-y-2">
+              <li><a href="/tools/" class="hover:text-white">All Tools</a></li>
+              <li><a href="/compare/" class="hover:text-white">Comparisons</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-3">About</h4>
+            <ul class="text-sm text-gray-400 space-y-2">
+              <li><a href="/about/" class="hover:text-white">About Stackpick</a></li>
+              <li><a href="/contact/" class="hover:text-white">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+          <p>&copy; {new Date().getFullYear()} Stackpick. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>

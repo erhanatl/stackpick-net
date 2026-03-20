@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ToolCard from '../components/ToolCard.astro';
+import tools from '../data/tools.json';
+import categories from '../data/categories.json';
+
+const publishedTools = tools.filter(t => t.status === 'Published');
+---
+
+<BaseLayout
+  title="Home"
+  description="Compare the best AI tools for DevOps. Unbiased reviews, side-by-side comparisons, and expert picks for CI/CD, monitoring, security, and more."
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-secondary to-slate-800 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        Pick the Right AI Tools<br />
+        <span class="text-accent">for Your DevOps Stack</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+        Independent, unbiased comparisons of AI-powered DevOps tools.
+        Side-by-side reviews to help your team make the right choice.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/tools/" class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+          Browse All Tools
+        </a>
+        <a href="/compare/" class="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-lg font-semibold transition-colors border border-white/20">
+          Compare Tools
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="py-16 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-center mb-10">Browse by Category</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {categories.map((cat) => {
+          const toolCount = publishedTools.filter(t => t.category === cat.name).length;
+          return (
+            <a href={`/category/${cat.slug}/`} class="bg-white rounded-xl p-5 text-center hover:shadow-md transition-shadow border border-border group">
+              <h3 class="font-semibold group-hover:text-primary transition-colors">{cat.name}</h3>
+              <p class="text-sm text-text-muted mt-1">{toolCount} tools</p>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Tools Section -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="text-2xl font-bold">Featured Tools</h2>
+        <a href="/tools/" class="text-primary hover:text-primary-dark font-medium text-sm">View all &rarr;</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {publishedTools.map((tool) => (
+          <ToolCard
+            name={tool.tool_name}
+            slug={tool.slug}
+            category={tool.category}
+            shortDescription={tool.short_description}
+            vendor={tool.vendor}
+            pricingModel={tool.pricing_model}
+            startingPrice={tool.starting_price}
+            rating={tool.rating}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Can't decide? Compare side by side</h2>
+      <p class="text-lg text-blue-100 mb-8">
+        See how tools stack up against each other with our detailed comparison pages.
+      </p>
+      <a href="/compare/" class="bg-white text-primary hover:bg-blue-50 px-8 py-3 rounded-lg font-semibold transition-colors inline-block">
+        View Comparisons
+      </a>
+    </div>
+  </section>
+</BaseLayout>

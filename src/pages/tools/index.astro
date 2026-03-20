@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import tools from '../../data/tools.json';
+
+const publishedTools = tools.filter(t => t.status === 'Published');
+---
+
+<BaseLayout
+  title="All AI DevOps Tools"
+  description="Browse and compare all AI-powered DevOps tools. Find the best tools for CI/CD, code assistance, monitoring, security, testing, and infrastructure as code."
+>
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold mb-2">All AI DevOps Tools</h1>
+      <p class="text-text-muted mb-10">{publishedTools.length} tools reviewed and compared</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {publishedTools.map((tool) => (
+          <ToolCard
+            name={tool.tool_name}
+            slug={tool.slug}
+            category={tool.category}
+            shortDescription={tool.short_description}
+            vendor={tool.vendor}
+            pricingModel={tool.pricing_model}
+            startingPrice={tool.starting_price}
+            rating={tool.rating}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

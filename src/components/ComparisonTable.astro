@@ -1,0 +1,90 @@
+---
+interface Tool {
+  name: string;
+  slug: string;
+  pricingModel: string;
+  startingPrice: string;
+  rating: number;
+  pros: string;
+  cons: string;
+}
+
+interface Props {
+  tools: Tool[];
+  features?: string[];
+}
+
+const { tools } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm">
+    <thead>
+      <tr class="bg-secondary text-white">
+        <th class="text-left p-4 font-semibold">Feature</th>
+        {tools.map((tool) => (
+          <th class="text-center p-4 font-semibold">
+            <a href={`/tools/${tool.slug}/`} class="hover:text-accent transition-colors">{tool.name}</a>
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-border">
+      <tr>
+        <td class="p-4 font-medium">Rating</td>
+        {tools.map((tool) => (
+          <td class="p-4 text-center">
+            <span class="inline-flex items-center gap-1">
+              <svg class="w-4 h-4 text-warning" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <span class="font-semibold">{tool.rating}</span>
+            </span>
+          </td>
+        ))}
+      </tr>
+      <tr class="bg-surface">
+        <td class="p-4 font-medium">Pricing Model</td>
+        {tools.map((tool) => (
+          <td class="p-4 text-center">{tool.pricingModel}</td>
+        ))}
+      </tr>
+      <tr>
+        <td class="p-4 font-medium">Starting Price</td>
+        {tools.map((tool) => (
+          <td class="p-4 text-center font-semibold">{tool.startingPrice}</td>
+        ))}
+      </tr>
+      <tr class="bg-surface">
+        <td class="p-4 font-medium">Pros</td>
+        {tools.map((tool) => (
+          <td class="p-4 text-sm">
+            <ul class="space-y-1">
+              {tool.pros.split(',').map((pro: string) => (
+                <li class="flex items-start gap-1">
+                  <span class="text-success mt-0.5">+</span>
+                  <span>{pro.trim()}</span>
+                </li>
+              ))}
+            </ul>
+          </td>
+        ))}
+      </tr>
+      <tr>
+        <td class="p-4 font-medium">Cons</td>
+        {tools.map((tool) => (
+          <td class="p-4 text-sm">
+            <ul class="space-y-1">
+              {tool.cons.split(',').map((con: string) => (
+                <li class="flex items-start gap-1">
+                  <span class="text-danger mt-0.5">-</span>
+                  <span>{con.trim()}</span>
+                </li>
+              ))}
+            </ul>
+          </td>
+        ))}
+      </tr>
+    </tbody>
+  </table>
+</div>

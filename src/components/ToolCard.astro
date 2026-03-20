@@ -1,0 +1,62 @@
+---
+interface Props {
+  name: string;
+  slug: string;
+  category: string;
+  shortDescription: string;
+  vendor: string;
+  pricingModel: string;
+  startingPrice: string;
+  rating: number;
+}
+
+const { name, slug, category, shortDescription, vendor, pricingModel, startingPrice, rating } = Astro.props;
+
+const categoryColors: Record<string, string> = {
+  'CI/CD': 'bg-blue-100 text-blue-800',
+  'Code Assistant': 'bg-purple-100 text-purple-800',
+  'Monitoring': 'bg-green-100 text-green-800',
+  'Testing': 'bg-orange-100 text-orange-800',
+  'Security': 'bg-red-100 text-red-800',
+  'IaC': 'bg-cyan-100 text-cyan-800',
+};
+
+const categorySlug: Record<string, string> = {
+  'CI/CD': 'ci-cd',
+  'Code Assistant': 'code-assistant',
+  'Monitoring': 'monitoring',
+  'Testing': 'testing',
+  'Security': 'security',
+  'IaC': 'iac',
+};
+
+const colorClass = categoryColors[category] || 'bg-gray-100 text-gray-800';
+const stars = Math.round(rating * 2) / 2;
+---
+
+<a href={`/tools/${slug}/`} class="block bg-white rounded-xl border border-border hover:shadow-lg transition-shadow p-6 group">
+  <div class="flex items-start justify-between mb-3">
+    <div>
+      <h3 class="text-lg font-semibold group-hover:text-primary transition-colors">{name}</h3>
+      <p class="text-sm text-text-muted">{vendor}</p>
+    </div>
+    <span class={`text-xs font-medium px-2.5 py-1 rounded-full ${colorClass}`}>
+      {category}
+    </span>
+  </div>
+  <p class="text-sm text-text-muted mb-4 line-clamp-2">{shortDescription}</p>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-1">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg class={`w-4 h-4 ${i < Math.floor(stars) ? 'text-warning' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+      <span class="text-sm text-text-muted ml-1">{rating}</span>
+    </div>
+    <div class="text-sm">
+      <span class="font-medium">{startingPrice}</span>
+      <span class="text-text-muted"> · {pricingModel}</span>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import tools from '../../data/tools.json';
+import categories from '../../data/categories.json';
+
+export function getStaticPaths() {
+  return categories.map(cat => ({
+    params: { slug: cat.slug },
+    props: { category: cat }
+  }));
+}
+
+const { category } = Astro.props;
+
+const categoryNameMap: Record<string, string> = {
+  'ci-cd': 'CI/CD',
+  'code-assistant': 'Code Assistant',
+  'monitoring': 'Monitoring',
+  'testing': 'Testing',
+  'security': 'Security',
+  'iac': 'IaC',
+};
+
+const categoryName = categoryNameMap[category.slug] || category.name;
+const categoryTools = tools.filter(t => t.category === categoryName && t.status === 'Published');
+---
+
+<BaseLayout
+  title={`Best AI ${category.name} Tools 2026`}
+  description={category.description}
+>
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-text-muted mb-8">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/tools/" class="hover:text-primary">Tools</a>
+        <span class="mx-2">/</span>
+        <span class="text-text">{category.name}</span>
+      </nav>
+
+      <h1 class="text-3xl font-bold mb-4">Best AI {category.name} Tools 2026</h1>
+      <p class="text-lg text-text-muted mb-10 max-w-3xl">{category.description}</p>
+
+      {categoryTools.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categoryTools.map((tool) => (
+            <ToolCard
+              name={tool.tool_name}
+              slug={tool.slug}
+              category={tool.category}
+              shortDescription={tool.short_description}
+              vendor={tool.vendor}
+              pricingModel={tool.pricing_model}
+              startingPrice={tool.starting_price}
+              rating={tool.rating}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16 bg-surface rounded-xl">
+          <p class="text-text-muted text-lg">Tools coming soon for this category.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
