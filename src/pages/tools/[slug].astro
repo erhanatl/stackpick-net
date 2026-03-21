@@ -151,7 +151,7 @@ const relatedTools = tools.filter(t => t.category === tool.category && t.slug !=
         </section>
       )}
 
-      <!-- JSON-LD -->
+      <!-- JSON-LD: Software -->
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -159,6 +159,7 @@ const relatedTools = tools.filter(t => t.category === tool.category && t.slug !=
         "description": tool.short_description,
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Web",
+        "url": tool.website_url,
         "offers": {
           "@type": "Offer",
           "price": tool.starting_price,
@@ -170,7 +171,23 @@ const relatedTools = tools.filter(t => t.category === tool.category && t.slug !=
           "bestRating": 5,
           "worstRating": 1,
           "ratingCount": 1
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Stackpick"
         }
+      })} />
+
+      <!-- JSON-LD: Breadcrumb -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://stackpick.net/" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://stackpick.net/tools/" },
+          { "@type": "ListItem", "position": 3, "name": tool.category, "item": `https://stackpick.net/category/${categorySlug[tool.category]}/` },
+          { "@type": "ListItem", "position": 4, "name": tool.tool_name }
+        ]
       })} />
     </div>
   </article>

@@ -6,13 +6,14 @@ interface Props {
   description: string;
   canonical?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage } = Astro.props;
+const { title, description, canonical, ogImage, noindex } = Astro.props;
 const siteUrl = 'https://stackpick.net';
 const pageTitle = title === 'Home' ? 'Stackpick — Best AI Tools for DevOps' : `${title} | Stackpick`;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
-const ogImageUrl = ogImage || `${siteUrl}/og-default.png`;
+const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
 ---
 
 <!doctype html>
@@ -21,6 +22,7 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.png`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
