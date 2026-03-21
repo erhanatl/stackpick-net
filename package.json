@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "generate": "node scripts/generate-tools.js",
-    "add": "node scripts/add-tool.js"
+    "add": "node scripts/add-tool.js",
+    "compare": "node scripts/add-comparison.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",

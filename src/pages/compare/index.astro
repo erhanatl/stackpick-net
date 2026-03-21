@@ -1,16 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ComparisonTable from '../../components/ComparisonTable.astro';
-import tools from '../../data/tools.json';
-
-const comparisons = [
-  {
-    title: "Cursor vs GitHub Copilot",
-    slug: "cursor-vs-github-copilot",
-    description: "Two leading AI code assistants compared — which one is right for your DevOps workflow?",
-    tools: ["cursor", "github-copilot"]
-  }
-];
+import comparisons from '../../data/comparisons.json';
 ---
 
 <BaseLayout

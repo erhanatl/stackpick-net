@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Cursor vs GitHub Copilot",
+    "slug": "cursor-vs-github-copilot",
+    "description": "Two leading AI code assistants compared — which one is right for your DevOps workflow?",
+    "tools": ["cursor", "github-copilot"],
+    "content": ""
+  }
+]

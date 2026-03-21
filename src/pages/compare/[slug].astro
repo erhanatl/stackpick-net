@@ -2,14 +2,27 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import tools from '../../data/tools.json';
+import comparisons from '../../data/comparisons.json';
+import { marked } from 'marked';
 
-const toolSlugs = ['cursor', 'github-copilot'];
-const comparedTools = toolSlugs.map(slug => tools.find(t => t.slug === slug)).filter(Boolean) as typeof tools;
+export function getStaticPaths() {
+  return comparisons.map(comp => ({
+    params: { slug: comp.slug },
+    props: { comparison: comp }
+  }));
+}
+
+const { comparison } = Astro.props;
+const comparedTools = comparison.tools
+  .map((slug: string) => tools.find(t => t.slug === slug))
+  .filter(Boolean) as typeof tools;
+
+const toolNames = comparedTools.map(t => t.tool_name).join(' vs ');
 ---
 
 <BaseLayout
-  title="Cursor vs GitHub Copilot 2026"
-  description="Detailed comparison of Cursor and GitHub Copilot. Compare features, pricing, pros & cons to pick the best AI code assistant for your DevOps team."
+  title={`${toolNames} (2026)`}
+  description={comparison.description}
 >
   <article class="py-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,14 +32,11 @@ const comparedTools = toolSlugs.map(slug => tools.find(t => t.slug === slug)).fi
         <span class="mx-2">/</span>
         <a href="/compare/" class="hover:text-primary">Comparisons</a>
         <span class="mx-2">/</span>
-        <span class="text-text">Cursor vs GitHub Copilot</span>
+        <span class="text-text">{toolNames}</span>
       </nav>
 
-      <h1 class="text-4xl font-bold mb-4">Cursor vs GitHub Copilot (2026)</h1>
-      <p class="text-lg text-text-muted mb-10">
-        A detailed side-by-side comparison of two leading AI code assistants.
-        Both tools aim to supercharge developer productivity, but they take very different approaches.
-      </p>
+      <h1 class="text-4xl font-bold mb-4">{toolNames} (2026)</h1>
+      <p class="text-lg text-text-muted mb-10">{comparison.description}</p>
 
       <!-- Comparison Table -->
       <ComparisonTable tools={comparedTools.map(t => ({
@@ -39,20 +49,10 @@ const comparedTools = toolSlugs.map(slug => tools.find(t => t.slug === slug)).fi
         cons: t.cons
       }))} />
 
-      <!-- Verdict -->
-      <section class="mt-12 bg-surface rounded-xl p-8">
-        <h2 class="text-2xl font-bold mb-4">The Verdict</h2>
-        <div class="prose max-w-none">
-          <p class="text-lg leading-relaxed mb-4">
-            <strong>Choose Cursor</strong> if you want a complete AI-first IDE experience with superior multi-file editing
-            and deep codebase understanding. Ideal for teams doing heavy refactoring or working on large codebases.
-          </p>
-          <p class="text-lg leading-relaxed">
-            <strong>Choose GitHub Copilot</strong> if you want seamless integration into your existing VS Code or JetBrains
-            workflow without switching editors. Best for developers who want AI assistance without changing their tools.
-          </p>
-        </div>
-      </section>
+      <!-- AI Generated Content -->
+      {comparison.content && (
+        <section class="mt-12 prose prose-lg max-w-none" set:html={marked(comparison.content)} />
+      )}
 
       <!-- CTA -->
       <div class="grid md:grid-cols-2 gap-6 mt-10">
@@ -76,8 +76,8 @@ const comparedTools = toolSlugs.map(slug => tools.find(t => t.slug === slug)).fi
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Cursor vs GitHub Copilot 2026 Comparison",
-        "description": "Detailed comparison of Cursor and GitHub Copilot AI code assistants",
+        "headline": `${toolNames} Comparison 2026`,
+        "description": comparison.description,
         "datePublished": "2026-03-20",
         "author": {
           "@type": "Organization",

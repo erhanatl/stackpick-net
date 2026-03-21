@@ -105,7 +105,12 @@ function addToToolsJson(tool) {
   // Check duplicate
   const existing = tools.findIndex((t) => t.slug === tool.slug);
   if (existing >= 0) {
-    tools[existing] = { ...tool, affiliate_url: '', status: 'Published' };
+    console.log(`\n⚠ "${tool.tool_name}" already exists. Skipping.`);
+    console.log(`  Use "npm run add -- "${tool.tool_name}" --force" to overwrite.\n`);
+    if (!process.argv.includes('--force')) {
+      return false;
+    }
+    tools[existing] = { ...tool, affiliate_url: tools[existing].affiliate_url || '', status: 'Published' };
     console.log(`Updated existing tool: ${tool.tool_name}`);
   } else {
     tools.push({ ...tool, affiliate_url: '', status: 'Published' });
@@ -156,7 +161,12 @@ async function main() {
   console.log('-------------------------\n');
 
   // Add to tools.json
-  addToToolsJson(tool);
+  const added = addToToolsJson(tool);
+
+  if (added === false) {
+    console.log('No changes made.');
+    return;
+  }
 
   // Git push
   console.log('Pushing to GitHub...');
