@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import tools from '../../data/tools.json';
+import { marked } from 'marked';
 
 export function getStaticPaths() {
   return tools
@@ -82,11 +83,18 @@ const relatedTools = tools.filter(t => t.category === tool.category && t.slug !=
         </div>
       </div>
 
-      <!-- Description -->
-      <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">Overview</h2>
-        <p class="text-lg leading-relaxed">{tool.short_description}</p>
-      </section>
+      <!-- AI Generated Content -->
+      {tool.content && (
+        <section class="mb-10 prose prose-lg max-w-none" set:html={marked(tool.content)} />
+      )}
+
+      <!-- Description (fallback if no AI content) -->
+      {!tool.content && (
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold mb-4">Overview</h2>
+          <p class="text-lg leading-relaxed">{tool.short_description}</p>
+        </section>
+      )}
 
       <!-- Pros & Cons -->
       <section class="grid md:grid-cols-2 gap-6 mb-10">
