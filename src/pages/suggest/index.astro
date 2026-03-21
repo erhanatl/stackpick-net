@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Suggest a Tool"
+  description="Know a great AI DevOps tool we're missing? Suggest it and we'll review it."
+>
+  <section class="py-16">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold mb-2">Suggest a Tool</h1>
+      <p class="text-text-muted mb-8">
+        Know a great AI-powered DevOps tool we haven't covered yet? Let us know and we'll review it.
+      </p>
+
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="space-y-6"
+      >
+        <input type="hidden" name="access_key" value="b44ace99-839a-4d46-82ab-6db543dfba86" />
+        <input type="hidden" name="subject" value="New Tool Suggestion - Stackpick" />
+        <input type="hidden" name="redirect" value="https://stackpick.net/suggest/thanks/" />
+        <input type="checkbox" name="botcheck" class="hidden" />
+
+        <div>
+          <label for="tool_name" class="block text-sm font-medium mb-1">Tool Name *</label>
+          <input
+            type="text"
+            name="tool_name"
+            id="tool_name"
+            required
+            placeholder="e.g. Jenkins X"
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="website" class="block text-sm font-medium mb-1">Website URL</label>
+          <input
+            type="url"
+            name="website"
+            id="website"
+            placeholder="https://..."
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="category" class="block text-sm font-medium mb-1">Category</label>
+          <select
+            name="category"
+            id="category"
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white"
+          >
+            <option value="">Select a category</option>
+            <option value="CI/CD">CI/CD</option>
+            <option value="Code Assistant">Code Assistant</option>
+            <option value="Monitoring">Monitoring</option>
+            <option value="Testing">Testing</option>
+            <option value="Security">Security</option>
+            <option value="IaC">Infrastructure as Code</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="reason" class="block text-sm font-medium mb-1">Why should we review it?</label>
+          <textarea
+            name="reason"
+            id="reason"
+            rows="4"
+            placeholder="What makes this tool special? How does it help DevOps teams?"
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium mb-1">Your Email (optional)</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="We'll notify you when the review is live"
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+        >
+          Submit Suggestion
+        </button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
