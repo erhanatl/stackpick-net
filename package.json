@@ -10,11 +10,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate": "node scripts/generate-tools.js"
+    "generate": "node scripts/generate-tools.js",
+    "add": "node scripts/add-tool.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
     "@astrojs/sitemap": "^3.7.1",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
     "airtable": "^0.12.2",
     "astro": "^6.0.8",
