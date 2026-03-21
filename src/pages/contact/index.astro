@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact Us"
+  description="Get in touch with the Stackpick team. Questions, feedback, partnership inquiries — we'd love to hear from you."
+>
+  <section class="py-16">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold mb-2">Contact Us</h1>
+      <p class="text-text-muted mb-8">
+        Have a question, feedback, or partnership inquiry? We'd love to hear from you.
+      </p>
+
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="space-y-6"
+      >
+        <input type="hidden" name="access_key" value="b44ace99-839a-4d46-82ab-6db543dfba86" />
+        <input type="hidden" name="subject" value="Contact Form - Stackpick" />
+        <input type="hidden" name="redirect" value="https://stackpick.net/contact/thanks/" />
+        <input type="checkbox" name="botcheck" class="hidden" />
+
+        <div>
+          <label for="name" class="block text-sm font-medium mb-1">Name *</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            required
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium mb-1">Email *</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="type" class="block text-sm font-medium mb-1">Inquiry Type</label>
+          <select
+            name="type"
+            id="type"
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white"
+          >
+            <option value="General">General Question</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Partnership">Partnership / Sponsorship</option>
+            <option value="Tool Listing">Tool Listing Request</option>
+            <option value="Bug Report">Bug Report</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium mb-1">Message *</label>
+          <textarea
+            name="message"
+            id="message"
+            rows="5"
+            required
+            class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+        >
+          Send Message
+        </button>
+      </form>
+
+      <div class="mt-12 bg-surface rounded-xl p-6">
+        <h2 class="font-bold mb-3">Other Ways to Reach Us</h2>
+        <ul class="space-y-2 text-text-muted">
+          <li><a href="/suggest/" class="text-primary hover:text-primary-dark">Suggest a Tool</a> — Know a tool we should review?</li>
+          <li><a href="/about/" class="text-primary hover:text-primary-dark">About Stackpick</a> — Learn more about our mission</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

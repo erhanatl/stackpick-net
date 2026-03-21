@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import tools from '../data/tools.json';
+import comparisons from '../data/comparisons.json';
+
+const toolCount = tools.filter(t => t.status === 'Published').length;
+const comparisonCount = comparisons.length;
+const categoryCount = 6;
+---
+
+<BaseLayout
+  title="About Stackpick"
+  description="Stackpick is an independent platform that helps DevOps teams discover, compare, and choose the best AI-powered tools for their workflow."
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold mb-6">About Stackpick</h1>
+
+      <div class="prose prose-lg max-w-none">
+        <p>
+          Stackpick is an independent platform built to help DevOps teams navigate the rapidly growing landscape of AI-powered tools. With new AI tools launching every week, choosing the right one for your stack can be overwhelming. We're here to make that decision easier.
+        </p>
+
+        <h2>Our Mission</h2>
+        <p>
+          We believe DevOps teams deserve unbiased, data-driven insights when evaluating AI tools. Unlike vendor-sponsored review sites, Stackpick provides independent analysis based on real capabilities, pricing transparency, and practical use cases.
+        </p>
+
+        <h2>What We Cover</h2>
+        <p>We review and compare AI tools across the entire DevOps lifecycle:</p>
+        <ul>
+          <li><strong>CI/CD</strong> — AI-powered build, test, and deployment automation</li>
+          <li><strong>Code Assistants</strong> — AI pair programming and code generation tools</li>
+          <li><strong>Monitoring</strong> — Intelligent observability and anomaly detection</li>
+          <li><strong>Security</strong> — AI-enhanced vulnerability scanning and threat detection</li>
+          <li><strong>Testing</strong> — Automated test generation and quality assurance</li>
+          <li><strong>Infrastructure as Code</strong> — AI-assisted infrastructure provisioning</li>
+        </ul>
+
+        <h2>How We Review</h2>
+        <p>Every tool on Stackpick is evaluated on:</p>
+        <ul>
+          <li><strong>Features & Capabilities</strong> — What does it actually do?</li>
+          <li><strong>Pricing & Value</strong> — Is it worth the cost?</li>
+          <li><strong>Ease of Use</strong> — How quickly can a team adopt it?</li>
+          <li><strong>Integration</strong> — Does it fit into existing DevOps workflows?</li>
+          <li><strong>Community & Support</strong> — What resources are available?</li>
+        </ul>
+
+        <h2>Stackpick in Numbers</h2>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6 my-8">
+        <div class="bg-surface rounded-xl p-6 text-center">
+          <p class="text-3xl font-bold text-primary">{toolCount}</p>
+          <p class="text-sm text-text-muted mt-1">Tools Reviewed</p>
+        </div>
+        <div class="bg-surface rounded-xl p-6 text-center">
+          <p class="text-3xl font-bold text-primary">{comparisonCount}</p>
+          <p class="text-sm text-text-muted mt-1">Comparisons</p>
+        </div>
+        <div class="bg-surface rounded-xl p-6 text-center">
+          <p class="text-3xl font-bold text-primary">{categoryCount}</p>
+          <p class="text-sm text-text-muted mt-1">Categories</p>
+        </div>
+      </div>
+
+      <div class="prose prose-lg max-w-none">
+        <h2>Built by DevOps People</h2>
+        <p>
+          Stackpick is built by <a href="https://continuoussoftware.co.uk" target="_blank" rel="noopener noreferrer">Continuous Software</a>, a DevOps consultancy with hands-on experience in enterprise tool selection, CI/CD pipeline design, and software delivery optimization. We don't just write about these tools — we use them.
+        </p>
+
+        <h2>Stay Updated</h2>
+        <p>
+          The AI DevOps landscape evolves fast. We continuously add new tools, update reviews, and publish fresh comparisons. <a href="/suggest/">Suggest a tool</a> you think we should cover, or <a href="/contact/">get in touch</a> with feedback.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
