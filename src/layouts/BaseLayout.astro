@@ -68,12 +68,23 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
         </a>
         <div class="hidden md:flex items-center gap-6 text-sm">
           <a href="/tools/" class="hover:text-accent transition-colors">All Tools</a>
-          <a href="/category/ci-cd/" class="hover:text-accent transition-colors">CI/CD</a>
-          <a href="/category/code-assistant/" class="hover:text-accent transition-colors">Code Assistants</a>
-          <a href="/category/monitoring/" class="hover:text-accent transition-colors">Monitoring</a>
-          <a href="/category/security/" class="hover:text-accent transition-colors">Security</a>
-          <a href="/category/testing/" class="hover:text-accent transition-colors">Testing</a>
-          <a href="/category/iac/" class="hover:text-accent transition-colors">IaC</a>
+          <div class="relative group">
+            <button class="hover:text-accent transition-colors flex items-center gap-1">
+              Categories
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+              <a href="/category/ci-cd/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">CI/CD</a>
+              <a href="/category/code-assistant/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Code Assistants</a>
+              <a href="/category/monitoring/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Monitoring</a>
+              <a href="/category/security/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Security</a>
+              <a href="/category/testing/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Testing</a>
+              <a href="/category/iac/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">IaC</a>
+              <a href="/category/ai-code-review/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">AI Code Review</a>
+              <a href="/category/aiops/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">AIOps</a>
+            </div>
+          </div>
+          <a href="/compare/" class="hover:text-accent transition-colors">Compare</a>
           <a href="/suggest/" class="bg-accent text-secondary px-4 py-1.5 rounded-lg font-medium hover:bg-cyan-400 transition-colors">Suggest a Tool</a>
         </div>
         <!-- Mobile menu button -->
@@ -93,6 +104,9 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
           <a href="/category/security/" class="hover:text-accent transition-colors">Security</a>
           <a href="/category/testing/" class="hover:text-accent transition-colors">Testing</a>
           <a href="/category/iac/" class="hover:text-accent transition-colors">IaC</a>
+          <a href="/category/ai-code-review/" class="hover:text-accent transition-colors">AI Code Review</a>
+          <a href="/category/aiops/" class="hover:text-accent transition-colors">AIOps</a>
+          <a href="/compare/" class="hover:text-accent transition-colors">Compare</a>
           <a href="/suggest/" class="text-accent hover:text-white transition-colors font-medium">Suggest a Tool</a>
         </div>
       </div>
