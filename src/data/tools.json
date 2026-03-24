@@ -626,7 +626,7 @@
   {
     "tool_name": "PagerDuty",
     "slug": "pagerduty",
-    "category": "Monitoring",
+    "category": "AIOps",
     "short_description": "PagerDuty is a digital operations management platform that provides incident response, on-call scheduling, and real-time alerting for IT teams. It helps organizations detect, triage, and resolve incidents quickly while maintaining service reliability and uptime.",
     "vendor": "PagerDuty, Inc.",
     "pricing_model": "Freemium",

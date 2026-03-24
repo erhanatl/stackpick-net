@@ -28,5 +28,15 @@
     "name": "IaC",
     "slug": "iac",
     "description": "AI-assisted Infrastructure as Code tools that help define, provision, and manage cloud infrastructure with intelligent automation."
+  },
+  {
+    "name": "AI Code Review",
+    "slug": "ai-code-review",
+    "description": "AI-powered code review tools that automatically analyze pull requests, detect bugs, suggest improvements, and enforce coding standards."
+  },
+  {
+    "name": "AIOps",
+    "slug": "aiops",
+    "description": "AI-powered IT operations tools that automate incident management, root cause analysis, and operational intelligence for DevOps teams."
   }
 ]
