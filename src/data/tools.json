@@ -834,7 +834,7 @@
   {
     "tool_name": "Qodo",
     "slug": "qodo",
-    "category": "Code Assistant",
+    "category": "Testing",
     "short_description": "An AI-powered code generation and testing platform that helps developers write, review, and test code more efficiently. It provides intelligent code suggestions, automated test generation, and code quality analysis to accelerate development workflows.",
     "vendor": "CodiumAI",
     "pricing_model": "Freemium",
@@ -930,7 +930,7 @@
   {
     "tool_name": "CodeRabbit",
     "slug": "coderabbit",
-    "category": "Code Assistant",
+    "category": "AI Code Review",
     "short_description": "CodeRabbit is an AI-powered code review platform that automatically analyzes pull requests and provides intelligent feedback. It integrates with GitHub and GitLab to enhance code quality through automated reviews, security checks, and contextual suggestions.",
     "vendor": "CodeRabbit Inc.",
     "pricing_model": "Freemium",
@@ -946,7 +946,7 @@
   {
     "tool_name": "Ellipsis",
     "slug": "ellipsis-ai-code-assistant",
-    "category": "Code Assistant",
+    "category": "AI Code Review",
     "short_description": "Ellipsis is an AI-powered code review and development assistant that integrates with GitHub to provide automated code reviews, bug fixes, and development assistance. It acts as an AI team member that can understand codebases, write code, and participate in pull request workflows.",
     "vendor": "Ellipsis Labs",
     "pricing_model": "Freemium",
@@ -962,7 +962,7 @@
   {
     "tool_name": "PR-Agent",
     "slug": "pr-agent",
-    "category": "Code Assistant",
+    "category": "AI Code Review",
     "short_description": "An AI-powered tool that automatically generates pull request descriptions, reviews code, and suggests improvements. It integrates with GitHub, GitLab, and Bitbucket to enhance the code review process through intelligent automation.",
     "vendor": "Codium AI",
     "pricing_model": "Freemium",
@@ -978,7 +978,7 @@
   {
     "tool_name": "Codium PR-Agent",
     "slug": "codium-pr-agent",
-    "category": "Code Assistant",
+    "category": "AI Code Review",
     "short_description": "AI-powered code review assistant that automatically analyzes pull requests and provides intelligent feedback. It helps developers improve code quality by generating detailed reviews, suggestions, and security insights directly within GitHub and GitLab workflows.",
     "vendor": "CodiumAI",
     "pricing_model": "Freemium",
@@ -994,7 +994,7 @@
   {
     "tool_name": "Opsgenie",
     "slug": "opsgenie",
-    "category": "Monitoring",
+    "category": "AIOps",
     "short_description": "Opsgenie is a modern incident management platform that centralizes alerts, notifies the right people reliably, and enables teams to collaborate effectively during incidents. It provides on-call scheduling, alert routing, and escalation management to ensure critical issues are addressed promptly.",
     "vendor": "Atlassian",
     "pricing_model": "Freemium",
@@ -1010,7 +1010,7 @@
   {
     "tool_name": "FireHydrant",
     "slug": "firehydrant",
-    "category": "Monitoring",
+    "category": "AIOps",
     "short_description": "FireHydrant is an incident management and response platform designed to help engineering teams prepare for, respond to, and learn from incidents. The platform provides comprehensive tools for incident orchestration, post-incident analysis, and team preparedness through runbooks and automated workflows.",
     "vendor": "FireHydrant",
     "pricing_model": "Freemium",
@@ -1026,7 +1026,7 @@
   {
     "tool_name": "Blameless",
     "slug": "blameless",
-    "category": "Monitoring",
+    "category": "AIOps",
     "short_description": "Blameless is a Site Reliability Engineering (SRE) platform that helps teams manage incidents, conduct post-mortems, and improve system reliability through data-driven insights. It focuses on creating a blameless culture while providing tools for incident response, error budgets, and reliability management.",
     "vendor": "Blameless",
     "pricing_model": "Paid",
@@ -1042,7 +1042,7 @@
   {
     "tool_name": "BigPanda",
     "slug": "bigpanda",
-    "category": "Monitoring",
+    "category": "AIOps",
     "short_description": "BigPanda is an AI-powered IT operations platform that correlates and analyzes monitoring data from multiple sources to prevent and resolve IT incidents faster. It uses machine learning to reduce alert noise and automate incident response workflows.",
     "vendor": "BigPanda",
     "pricing_model": "Enterprise",
