@@ -5,7 +5,8 @@ import comparisons from '../../data/comparisons.json';
 
 const toolCount = tools.filter(t => t.status === 'Published').length;
 const comparisonCount = comparisons.length;
-const categoryCount = 6;
+const categories = [...new Set(tools.map(t => t.category))];
+const categoryCount = categories.length;
 ---
 
 <BaseLayout
@@ -27,7 +28,7 @@ const categoryCount = 6;
         </p>
 
         <h2>What We Cover</h2>
-        <p>We review and compare AI tools across the entire DevOps lifecycle:</p>
+        <p>We review and compare AI tools across {categoryCount} categories spanning the entire DevOps lifecycle:</p>
         <ul>
           <li><strong>CI/CD</strong> — AI-powered build, test, and deployment automation</li>
           <li><strong>Code Assistants</strong> — AI pair programming and code generation tools</li>
@@ -35,6 +36,8 @@ const categoryCount = 6;
           <li><strong>Security</strong> — AI-enhanced vulnerability scanning and threat detection</li>
           <li><strong>Testing</strong> — Automated test generation and quality assurance</li>
           <li><strong>Infrastructure as Code</strong> — AI-assisted infrastructure provisioning</li>
+          <li><strong>AI Code Review</strong> — Automated pull request analysis and code quality</li>
+          <li><strong>AIOps</strong> — AI-driven incident management and operations intelligence</li>
         </ul>
 
         <h2>How We Review</h2>
