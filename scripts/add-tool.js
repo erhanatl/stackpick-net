@@ -71,7 +71,7 @@ Return a JSON object (and NOTHING else, no markdown code fences) with exactly th
   "rating": 4.5,
   "pros": "Comma-separated list of 4-5 pros",
   "cons": "Comma-separated list of 3-4 cons",
-  "content": "A detailed markdown review (800-1200 words) with these sections:\\n## Overview\\n(2-3 paragraphs)\\n## Key Features\\n(bullet points)\\n## Pricing Details\\n## Pros and Cons\\n## Who Should Use This Tool?\\n## Final Verdict\\n\\nWrite professionally, be objective."
+  "content": "A detailed markdown review (800-1200 words) with these sections:\\n## Overview\\n(2-3 paragraphs)\\n## Key Features\\n(use markdown dash lists with '- ' prefix, NOT bullet characters)\\n## Pricing Details\\n## Pros and Cons\\n(use markdown dash lists with '- ' prefix)\\n## Who Should Use This Tool?\\n## Final Verdict\\n\\nWrite professionally, be objective. IMPORTANT: Always use '- ' for lists, never use '•' bullet character."
 }
 
 Important:
