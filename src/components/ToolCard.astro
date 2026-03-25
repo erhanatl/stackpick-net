@@ -8,9 +8,17 @@ interface Props {
   pricingModel: string;
   startingPrice: string;
   rating: number;
+  websiteUrl?: string;
 }
 
-const { name, slug, category, shortDescription, vendor, pricingModel, startingPrice, rating } = Astro.props;
+const { name, slug, category, shortDescription, vendor, pricingModel, startingPrice, rating, websiteUrl } = Astro.props;
+
+const getDomain = (url: string | undefined) => {
+  if (!url) return null;
+  try { return new URL(url).hostname; } catch { return null; }
+};
+const domain = getDomain(websiteUrl);
+const logoUrl = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null;
 
 const categoryColors: Record<string, string> = {
   'CI/CD': 'bg-blue-100 text-blue-800',
@@ -40,11 +48,20 @@ const stars = Math.round(rating * 2) / 2;
 
 <a href={`/tools/${slug}/`} class="block bg-white rounded-xl border border-border hover:shadow-lg transition-shadow p-6 group">
   <div class="flex items-start justify-between mb-3">
-    <div>
-      <h3 class="text-lg font-semibold group-hover:text-primary transition-colors">{name}</h3>
-      <p class="text-sm text-text-muted">{vendor}</p>
+    <div class="flex items-center gap-3">
+      {logoUrl ? (
+        <img src={logoUrl} alt={`${name} logo`} width="32" height="32" class="rounded-md shrink-0" loading="lazy" />
+      ) : (
+        <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center shrink-0">
+          <span class="text-sm font-bold text-gray-400">{name.charAt(0)}</span>
+        </div>
+      )}
+      <div>
+        <h3 class="text-lg font-semibold group-hover:text-primary transition-colors">{name}</h3>
+        <p class="text-sm text-text-muted">{vendor}</p>
+      </div>
     </div>
-    <span class={`text-xs font-medium px-2.5 py-1 rounded-full ${colorClass}`}>
+    <span class={`text-xs font-medium px-2.5 py-1 rounded-full ${colorClass} shrink-0 ml-2`}>
       {category}
     </span>
   </div>
