@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import guides from '../../data/guides.json';
+import tools from '../../data/tools.json';
+import categories from '../../data/categories.json';
+import { marked } from 'marked';
+
+export function getStaticPaths() {
+  return guides.map(guide => ({
+    params: { slug: guide.slug },
+    props: { guide }
+  }));
+}
+
+const { guide } = Astro.props;
+
+const siteUrl = 'https://stackpick.net';
+
+function estimateReadingTime(content: string): number {
+  const words = content.split(/\s+/).length;
+  return Math.ceil(words / 200);
+}
+
+const readingTime = estimateReadingTime(guide.content);
+
+// Find the matching category slug for linking
+const categoryData = categories.find((c: { name: string; slug: string }) => c.name === guide.category);
+const categorySlug = categoryData ? categoryData.slug : guide.category.toLowerCase().replace(/\s+/g, '-');
+
+// Find related tools in the same category
+const publishedTools = tools.filter(t => t.status === 'Published');
+const relatedTools = publishedTools.filter(t => t.category === guide.category);
+
+const typeBadge = guide.type === 'best-tools' ? 'Best Tools' : 'How to Choose';
+const typeBadgeClass = guide.type === 'best-tools'
+  ? 'bg-primary/10 text-primary'
+  : 'bg-accent/10 text-secondary';
+---
+
+<BaseLayout
+  title={guide.title}
+  description={guide.description}
+>
+  <article class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-text-muted mb-8">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/blog/" class="hover:text-primary">Blog</a>
+        <span class="mx-2">/</span>
+        <span class="text-text">{guide.title}</span>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <span class={`text-xs font-medium px-2.5 py-1 rounded-full ${typeBadgeClass}`}>{typeBadge}</span>
+          <span class="text-xs font-medium bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">{guide.category}</span>
+        </div>
+        <h1 class="text-4xl font-bold mb-4">{guide.title}</h1>
+        <p class="text-lg text-text-muted mb-4">{guide.description}</p>
+        <div class="flex items-center gap-4 text-sm text-text-muted">
+          <span>{new Date(guide.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+          <span>{readingTime} min read</span>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <section class="prose prose-lg max-w-none mb-12" set:html={marked(guide.content)} />
+
+      <!-- Related Tools -->
+      {relatedTools.length > 0 && (
+        <section class="border-t border-border pt-10">
+          <h2 class="text-2xl font-bold mb-6">{guide.category} Tools on Stackpick</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            {relatedTools.map((tool) => (
+              <a href={`/tools/${tool.slug}/`} class="bg-white border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between mb-1">
+                  <h4 class="font-semibold">{tool.tool_name}</h4>
+                  <span class="text-sm font-medium text-warning">{tool.rating}/5</span>
+                </div>
+                <p class="text-sm text-text-muted">{tool.short_description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- JSON-LD: Article -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": guide.title,
+        "description": guide.description,
+        "datePublished": guide.date,
+        "dateModified": guide.date,
+        "author": {
+          "@type": "Organization",
+          "name": "Stackpick",
+          "url": siteUrl
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Stackpick",
+          "url": siteUrl
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `${siteUrl}/blog/${guide.slug}/`
+        }
+      })} />
+
+      <!-- JSON-LD: Breadcrumb -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/` },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog/` },
+          { "@type": "ListItem", "position": 3, "name": guide.title }
+        ]
+      })} />
+    </div>
+  </article>
+</BaseLayout>
