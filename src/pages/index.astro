@@ -59,7 +59,7 @@ const publishedTools = tools.filter(t => t.status === 'Published');
         <a href="/tools/" class="text-primary hover:text-primary-dark font-medium text-sm">View all &rarr;</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {publishedTools.map((tool) => (
+        {publishedTools.filter(t => ['github-copilot', 'datadog-ai', 'snyk'].includes(t.slug)).map((tool) => (
           <ToolCard
             name={tool.tool_name}
             slug={tool.slug}
