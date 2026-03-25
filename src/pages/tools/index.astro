@@ -13,21 +13,90 @@ const publishedTools = tools.filter(t => t.status === 'Published');
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold mb-2">All AI DevOps Tools</h1>
-      <p class="text-text-muted mb-10">{publishedTools.length} tools reviewed and compared</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {publishedTools.map((tool) => (
-          <ToolCard
-            name={tool.tool_name}
-            slug={tool.slug}
-            category={tool.category}
-            shortDescription={tool.short_description}
-            vendor={tool.vendor}
-            pricingModel={tool.pricing_model}
-            startingPrice={tool.starting_price}
-            rating={tool.rating}
+      <p class="text-text-muted mb-4">{publishedTools.length} tools reviewed and compared</p>
+
+      <!-- Search & Filter -->
+      <div class="flex flex-col sm:flex-row gap-3 mb-10">
+        <div class="relative flex-1">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            id="tool-search"
+            placeholder="Search tools..."
+            class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
           />
+        </div>
+        <select
+          id="category-filter"
+          class="px-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+        >
+          <option value="">All Categories</option>
+          {[...new Set(publishedTools.map(t => t.category))].sort().map(cat => (
+            <option value={cat}>{cat}</option>
+          ))}
+        </select>
+      </div>
+
+      <p id="search-count" class="text-sm text-text-muted mb-4 hidden"></p>
+
+      <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {publishedTools.map((tool) => (
+          <div class="tool-card" data-name={tool.tool_name.toLowerCase()} data-category={tool.category} data-vendor={tool.vendor.toLowerCase()} data-description={tool.short_description.toLowerCase()}>
+            <ToolCard
+              name={tool.tool_name}
+              slug={tool.slug}
+              category={tool.category}
+              shortDescription={tool.short_description}
+              vendor={tool.vendor}
+              pricingModel={tool.pricing_model}
+              startingPrice={tool.starting_price}
+              rating={tool.rating}
+            />
+          </div>
         ))}
       </div>
+
+      <p id="no-results" class="hidden text-center text-text-muted py-12">No tools found matching your search.</p>
+
+      <script>
+        const searchInput = document.getElementById('tool-search');
+        const categoryFilter = document.getElementById('category-filter');
+        const cards = document.querySelectorAll('.tool-card');
+        const noResults = document.getElementById('no-results');
+        const searchCount = document.getElementById('search-count');
+        const total = cards.length;
+
+        function filterTools() {
+          const query = searchInput.value.toLowerCase().trim();
+          const category = categoryFilter.value;
+          let visible = 0;
+
+          cards.forEach(card => {
+            const matchesSearch = !query ||
+              card.dataset.name.includes(query) ||
+              card.dataset.vendor.includes(query) ||
+              card.dataset.description.includes(query);
+            const matchesCategory = !category || card.dataset.category === category;
+            const show = matchesSearch && matchesCategory;
+            card.style.display = show ? '' : 'none';
+            if (show) visible++;
+          });
+
+          noResults.classList.toggle('hidden', visible > 0);
+
+          if (query || category) {
+            searchCount.textContent = `Showing ${visible} of ${total} tools`;
+            searchCount.classList.remove('hidden');
+          } else {
+            searchCount.classList.add('hidden');
+          }
+        }
+
+        searchInput.addEventListener('input', filterTools);
+        categoryFilter.addEventListener('change', filterTools);
+      </script>
     </div>
   </section>
 </BaseLayout>
