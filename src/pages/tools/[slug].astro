@@ -25,7 +25,8 @@ const categorySlug: Record<string, string> = {
   'IaC': 'iac',
 };
 
-const relatedTools = tools.filter(t => t.category === tool.category && t.slug !== tool.slug && t.status === 'Published');
+const allRelatedTools = tools.filter(t => t.category === tool.category && t.slug !== tool.slug && t.status === 'Published');
+const relatedTools = [...allRelatedTools].sort((a, b) => b.rating - a.rating).slice(0, 6);
 const relatedComparisons = comparisons.filter(c => c.tools.includes(tool.slug));
 const relatedGuides = guides.filter(g => g.category === tool.category);
 
@@ -230,11 +231,21 @@ const faqs = [
       <!-- Related Tools -->
       {relatedTools.length > 0 && (
         <section>
-          <h2 class="text-2xl font-bold mb-6">Other {tool.category} Tools</h2>
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold">Other {tool.category} Tools</h2>
+            {allRelatedTools.length > 6 && (
+              <a href={`/category/${categorySlug[tool.category]}/`} class="text-primary hover:text-primary-dark font-medium text-sm">
+                View all {allRelatedTools.length} tools &rarr;
+              </a>
+            )}
+          </div>
           <div class="grid md:grid-cols-2 gap-4">
             {relatedTools.map((related) => (
               <a href={`/tools/${related.slug}/`} class="bg-white border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <h4 class="font-semibold">{related.tool_name}</h4>
+                <div class="flex items-center justify-between">
+                  <h4 class="font-semibold">{related.tool_name}</h4>
+                  <span class="text-sm text-warning font-medium">★ {related.rating}</span>
+                </div>
                 <p class="text-sm text-text-muted mt-1">{related.short_description}</p>
               </a>
             ))}
