@@ -99,21 +99,26 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
       </nav>
       <!-- Mobile menu -->
       <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
-        <div class="flex flex-col gap-3 text-sm">
-          <a href="/tools/" class="hover:text-accent transition-colors">All Tools</a>
-          <a href="/category/ci-cd/" class="hover:text-accent transition-colors">CI/CD</a>
-          <a href="/category/code-assistant/" class="hover:text-accent transition-colors">Code Assistants</a>
-          <a href="/category/monitoring/" class="hover:text-accent transition-colors">Monitoring</a>
-          <a href="/category/security/" class="hover:text-accent transition-colors">Security</a>
-          <a href="/category/testing/" class="hover:text-accent transition-colors">Testing</a>
-          <a href="/category/iac/" class="hover:text-accent transition-colors">IaC</a>
-          <a href="/category/ai-code-review/" class="hover:text-accent transition-colors">AI Code Review</a>
-          <a href="/category/aiops/" class="hover:text-accent transition-colors">AIOps</a>
-          <a href="/compare/" class="hover:text-accent transition-colors">Compare</a>
-          <a href="/blog/" class="hover:text-accent transition-colors">Blog</a>
-          <a href="/about/" class="hover:text-accent transition-colors">About</a>
-          <a href="/contact/" class="hover:text-accent transition-colors">Contact</a>
-          <a href="/suggest/" class="text-accent hover:text-white transition-colors font-medium">Suggest a Tool</a>
+        <div class="flex flex-col gap-1 text-sm">
+          <a href="/tools/" class="py-2 hover:text-accent transition-colors font-medium">All Tools</a>
+          <div class="border-t border-gray-700 my-1"></div>
+          <span class="text-xs text-gray-500 uppercase tracking-wide pt-1">Categories</span>
+          <div class="grid grid-cols-2 gap-1 pl-2">
+            <a href="/category/ci-cd/" class="py-1.5 hover:text-accent transition-colors">CI/CD</a>
+            <a href="/category/code-assistant/" class="py-1.5 hover:text-accent transition-colors">Code Assistants</a>
+            <a href="/category/monitoring/" class="py-1.5 hover:text-accent transition-colors">Monitoring</a>
+            <a href="/category/security/" class="py-1.5 hover:text-accent transition-colors">Security</a>
+            <a href="/category/testing/" class="py-1.5 hover:text-accent transition-colors">Testing</a>
+            <a href="/category/iac/" class="py-1.5 hover:text-accent transition-colors">IaC</a>
+            <a href="/category/ai-code-review/" class="py-1.5 hover:text-accent transition-colors">AI Code Review</a>
+            <a href="/category/aiops/" class="py-1.5 hover:text-accent transition-colors">AIOps</a>
+          </div>
+          <div class="border-t border-gray-700 my-1"></div>
+          <a href="/compare/" class="py-2 hover:text-accent transition-colors">Compare</a>
+          <a href="/blog/" class="py-2 hover:text-accent transition-colors">Blog</a>
+          <a href="/about/" class="py-2 hover:text-accent transition-colors">About</a>
+          <a href="/contact/" class="py-2 hover:text-accent transition-colors">Contact</a>
+          <a href="/suggest/" class="py-2 text-accent hover:text-white transition-colors font-medium">Suggest a Tool</a>
         </div>
       </div>
     </header>
