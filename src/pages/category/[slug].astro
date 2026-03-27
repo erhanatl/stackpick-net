@@ -29,7 +29,7 @@ const categoryTools = tools.filter(t => t.category === categoryName && t.status 
 ---
 
 <BaseLayout
-  title={`Best AI ${category.name} Tools 2026`}
+  title={`Best ${category.name.startsWith('AI') ? '' : 'AI '}${category.name} Tools 2026`}
   description={category.description}
 >
   <section class="py-16">
@@ -43,7 +43,7 @@ const categoryTools = tools.filter(t => t.category === categoryName && t.status 
         <span class="text-text">{category.name}</span>
       </nav>
 
-      <h1 class="text-3xl font-bold mb-4">Best AI {category.name} Tools 2026</h1>
+      <h1 class="text-3xl font-bold mb-4">Best {category.name.startsWith('AI') ? '' : 'AI '}{category.name} Tools 2026</h1>
       <p class="text-lg text-text-muted mb-10 max-w-3xl">{category.description}</p>
 
       {categoryTools.length > 0 ? (
