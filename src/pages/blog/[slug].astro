@@ -27,9 +27,10 @@ const readingTime = estimateReadingTime(guide.content);
 const categoryData = categories.find((c: { name: string; slug: string }) => c.name === guide.category);
 const categorySlug = categoryData ? categoryData.slug : guide.category.toLowerCase().replace(/\s+/g, '-');
 
-// Find related tools in the same category
+// Find related tools in the same category (limit to 6)
 const publishedTools = tools.filter(t => t.status === 'Published');
-const relatedTools = publishedTools.filter(t => t.category === guide.category);
+const allCategoryTools = publishedTools.filter(t => t.category === guide.category);
+const relatedTools = allCategoryTools.sort((a, b) => a.tool_name.localeCompare(b.tool_name)).slice(0, 6);
 
 const typeBadge = guide.type === 'best-tools' ? 'Best Tools' : 'How to Choose';
 const typeBadgeClass = guide.type === 'best-tools'
@@ -73,15 +74,19 @@ const typeBadgeClass = guide.type === 'best-tools'
       <!-- Related Tools -->
       {relatedTools.length > 0 && (
         <section class="border-t border-border pt-10">
-          <h2 class="text-2xl font-bold mb-6">{guide.category} Tools on Stackpick</h2>
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold">{guide.category} Tools on Stackpick</h2>
+            {allCategoryTools.length > 6 && (
+              <a href={`/category/${categorySlug}/`} class="text-primary hover:text-primary-dark font-medium text-sm">
+                View all {allCategoryTools.length} tools &rarr;
+              </a>
+            )}
+          </div>
           <div class="grid md:grid-cols-2 gap-4">
             {relatedTools.map((tool) => (
               <a href={`/tools/${tool.slug}/`} class="bg-white border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div class="flex items-center justify-between mb-1">
-                  <h4 class="font-semibold">{tool.tool_name}</h4>
-                  <span class="text-sm font-medium text-warning">{tool.rating}/5</span>
-                </div>
-                <p class="text-sm text-text-muted">{tool.short_description}</p>
+                <h4 class="font-semibold">{tool.tool_name}</h4>
+                <p class="text-sm text-text-muted mt-1">{tool.short_description}</p>
               </a>
             ))}
           </div>
