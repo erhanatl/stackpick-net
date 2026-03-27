@@ -23,10 +23,12 @@ const categorySlug: Record<string, string> = {
   'Testing': 'testing',
   'Security': 'security',
   'IaC': 'iac',
+  'AI Code Review': 'ai-code-review',
+  'AIOps': 'aiops',
 };
 
 const allRelatedTools = tools.filter(t => t.category === tool.category && t.slug !== tool.slug && t.status === 'Published');
-const relatedTools = [...allRelatedTools].sort((a, b) => b.rating - a.rating).slice(0, 6);
+const relatedTools = [...allRelatedTools].sort((a, b) => a.tool_name.localeCompare(b.tool_name)).slice(0, 6);
 const relatedComparisons = comparisons.filter(c => c.tools.includes(tool.slug));
 const relatedGuides = guides.filter(g => g.category === tool.category);
 
@@ -59,7 +61,7 @@ const faqs = [
 
 <BaseLayout
   title={`${tool.tool_name} Review 2026 | Pricing, Pros & Cons`}
-  description={`${tool.tool_name} by ${tool.vendor} — ${tool.short_description} Rating: ${tool.rating}/5. Pricing: ${tool.starting_price} (${tool.pricing_model}).`}
+  description={`${tool.tool_name} by ${tool.vendor} — ${tool.short_description} Pricing: ${tool.starting_price} (${tool.pricing_model}).`}
 >
   <article class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,26 +78,12 @@ const faqs = [
 
       <!-- Header -->
       <header class="mb-10">
-        <div class="flex items-start justify-between flex-wrap gap-4">
-          <div>
-            <h1 class="text-4xl font-bold mb-2">{tool.tool_name}</h1>
-            <p class="text-lg text-text-muted">by {tool.vendor}</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="flex items-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <svg class={`w-5 h-5 ${i < Math.floor(tool.rating) ? 'text-warning' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <span class="text-xl font-bold">{tool.rating}</span>
-          </div>
-        </div>
+        <h1 class="text-4xl font-bold mb-2">{tool.tool_name}</h1>
+        <p class="text-lg text-text-muted">by {tool.vendor}</p>
       </header>
 
       <!-- Quick Info -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      <div class="grid grid-cols-3 gap-4 mb-10">
         <div class="bg-surface rounded-lg p-4 text-center">
           <p class="text-sm text-text-muted">Category</p>
           <p class="font-semibold">{tool.category}</p>
@@ -107,10 +95,6 @@ const faqs = [
         <div class="bg-surface rounded-lg p-4 text-center">
           <p class="text-sm text-text-muted">Starting Price</p>
           <p class="font-semibold">{tool.starting_price}</p>
-        </div>
-        <div class="bg-surface rounded-lg p-4 text-center">
-          <p class="text-sm text-text-muted">Rating</p>
-          <p class="font-semibold">{tool.rating}/5</p>
         </div>
       </div>
 
@@ -242,10 +226,7 @@ const faqs = [
           <div class="grid md:grid-cols-2 gap-4">
             {relatedTools.map((related) => (
               <a href={`/tools/${related.slug}/`} class="bg-white border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div class="flex items-center justify-between">
-                  <h4 class="font-semibold">{related.tool_name}</h4>
-                  <span class="text-sm text-warning font-medium">★ {related.rating}</span>
-                </div>
+                <h4 class="font-semibold">{related.tool_name}</h4>
                 <p class="text-sm text-text-muted mt-1">{related.short_description}</p>
               </a>
             ))}
@@ -272,60 +253,6 @@ const faqs = [
           "price": tool.starting_price,
           "priceCurrency": "USD",
           "category": tool.pricing_model
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": tool.rating,
-          "bestRating": 5,
-          "worstRating": 1,
-          "ratingCount": 1
-        }
-      })} />
-
-      <!-- JSON-LD: Review -->
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Review",
-        "name": `${tool.tool_name} Review 2026`,
-        "reviewBody": tool.short_description,
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": tool.tool_name,
-          "applicationCategory": "DeveloperApplication",
-          "url": tool.website_url
-        },
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": tool.rating,
-          "bestRating": 5,
-          "worstRating": 1
-        },
-        "author": {
-          "@type": "Organization",
-          "name": "Stackpick",
-          "url": "https://stackpick.net"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Stackpick",
-          "url": "https://stackpick.net"
-        },
-        "datePublished": "2026-03-01",
-        "positiveNotes": {
-          "@type": "ItemList",
-          "itemListElement": prosList.map((p: string, i: number) => ({
-            "@type": "ListItem",
-            "position": i + 1,
-            "name": p
-          }))
-        },
-        "negativeNotes": {
-          "@type": "ItemList",
-          "itemListElement": consList.map((c: string, i: number) => ({
-            "@type": "ListItem",
-            "position": i + 1,
-            "name": c
-          }))
         }
       })} />
 
