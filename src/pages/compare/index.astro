@@ -113,7 +113,7 @@ const categories = [...new Set(publishedTools.map(t => t.category))].sort();
                 ${logoHtml}
                 <div>
                   <span class="font-medium text-sm">${t.tool_name}</span>
-                  <span class="block text-xs text-gray-500 mt-0.5">${t.vendor}</span>
+                  <span class="block text-xs text-text-muted mt-0.5 vendor-name">${t.vendor}</span>
                 </div>
               </div>
             </button>
@@ -139,10 +139,14 @@ const categories = [...new Set(publishedTools.map(t => t.category))].sort();
         selectedTools = selectedTools.filter(s => s !== slug);
         btn.classList.remove('bg-primary', 'text-white', 'border-primary');
         btn.classList.add('bg-white');
+        const vendor = btn.querySelector('.vendor-name');
+        if (vendor) { vendor.classList.remove('text-blue-200'); vendor.classList.add('text-text-muted'); }
       } else if (selectedTools.length < 3) {
         selectedTools.push(slug);
         btn.classList.add('bg-primary', 'text-white', 'border-primary');
         btn.classList.remove('bg-white');
+        const vendor = btn.querySelector('.vendor-name');
+        if (vendor) { vendor.classList.remove('text-text-muted'); vendor.classList.add('text-blue-200'); }
       }
 
       updateSelectionHint();
