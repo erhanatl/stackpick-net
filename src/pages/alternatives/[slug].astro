@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import tools from '../../data/tools.json';
+import comparisons from '../../data/comparisons.json';
+
+export function getStaticPaths() {
+  return tools
+    .filter(t => t.status === 'Published')
+    .map(tool => ({
+      params: { slug: tool.slug },
+      props: { tool }
+    }));
+}
+
+const { tool } = Astro.props;
+
+const categorySlug: Record<string, string> = {
+  'CI/CD': 'ci-cd',
+  'Code Assistant': 'code-assistant',
+  'Monitoring': 'monitoring',
+  'Testing': 'testing',
+  'Security': 'security',
+  'IaC': 'iac',
+  'AI Code Review': 'ai-code-review',
+  'AIOps': 'aiops',
+};
+
+const getDomain = (url: string | undefined) => {
+  if (!url) return null;
+  try { return new URL(url).hostname; } catch { return null; }
+};
+
+// Same category alternatives
+const sameCategoryAlts = tools.filter(t =>
+  t.category === tool.category && t.slug !== tool.slug && t.status === 'Published'
+).sort((a, b) => a.tool_name.localeCompare(b.tool_name));
+
+// Cross-category alternatives (tools that might serve similar purposes)
+const relatedComparisons = comparisons.filter(c => c.tools.includes(tool.slug));
+const comparedSlugs = new Set<string>();
+relatedComparisons.forEach(c => c.tools.forEach((s: string) => {
+  if (s !== tool.slug) comparedSlugs.add(s);
+}));
+const comparedTools = tools.filter(t => comparedSlugs.has(t.slug) && t.status === 'Published');
+
+// Merge: compared tools first (most relevant), then same category
+const seenSlugs = new Set<string>();
+const alternatives: typeof tools = [];
+
+// First add tools that have been directly compared
+comparedTools.forEach(t => {
+  if (!seenSlugs.has(t.slug)) {
+    seenSlugs.add(t.slug);
+    alternatives.push(t);
+  }
+});
+
+// Then add same category tools
+sameCategoryAlts.forEach(t => {
+  if (!seenSlugs.has(t.slug)) {
+    seenSlugs.add(t.slug);
+    alternatives.push(t);
+  }
+});
+
+const toolDomain = getDomain(tool.website_url);
+const toolLogo = toolDomain ? `https://www.google.com/s2/favicons?domain=${toolDomain}&sz=64` : null;
+
+const pricingColors: Record<string, string> = {
+  'Free': 'bg-green-100 text-green-800',
+  'Freemium': 'bg-blue-100 text-blue-800',
+  'Paid': 'bg-orange-100 text-orange-800',
+  'Enterprise': 'bg-purple-100 text-purple-800',
+  'Open Source': 'bg-emerald-100 text-emerald-800',
+};
+---
+
+<BaseLayout
+  title={`Best ${tool.tool_name} Alternatives 2026 | Top ${alternatives.length} Competitors`}
+  description={`Looking for ${tool.tool_name} alternatives? Compare the top ${alternatives.length} ${tool.category} tools. Side-by-side feature comparison, pricing, and pros & cons.`}
+>
+  <article class="py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-text-muted mb-8">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/tools/" class="hover:text-primary">Tools</a>
+        <span class="mx-2">/</span>
+        <a href={`/tools/${tool.slug}/`} class="hover:text-primary">{tool.tool_name}</a>
+        <span class="mx-2">/</span>
+        <span class="text-text">Alternatives</span>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-10">
+        <div class="flex items-center gap-4 mb-4">
+          {toolLogo ? (
+            <img src={toolLogo} alt={`${tool.tool_name} logo`} width="48" height="48" class="rounded-lg shrink-0" loading="lazy" />
+          ) : (
+            <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
+              <span class="text-xl font-bold text-gray-400">{tool.tool_name.charAt(0)}</span>
+            </div>
+          )}
+          <div>
+            <h1 class="text-3xl md:text-4xl font-bold">Best {tool.tool_name} Alternatives</h1>
+            <p class="text-text-muted mt-1">{alternatives.length} alternatives and competitors in 2026</p>
+          </div>
+        </div>
+        <p class="text-lg text-text-muted max-w-3xl">
+          {tool.tool_name} is a {tool.category.toLowerCase()} tool by {tool.vendor} ({tool.pricing_model}, starting at {tool.starting_price}).
+          Here are the best alternatives if you're looking for something different.
+        </p>
+      </header>
+
+      <!-- Quick Summary of Original Tool -->
+      <div class="bg-surface rounded-xl p-6 mb-10 border border-border">
+        <div class="flex items-center justify-between flex-wrap gap-4 mb-4">
+          <h2 class="text-lg font-bold">Why look for {tool.tool_name} alternatives?</h2>
+          <a href={`/tools/${tool.slug}/`} class="text-primary hover:text-primary-dark text-sm font-medium">
+            View full {tool.tool_name} review &rarr;
+          </a>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-sm font-semibold text-text-muted mb-2 uppercase tracking-wide">Known Limitations</h3>
+            <ul class="space-y-1.5">
+              {tool.cons.split(',').map((con: string) => (
+                <li class="flex items-start gap-2 text-sm">
+                  <span class="text-danger font-bold mt-0.5 shrink-0">-</span>
+                  <span>{con.trim()}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-text-muted mb-2 uppercase tracking-wide">Key Strengths</h3>
+            <ul class="space-y-1.5">
+              {tool.pros.split(',').map((pro: string) => (
+                <li class="flex items-start gap-2 text-sm">
+                  <span class="text-success font-bold mt-0.5 shrink-0">+</span>
+                  <span>{pro.trim()}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alternatives List -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Top {tool.tool_name} Alternatives</h2>
+        <div class="space-y-4">
+          {alternatives.map((alt, index) => {
+            const domain = getDomain(alt.website_url);
+            const logo = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null;
+            const colorClass = pricingColors[alt.pricing_model] || 'bg-gray-100 text-gray-800';
+            const isCompared = comparedSlugs.has(alt.slug);
+
+            return (
+              <div class="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-start gap-4">
+                  <div class="flex items-center gap-2 shrink-0">
+                    <span class="text-2xl font-bold text-text-muted w-8 text-center">#{index + 1}</span>
+                    {logo ? (
+                      <img src={logo} alt={`${alt.tool_name} logo`} width="40" height="40" class="rounded-lg" loading="lazy" />
+                    ) : (
+                      <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                        <span class="font-bold text-gray-400">{alt.tool_name.charAt(0)}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-3 flex-wrap mb-1">
+                      <a href={`/tools/${alt.slug}/`} class="text-xl font-bold hover:text-primary transition-colors">
+                        {alt.tool_name}
+                      </a>
+                      <span class={`text-xs font-medium px-2.5 py-0.5 rounded-full ${colorClass}`}>
+                        {alt.pricing_model}
+                      </span>
+                      {alt.category !== tool.category && (
+                        <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                          {alt.category}
+                        </span>
+                      )}
+                    </div>
+                    <p class="text-sm text-text-muted mb-1">by {alt.vendor} · Starting at {alt.starting_price}</p>
+                    <p class="text-text-muted mb-3">{alt.short_description}</p>
+
+                    <div class="grid md:grid-cols-2 gap-3 mb-3">
+                      <div>
+                        <ul class="space-y-1">
+                          {alt.pros.split(',').slice(0, 3).map((pro: string) => (
+                            <li class="flex items-start gap-1.5 text-sm">
+                              <span class="text-success font-bold mt-0.5 shrink-0">+</span>
+                              <span>{pro.trim()}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <ul class="space-y-1">
+                          {alt.cons.split(',').slice(0, 2).map((con: string) => (
+                            <li class="flex items-start gap-1.5 text-sm">
+                              <span class="text-danger font-bold mt-0.5 shrink-0">-</span>
+                              <span>{con.trim()}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 flex-wrap">
+                      <a href={`/tools/${alt.slug}/`} class="text-primary hover:text-primary-dark text-sm font-medium">
+                        Read full review &rarr;
+                      </a>
+                      {isCompared && relatedComparisons.find(c => c.tools.includes(alt.slug)) && (
+                        <a href={`/compare/${relatedComparisons.find(c => c.tools.includes(alt.slug))!.slug}/`} class="text-sm font-medium text-secondary hover:text-slate-600">
+                          See {tool.tool_name} vs {alt.tool_name} comparison &rarr;
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Quick Comparison Table -->
+      {alternatives.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold mb-6">{tool.tool_name} vs Alternatives: Quick Comparison</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm text-sm">
+              <thead>
+                <tr class="bg-secondary text-white">
+                  <th class="text-left p-3 font-semibold">Tool</th>
+                  <th class="text-center p-3 font-semibold">Vendor</th>
+                  <th class="text-center p-3 font-semibold">Pricing</th>
+                  <th class="text-center p-3 font-semibold">Starting Price</th>
+                  <th class="text-center p-3 font-semibold">Category</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr class="bg-primary/5">
+                  <td class="p-3 font-semibold">
+                    <a href={`/tools/${tool.slug}/`} class="hover:text-primary">{tool.tool_name}</a>
+                    <span class="text-xs text-text-muted ml-1">(original)</span>
+                  </td>
+                  <td class="p-3 text-center">{tool.vendor}</td>
+                  <td class="p-3 text-center">{tool.pricing_model}</td>
+                  <td class="p-3 text-center font-medium">{tool.starting_price}</td>
+                  <td class="p-3 text-center">{tool.category}</td>
+                </tr>
+                {alternatives.slice(0, 10).map((alt) => (
+                  <tr>
+                    <td class="p-3 font-semibold">
+                      <a href={`/tools/${alt.slug}/`} class="hover:text-primary">{alt.tool_name}</a>
+                    </td>
+                    <td class="p-3 text-center">{alt.vendor}</td>
+                    <td class="p-3 text-center">{alt.pricing_model}</td>
+                    <td class="p-3 text-center font-medium">{alt.starting_price}</td>
+                    <td class="p-3 text-center">{alt.category}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <!-- CTA -->
+      <div class="mt-12 bg-surface rounded-xl p-8 text-center">
+        <h3 class="text-xl font-bold mb-3">Can't decide?</h3>
+        <p class="text-text-muted mb-6">Use our interactive comparison tool to compare any tools side by side.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/compare/" class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-block">
+            Compare Tools
+          </a>
+          <a href={`/category/${categorySlug[tool.category]}/`} class="bg-white hover:bg-gray-50 text-secondary border border-border px-8 py-3 rounded-lg font-semibold transition-colors inline-block">
+            Browse All {tool.category} Tools
+          </a>
+        </div>
+      </div>
+
+      <!-- JSON-LD: ItemList -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": `Best ${tool.tool_name} Alternatives 2026`,
+        "description": `Top ${alternatives.length} alternatives to ${tool.tool_name} for ${tool.category}`,
+        "numberOfItems": alternatives.length,
+        "itemListElement": alternatives.slice(0, 10).map((alt, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": alt.tool_name,
+            "description": alt.short_description,
+            "url": `https://stackpick.net/tools/${alt.slug}/`,
+            "applicationCategory": "DeveloperApplication",
+            "provider": {
+              "@type": "Organization",
+              "name": alt.vendor
+            }
+          }
+        }))
+      })} />
+
+      <!-- JSON-LD: BreadcrumbList -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://stackpick.net/" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://stackpick.net/tools/" },
+          { "@type": "ListItem", "position": 3, "name": tool.tool_name, "item": `https://stackpick.net/tools/${tool.slug}/` },
+          { "@type": "ListItem", "position": 4, "name": "Alternatives" }
+        ]
+      })} />
+    </div>
+  </article>
+</BaseLayout>

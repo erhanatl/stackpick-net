@@ -202,14 +202,22 @@ const faqs = [
       <div class="bg-surface rounded-xl p-8 text-center mb-10">
         <h3 class="text-xl font-bold mb-3">Try {tool.tool_name}</h3>
         <p class="text-text-muted mb-4">Starting at {tool.starting_price}</p>
-        <a
-          href={tool.affiliate_url || tool.website_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
-        >
-          Visit Website
-        </a>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href={tool.affiliate_url || tool.website_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
+          >
+            Visit Website
+          </a>
+          <a
+            href={`/alternatives/${tool.slug}/`}
+            class="bg-white hover:bg-gray-50 text-secondary border border-border px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
+          >
+            View Alternatives
+          </a>
+        </div>
       </div>
 
       <!-- Related Tools -->
