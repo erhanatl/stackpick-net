@@ -91,10 +91,10 @@ const categories = [...new Set(publishedTools.map(t => t.category))].sort();
         // Highlight active category
         document.querySelectorAll('.category-btn').forEach(b => {
           b.classList.remove('bg-primary', 'text-white', 'border-primary');
-          b.classList.add('bg-white');
+          b.classList.add('bg-white', 'hover:text-primary');
         });
         btn.classList.add('bg-primary', 'text-white', 'border-primary');
-        btn.classList.remove('bg-white');
+        btn.classList.remove('bg-white', 'hover:text-primary');
 
         // Show tools for category
         const categoryTools = allTools.filter(t => t.category === selectedCategory);
