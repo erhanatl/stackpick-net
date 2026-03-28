@@ -160,12 +160,12 @@ const pricingColors: Record<string, string> = {
             return (
               <div class="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-shadow">
                 <div class="flex items-start gap-4">
-                  <div class="flex items-center gap-2 shrink-0">
-                    <span class="text-2xl font-bold text-text-muted w-8 text-center">#{index + 1}</span>
+                  <div class="flex items-center gap-3 shrink-0">
+                    <span class="text-2xl font-bold text-text-muted w-10 text-right">#{index + 1}</span>
                     {logo ? (
-                      <img src={logo} alt={`${alt.tool_name} logo`} width="40" height="40" class="rounded-lg" loading="lazy" />
+                      <img src={logo} alt={`${alt.tool_name} logo`} width="40" height="40" class="rounded-lg shrink-0" loading="lazy" />
                     ) : (
-                      <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
                         <span class="font-bold text-gray-400">{alt.tool_name.charAt(0)}</span>
                       </div>
                     )}
