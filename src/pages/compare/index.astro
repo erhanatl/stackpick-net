@@ -62,16 +62,37 @@ const categories = [...new Set(publishedTools.map(t => t.category))].sort();
 
       <!-- Featured Comparisons -->
       <div>
-        <h2 class="text-2xl font-bold mb-6">Featured Comparisons</h2>
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold">Featured Comparisons</h2>
+          <span class="text-sm text-text-muted">{comparisons.length} comparisons</span>
+        </div>
         <div class="space-y-4">
-          {comparisons.map((comp) => (
-            <a href={`/compare/${comp.slug}/`} class="block bg-white border border-border rounded-xl p-6 hover:shadow-lg transition-shadow">
+          {comparisons.slice(0, 3).map((comp) => (
+            <a href={`/compare/${comp.slug}/`} class="card-hover block bg-white border border-border rounded-xl p-6">
               <h3 class="text-xl font-bold mb-2">{comp.title}</h3>
               <p class="text-text-muted">{comp.description}</p>
               <span class="inline-block mt-4 text-primary font-medium text-sm">Read detailed comparison &rarr;</span>
             </a>
           ))}
         </div>
+
+        <!-- All Comparisons (collapsed) -->
+        <div id="all-comparisons" class="hidden mt-4 space-y-4">
+          {comparisons.slice(3).map((comp) => (
+            <a href={`/compare/${comp.slug}/`} class="card-hover block bg-white border border-border rounded-xl p-6">
+              <h3 class="text-xl font-bold mb-2">{comp.title}</h3>
+              <p class="text-text-muted">{comp.description}</p>
+              <span class="inline-block mt-4 text-primary font-medium text-sm">Read detailed comparison &rarr;</span>
+            </a>
+          ))}
+        </div>
+
+        <button
+          id="show-all-btn"
+          class="mt-6 w-full py-3 rounded-lg border border-border bg-white text-sm font-medium text-primary hover:bg-surface transition-colors"
+        >
+          Show all {comparisons.length} comparisons
+        </button>
       </div>
     </div>
   </section>
@@ -239,6 +260,19 @@ const categories = [...new Set(publishedTools.map(t => t.category))].sort();
 
       document.getElementById('comparison-result').classList.remove('hidden');
       document.getElementById('comparison-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Show all comparisons toggle
+    document.getElementById('show-all-btn')?.addEventListener('click', () => {
+      const allSection = document.getElementById('all-comparisons');
+      const btn = document.getElementById('show-all-btn');
+      if (allSection.classList.contains('hidden')) {
+        allSection.classList.remove('hidden');
+        btn.textContent = 'Show less';
+      } else {
+        allSection.classList.add('hidden');
+        btn.textContent = `Show all ${document.querySelectorAll('#all-comparisons a').length + 3} comparisons`;
+      }
     });
   </script>
 </BaseLayout>
