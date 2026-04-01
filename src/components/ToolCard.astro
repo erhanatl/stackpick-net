@@ -33,7 +33,7 @@ const categoryColors: Record<string, string> = {
 const colorClass = categoryColors[category] || 'bg-gray-100 text-gray-800';
 ---
 
-<a href={`/tools/${slug}/`} class="block bg-white rounded-xl border border-border hover:shadow-lg transition-shadow p-6 group">
+<a href={`/tools/${slug}/`} class="card-hover block bg-white rounded-xl border border-border p-6 group">
   <div class="flex items-start justify-between mb-3">
     <div class="flex items-center gap-3">
       {logoUrl ? (
