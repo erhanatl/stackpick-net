@@ -1084,7 +1084,7 @@
     "slug": "cline",
     "category": "Code Assistant",
     "short_description": "Cline is an AI-powered coding assistant that runs directly in VS Code, enabling developers to build software through natural language conversations. It can autonomously execute terminal commands, edit files, and interact with your development environment to implement features and fix bugs.",
-    "vendor": "Anthropic (Community-driven)",
+    "vendor": "Community-driven (Open Source)",
     "pricing_model": "Freemium",
     "starting_price": "Free with API costs",
     "website_url": "https://github.com/cline/cline",
@@ -1322,7 +1322,7 @@
   {
     "tool_name": "Firefly.ai",
     "slug": "firefly-ai",
-    "category": "Code Assistant",
+    "category": "IaC",
     "short_description": "Firefly.ai is an AI-powered development assistant that helps developers write, debug, and optimize code through intelligent suggestions and automated code generation. It integrates seamlessly into existing development workflows to enhance productivity and code quality.",
     "vendor": "Firefly Technologies",
     "pricing_model": "Freemium",
@@ -1760,7 +1760,7 @@
   {
     "tool_name": "Reviewer.ai",
     "slug": "reviewer-ai",
-    "category": "Code Assistant",
+    "category": "AI Code Review",
     "short_description": "Reviewer.ai is an AI-powered code review tool that automatically analyzes pull requests and provides intelligent feedback on code quality, security vulnerabilities, and best practices. It integrates with popular version control systems to streamline the code review process and improve development team productivity.",
     "vendor": "Reviewer.ai Inc.",
     "pricing_model": "Freemium",
@@ -1792,7 +1792,7 @@
   {
     "tool_name": "Trag AI",
     "slug": "trag-ai",
-    "category": "Code Assistant",
+    "category": "AI Code Review",
     "short_description": "Trag AI is an intelligent code analysis and automation platform that helps developers understand, refactor, and optimize codebases using AI-powered insights. It provides automated code reviews, technical debt analysis, and smart suggestions for code improvements across multiple programming languages.",
     "vendor": "Trag AI Inc.",
     "pricing_model": "Freemium",
