@@ -49,14 +49,36 @@ function estimateReadingTime(content: string): number {
 
         <!-- Hero Search -->
         <div class="max-w-2xl mx-auto mb-8">
-          <a href="/tools/" class="flex items-center gap-3 w-full px-5 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/15 transition-all group cursor-text">
-            <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="relative">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-            <span class="text-gray-400 text-sm md:text-base flex-1 text-left">Search {publishedTools.length} AI DevOps tools...</span>
-            <span class="text-xs text-gray-500 bg-white/10 px-2 py-1 rounded shrink-0">Browse all →</span>
-          </a>
+            <input
+              id="hero-search"
+              type="text"
+              placeholder={`Search ${publishedTools.length} AI DevOps tools...`}
+              class="w-full pl-12 pr-32 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/15 transition-all text-sm md:text-base"
+            />
+            <button id="hero-search-btn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-dark text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors">
+              Search
+            </button>
+          </div>
         </div>
+
+        <script>
+          const heroInput = document.getElementById('hero-search') as HTMLInputElement;
+          const heroBtn = document.getElementById('hero-search-btn');
+
+          function goSearch() {
+            const q = heroInput.value.trim();
+            window.location.href = q ? `/tools/?q=${encodeURIComponent(q)}` : '/tools/';
+          }
+
+          heroBtn?.addEventListener('click', goSearch);
+          heroInput?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') goSearch();
+          });
+        </script>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="/tools/" class="bg-primary hover:bg-primary-dark text-white px-8 py-3.5 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-primary/25">
