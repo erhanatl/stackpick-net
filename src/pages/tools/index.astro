@@ -165,14 +165,6 @@ const publishedTools = tools.filter(t => t.status === 'Published');
         sortFilter.addEventListener('change', filterAndSort);
         resetBtn!.addEventListener('click', resetFilters);
 
-        // Pre-fill search from URL param ?q=
-        const urlParams = new URLSearchParams(window.location.search);
-        const qParam = urlParams.get('q');
-        if (qParam) {
-          searchInput.value = qParam;
-          searchInput.focus();
-        }
-
         // Initial sort A→Z
         filterAndSort();
       </script>
