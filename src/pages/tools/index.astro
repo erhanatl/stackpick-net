@@ -16,34 +16,63 @@ const publishedTools = tools.filter(t => t.status === 'Published');
       <p class="text-text-muted mb-4">{publishedTools.length} tools reviewed and compared</p>
 
       <!-- Search & Filter -->
-      <div class="flex flex-col sm:flex-row gap-3 mb-10">
-        <div class="relative flex-1">
+      <div class="flex flex-col gap-3 mb-6">
+        <!-- Search -->
+        <div class="relative">
           <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
             type="text"
             id="tool-search"
-            placeholder="Search tools..."
-            class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            placeholder="Search by name, vendor, or description..."
+            class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
           />
         </div>
-        <select
-          id="category-filter"
-          class="px-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-        >
-          <option value="">All Categories</option>
-          {[...new Set(publishedTools.map(t => t.category))].sort().map(cat => (
-            <option value={cat}>{cat}</option>
-          ))}
-        </select>
+        <!-- Filters Row -->
+        <div class="flex flex-wrap gap-3">
+          <select
+            id="category-filter"
+            class="px-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          >
+            <option value="">All Categories</option>
+            {[...new Set(publishedTools.map(t => t.category))].sort().map(cat => (
+              <option value={cat}>{cat}</option>
+            ))}
+          </select>
+          <select
+            id="pricing-filter"
+            class="px-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          >
+            <option value="">All Pricing</option>
+            <option value="Free">Free</option>
+            <option value="Freemium">Freemium</option>
+            <option value="Paid">Paid</option>
+            <option value="Enterprise">Enterprise</option>
+          </select>
+          <select
+            id="sort-filter"
+            class="px-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          >
+            <option value="name-asc">Name: A → Z</option>
+            <option value="name-desc">Name: Z → A</option>
+            <option value="category">Category</option>
+            <option value="pricing">Pricing Model</option>
+          </select>
+          <button
+            id="reset-filters"
+            class="hidden px-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm text-text-muted hover:text-danger hover:border-danger transition-colors"
+          >
+            ✕ Clear filters
+          </button>
+        </div>
       </div>
 
       <p id="search-count" class="text-sm text-text-muted mb-4 hidden"></p>
 
       <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {publishedTools.map((tool) => (
-          <div class="tool-card" data-name={tool.tool_name.toLowerCase()} data-category={tool.category} data-vendor={tool.vendor.toLowerCase()} data-description={tool.short_description.toLowerCase()}>
+          <div class="tool-card" data-name={tool.tool_name.toLowerCase()} data-category={tool.category} data-vendor={tool.vendor.toLowerCase()} data-description={tool.short_description.toLowerCase()} data-pricing={tool.pricing_model}>
             <ToolCard
               name={tool.tool_name}
               slug={tool.slug}
@@ -61,41 +90,83 @@ const publishedTools = tools.filter(t => t.status === 'Published');
       <p id="no-results" class="hidden text-center text-text-muted py-12">No tools found matching your search.</p>
 
       <script>
-        const searchInput = document.getElementById('tool-search');
-        const categoryFilter = document.getElementById('category-filter');
-        const cards = document.querySelectorAll('.tool-card');
+        const searchInput = document.getElementById('tool-search') as HTMLInputElement;
+        const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement;
+        const pricingFilter = document.getElementById('pricing-filter') as HTMLSelectElement;
+        const sortFilter = document.getElementById('sort-filter') as HTMLSelectElement;
+        const resetBtn = document.getElementById('reset-filters');
+        const grid = document.getElementById('tools-grid');
         const noResults = document.getElementById('no-results');
         const searchCount = document.getElementById('search-count');
-        const total = cards.length;
+        const total = document.querySelectorAll('.tool-card').length;
 
-        function filterTools() {
+        function filterAndSort() {
           const query = searchInput.value.toLowerCase().trim();
           const category = categoryFilter.value;
+          const pricing = pricingFilter.value;
+          const sort = sortFilter.value;
+
+          // Get all cards as array for sorting
+          const cards = Array.from(document.querySelectorAll('.tool-card')) as HTMLElement[];
           let visible = 0;
 
-          cards.forEach(card => {
+          // Filter
+          const visibleCards = cards.filter(card => {
             const matchesSearch = !query ||
-              card.dataset.name.includes(query) ||
-              card.dataset.vendor.includes(query) ||
-              card.dataset.description.includes(query);
+              card.dataset.name!.includes(query) ||
+              card.dataset.vendor!.includes(query) ||
+              card.dataset.description!.includes(query);
             const matchesCategory = !category || card.dataset.category === category;
-            const show = matchesSearch && matchesCategory;
-            card.style.display = show ? '' : 'none';
-            if (show) visible++;
+            const matchesPricing = !pricing || card.dataset.pricing === pricing;
+            return matchesSearch && matchesCategory && matchesPricing;
           });
 
-          noResults.classList.toggle('hidden', visible > 0);
+          // Sort
+          visibleCards.sort((a, b) => {
+            if (sort === 'name-asc') return a.dataset.name!.localeCompare(b.dataset.name!);
+            if (sort === 'name-desc') return b.dataset.name!.localeCompare(a.dataset.name!);
+            if (sort === 'category') return a.dataset.category!.localeCompare(b.dataset.category!);
+            if (sort === 'pricing') return a.dataset.pricing!.localeCompare(b.dataset.pricing!);
+            return 0;
+          });
 
-          if (query || category) {
-            searchCount.textContent = `Showing ${visible} of ${total} tools`;
-            searchCount.classList.remove('hidden');
+          // Apply visibility and order
+          cards.forEach(card => card.style.display = 'none');
+          visibleCards.forEach(card => {
+            card.style.display = '';
+            grid!.appendChild(card);
+            visible++;
+          });
+
+          noResults!.classList.toggle('hidden', visible > 0);
+
+          const isFiltered = query || category || pricing || sort !== 'name-asc';
+          if (isFiltered) {
+            searchCount!.textContent = `Showing ${visible} of ${total} tools`;
+            searchCount!.classList.remove('hidden');
+            resetBtn!.classList.remove('hidden');
           } else {
-            searchCount.classList.add('hidden');
+            searchCount!.classList.add('hidden');
+            resetBtn!.classList.add('hidden');
           }
         }
 
-        searchInput.addEventListener('input', filterTools);
-        categoryFilter.addEventListener('change', filterTools);
+        function resetFilters() {
+          searchInput.value = '';
+          categoryFilter.value = '';
+          pricingFilter.value = '';
+          sortFilter.value = 'name-asc';
+          filterAndSort();
+        }
+
+        searchInput.addEventListener('input', filterAndSort);
+        categoryFilter.addEventListener('change', filterAndSort);
+        pricingFilter.addEventListener('change', filterAndSort);
+        sortFilter.addEventListener('change', filterAndSort);
+        resetBtn!.addEventListener('click', resetFilters);
+
+        // Initial sort A→Z
+        filterAndSort();
       </script>
     </div>
   </section>
