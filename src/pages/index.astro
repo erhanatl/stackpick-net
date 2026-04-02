@@ -42,10 +42,30 @@ function estimateReadingTime(content: string): number {
           Pick the Right AI Tools<br />
           <span class="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">for Your DevOps Stack</span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
           Independent, unbiased comparisons of AI-powered DevOps tools.
           Side-by-side reviews to help your team make the right choice.
         </p>
+
+        <!-- Hero Search -->
+        <form action="/tools/" method="get" class="max-w-2xl mx-auto mb-8">
+          <div class="relative">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              name="q"
+              placeholder={`Search ${publishedTools.length} AI DevOps tools...`}
+              class="w-full pl-12 pr-32 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white/15 transition-all text-sm md:text-base"
+            />
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-dark text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors">
+              Search
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Try "Datadog", "code review", or "free monitoring"</p>
+        </form>
+
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="/tools/" class="bg-primary hover:bg-primary-dark text-white px-8 py-3.5 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-primary/25">
             Browse All Tools
