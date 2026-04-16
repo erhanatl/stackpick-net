@@ -3152,7 +3152,7 @@
   {
     "tool_name": "Groundcover",
     "slug": "groundcover",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "eBPF-based cloud-native observability platform with AI-native incident investigation and zero-instrumentation telemetry for Kubernetes.",
     "vendor": "Groundcover",
     "pricing_model": "Freemium",
@@ -3168,7 +3168,7 @@
   {
     "tool_name": "Better Stack",
     "slug": "better-stack",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Full-stack observability platform with AI SRE for automated root cause analysis, AI-written postmortems, and unified logs, metrics, and uptime monitoring.",
     "vendor": "Better Stack",
     "pricing_model": "Freemium",
@@ -3184,7 +3184,7 @@
   {
     "tool_name": "Metoro",
     "slug": "metoro",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "AI SRE platform for Kubernetes that autonomously detects issues, verifies deployments, investigates alerts, and generates fix PRs using eBPF telemetry.",
     "vendor": "Metoro",
     "pricing_model": "Paid",
@@ -3392,7 +3392,7 @@
   {
     "tool_name": "AWS CodeGuru",
     "slug": "aws-codeguru",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "AWS AI-powered automated code reviewer that identifies defects, security vulnerabilities, and performance issues with context-aware recommendations.",
     "vendor": "Amazon Web Services",
     "pricing_model": "Pay-as-you-go",
