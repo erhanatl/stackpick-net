@@ -2,7 +2,7 @@
   {
     "tool_name": "GitHub Copilot",
     "slug": "github-copilot",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "AI-powered code completion and suggestion tool integrated directly into your IDE. Supports multiple languages and frameworks.",
     "vendor": "GitHub / Microsoft",
     "pricing_model": "Freemium",
@@ -17,7 +17,7 @@
   {
     "tool_name": "Cursor",
     "slug": "cursor",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "AI-first code editor built on VS Code with advanced code generation, editing, and chat capabilities.",
     "vendor": "Anysphere",
     "pricing_model": "Freemium",
@@ -47,7 +47,7 @@
   {
     "tool_name": "Datadog AI",
     "slug": "datadog-ai",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "AI-powered observability and monitoring platform with intelligent alerting",
     "vendor": "Datadog",
     "pricing_model": "Paid",
@@ -77,7 +77,7 @@
   {
     "tool_name": "Pulumi AI",
     "slug": "pulumi-ai",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "AI-powered Infrastructure as Code platform using familiar programming languages instead of domain-specific languages.",
     "vendor": "Pulumi",
     "pricing_model": "Freemium",
@@ -92,7 +92,7 @@
   {
     "tool_name": "Terraform AI (HashiCorp)",
     "slug": "terraform-ai",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "AI-assisted infrastructure as code with intelligent resource suggestions",
     "vendor": "HashiCorp",
     "pricing_model": "Freemium",
@@ -107,7 +107,7 @@
   {
     "tool_name": "Spacelift AI",
     "slug": "spacelift-ai",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "AI-powered infrastructure as code management and orchestration platform",
     "vendor": "Spacelift",
     "pricing_model": "Freemium",
@@ -137,7 +137,7 @@
   {
     "tool_name": "Amazon Q Developer",
     "slug": "amazon-q-developer",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "AI code companion from AWS with security scanning",
     "vendor": "Amazon Web Services",
     "pricing_model": "Freemium",
@@ -167,7 +167,7 @@
   {
     "tool_name": "GitLab Duo",
     "slug": "gitlab-duo",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "AI-powered DevSecOps assistant integrated across the GitLab platform",
     "vendor": "GitLab",
     "pricing_model": "Paid",
@@ -212,7 +212,7 @@
   {
     "tool_name": "Tabnine",
     "slug": "tabnine",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Tabnine is an AI-powered code completion tool that provides intelligent suggestions and auto-completions for developers. It uses machine learning to understand code patterns and context, supporting over 30 programming languages and integrating with popular IDEs.",
     "vendor": "Tabnine Ltd.",
     "pricing_model": "Freemium",
@@ -272,7 +272,7 @@
   {
     "tool_name": "Codeium",
     "slug": "codeium",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Codeium is an AI-powered code assistant that provides intelligent code completion, chat assistance, and automated code generation across 70+ programming languages. It integrates with popular IDEs to enhance developer productivity through context-aware suggestions and explanations.",
     "vendor": "Codeium",
     "pricing_model": "Freemium",
@@ -287,7 +287,7 @@
   {
     "tool_name": "Supermaven",
     "slug": "supermaven",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Supermaven is an AI-powered code completion tool that provides fast, contextually-aware suggestions to accelerate software development. It offers real-time code assistance with a 300,000-token context window for comprehensive understanding of large codebases.",
     "vendor": "Supermaven Inc.",
     "pricing_model": "Freemium",
@@ -302,7 +302,7 @@
   {
     "tool_name": "Continue",
     "slug": "continue-dev",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Continue is an open-source AI code assistant that integrates with VS Code and JetBrains IDEs to provide context-aware code completion, explanation, and refactoring. It supports multiple AI models including local and cloud-based options for enhanced developer productivity.",
     "vendor": "Continue Dev",
     "pricing_model": "Freemium",
@@ -317,7 +317,7 @@
   {
     "tool_name": "Replit AI",
     "slug": "replit-ai",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Replit AI is an intelligent coding assistant integrated into the Replit cloud-based development environment. It provides AI-powered code completion, generation, debugging, and explanation features to help developers write code more efficiently across multiple programming languages.",
     "vendor": "Replit",
     "pricing_model": "Freemium",
@@ -332,7 +332,7 @@
   {
     "tool_name": "JetBrains AI Assistant",
     "slug": "jetbrains-ai-assistant",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "JetBrains AI Assistant is an integrated AI-powered coding companion that provides intelligent code completion, generation, and refactoring capabilities across JetBrains IDEs. It leverages large language models to help developers write, debug, and optimize code more efficiently.",
     "vendor": "JetBrains",
     "pricing_model": "Paid",
@@ -347,7 +347,7 @@
   {
     "tool_name": "Sourcegraph Cody",
     "slug": "sourcegraph-cody",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Sourcegraph Cody is an AI-powered coding assistant that provides intelligent code completion, explanation, and generation capabilities. It leverages advanced language models combined with deep codebase understanding to help developers write, understand, and debug code more efficiently.",
     "vendor": "Sourcegraph",
     "pricing_model": "Freemium",
@@ -362,7 +362,7 @@
   {
     "tool_name": "Devin AI",
     "slug": "devin-ai",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Devin is an AI-powered autonomous software engineer that can plan, code, test, and deploy applications end-to-end. It operates as a collaborative coding partner that can handle complex software development tasks with minimal human oversight.",
     "vendor": "Cognition AI",
     "pricing_model": "Enterprise",
@@ -467,7 +467,7 @@
   {
     "tool_name": "New Relic AI",
     "slug": "new-relic-ai",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "New Relic AI is an intelligent observability platform that uses artificial intelligence to provide automated insights, anomaly detection, and root cause analysis for application performance monitoring. It combines traditional APM capabilities with AI-powered analytics to help teams proactively identify and resolve issues across their entire technology stack.",
     "vendor": "New Relic",
     "pricing_model": "Freemium",
@@ -482,7 +482,7 @@
   {
     "tool_name": "Dynatrace",
     "slug": "dynatrace",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Dynatrace is an AI-powered observability platform that provides full-stack monitoring, application performance monitoring (APM), and automated root cause analysis. It delivers real-time insights into applications, infrastructure, and user experience across cloud-native and hybrid environments.",
     "vendor": "Dynatrace LLC",
     "pricing_model": "Freemium",
@@ -497,7 +497,7 @@
   {
     "tool_name": "Grafana",
     "slug": "grafana",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Grafana is an open-source analytics and interactive visualization platform that allows users to query, visualize, alert on, and explore metrics, logs, and traces from multiple data sources. It provides powerful dashboards and monitoring capabilities for observability across infrastructure, applications, and business metrics.",
     "vendor": "Grafana Labs",
     "pricing_model": "Freemium",
@@ -512,7 +512,7 @@
   {
     "tool_name": "Prometheus",
     "slug": "prometheus",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Prometheus is an open-source monitoring and alerting toolkit designed for reliability and scalability. It collects metrics from configured targets at given intervals, evaluates rule expressions, displays results, and triggers alerts when specified conditions are observed.",
     "vendor": "Cloud Native Computing Foundation (CNCF)",
     "pricing_model": "Free",
@@ -527,7 +527,7 @@
   {
     "tool_name": "Honeycomb",
     "slug": "honeycomb",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Honeycomb is an observability platform that provides high-cardinality analytics and distributed tracing for modern applications. It helps teams debug production issues faster by allowing them to ask arbitrary questions about their system's behavior.",
     "vendor": "Honeycomb.io",
     "pricing_model": "Freemium",
@@ -542,7 +542,7 @@
   {
     "tool_name": "Elastic Observability",
     "slug": "elastic-observability",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Elastic Observability is a comprehensive monitoring and observability platform that provides unified logs, metrics, and application performance monitoring (APM) across cloud-native and hybrid environments. It leverages the Elastic Stack (Elasticsearch, Kibana, Beats) to deliver real-time insights and deep visibility into application and infrastructure performance.",
     "vendor": "Elastic",
     "pricing_model": "Freemium",
@@ -557,7 +557,7 @@
   {
     "tool_name": "Sentry",
     "slug": "sentry",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Sentry is an application monitoring and error tracking platform that helps developers identify, triage, and resolve issues in real-time. It provides comprehensive crash reporting, performance monitoring, and release health tracking across multiple programming languages and frameworks.",
     "vendor": "Functional Software Inc.",
     "pricing_model": "Freemium",
@@ -782,7 +782,7 @@
   {
     "tool_name": "Ansible",
     "slug": "ansible",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Ansible is an open-source automation platform that simplifies complex IT tasks through agentless configuration management, application deployment, and infrastructure orchestration. It uses human-readable YAML playbooks to define automation workflows and can manage both on-premises and cloud environments.",
     "vendor": "Red Hat",
     "pricing_model": "Freemium",
@@ -797,7 +797,7 @@
   {
     "tool_name": "AWS CDK",
     "slug": "aws-cdk",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "AWS Cloud Development Kit (CDK) is an Infrastructure as Code framework that allows developers to define cloud infrastructure using familiar programming languages like Python, TypeScript, Java, and C#. It generates CloudFormation templates and provides high-level constructs for building AWS resources.",
     "vendor": "Amazon Web Services",
     "pricing_model": "Free",
@@ -812,7 +812,7 @@
   {
     "tool_name": "Crossplane",
     "slug": "crossplane",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Crossplane is an open-source Kubernetes add-on that transforms your cluster into a universal control plane for managing cloud infrastructure. It enables teams to provision and manage cloud resources using Kubernetes APIs and GitOps workflows.",
     "vendor": "Crossplane Community (CNCF)",
     "pricing_model": "Free",
@@ -827,7 +827,7 @@
   {
     "tool_name": "env0",
     "slug": "env0",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "env0 is a cloud-native Infrastructure as Code (IaC) management platform that provides governance, automation, and cost management for Terraform, Terragrunt, Pulumi, and other IaC frameworks. It enables organizations to deploy and manage cloud infrastructure with enterprise-grade controls and visibility.",
     "vendor": "env0",
     "pricing_model": "Freemium",
@@ -842,7 +842,7 @@
   {
     "tool_name": "Atlantis",
     "slug": "atlantis",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Atlantis is an open-source tool for automating Terraform via pull requests. It enables teams to plan, review, and apply infrastructure changes directly through GitHub, GitLab, or Bitbucket pull request workflows.",
     "vendor": "Runatlantis (Open Source)",
     "pricing_model": "Free",
@@ -857,7 +857,7 @@
   {
     "tool_name": "CodeRabbit",
     "slug": "coderabbit",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "CodeRabbit is an AI-powered code review platform that automatically analyzes pull requests and provides intelligent feedback. It integrates with GitHub and GitLab to enhance code quality through automated reviews, security checks, and contextual suggestions.",
     "vendor": "CodeRabbit Inc.",
     "pricing_model": "Freemium",
@@ -872,7 +872,7 @@
   {
     "tool_name": "Ellipsis",
     "slug": "ellipsis-ai-code-assistant",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Ellipsis is an AI-powered code review and development assistant that integrates with GitHub to provide automated code reviews, bug fixes, and development assistance. It acts as an AI team member that can understand codebases, write code, and participate in pull request workflows.",
     "vendor": "Ellipsis Labs",
     "pricing_model": "Freemium",
@@ -887,7 +887,7 @@
   {
     "tool_name": "PR-Agent",
     "slug": "pr-agent",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "An AI-powered tool that automatically generates pull request descriptions, reviews code, and suggests improvements. It integrates with GitHub, GitLab, and Bitbucket to enhance the code review process through intelligent automation.",
     "vendor": "Codium AI",
     "pricing_model": "Freemium",
@@ -962,7 +962,7 @@
   {
     "tool_name": "Claude",
     "slug": "claude-code",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Claude is an AI assistant developed by Anthropic that excels at code generation, debugging, and technical writing. It provides intelligent code suggestions, explains complex programming concepts, and helps with software development tasks across multiple programming languages.",
     "vendor": "Anthropic",
     "pricing_model": "Freemium",
@@ -977,7 +977,7 @@
   {
     "tool_name": "OpenTofu",
     "slug": "opentofu",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "OpenTofu is an open-source infrastructure as code (IaC) tool that serves as a community-driven fork of Terraform. It provides declarative infrastructure management with full Terraform compatibility while being governed by the Linux Foundation.",
     "vendor": "OpenTofu Foundation (Linux Foundation)",
     "pricing_model": "Free",
@@ -1007,7 +1007,7 @@
   {
     "tool_name": "Splunk AI",
     "slug": "splunk-ai",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Splunk AI is an AI-powered observability and security platform that uses machine learning to analyze machine data, detect anomalies, and provide intelligent insights. It combines traditional log analysis with advanced AI capabilities for predictive analytics and automated incident response.",
     "vendor": "Splunk Inc.",
     "pricing_model": "Enterprise",
@@ -1022,7 +1022,7 @@
   {
     "tool_name": "AppDynamics AI",
     "slug": "appdynamics-ai",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "AppDynamics AI is an application performance monitoring (APM) platform that uses artificial intelligence and machine learning to provide intelligent observability, automated root cause analysis, and predictive insights for modern applications. It helps organizations monitor, troubleshoot, and optimize application performance across complex distributed environments.",
     "vendor": "Cisco",
     "pricing_model": "Enterprise",
@@ -1037,7 +1037,7 @@
   {
     "tool_name": "Moogsoft",
     "slug": "moogsoft",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Moogsoft is an AI-powered observability platform that provides intelligent incident management and root cause analysis. It uses machine learning to correlate events, reduce alert noise, and help teams resolve incidents faster across complex IT environments.",
     "vendor": "Moogsoft",
     "pricing_model": "Enterprise",
@@ -1052,7 +1052,7 @@
   {
     "tool_name": "Windsurf",
     "slug": "windsurf",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Windsurf is an AI-powered code editor that combines intelligent code generation with collaborative development features. It provides real-time AI assistance for coding, debugging, and code optimization across multiple programming languages.",
     "vendor": "Codeium",
     "pricing_model": "Freemium",
@@ -1067,7 +1067,7 @@
   {
     "tool_name": "Google Gemini Code Assist",
     "slug": "google-gemini-code-assist",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Google's AI-powered code assistant that provides intelligent code completion, generation, and explanation capabilities. It integrates with popular IDEs and supports multiple programming languages with advanced contextual understanding.",
     "vendor": "Google",
     "pricing_model": "Freemium",
@@ -1082,7 +1082,7 @@
   {
     "tool_name": "Cline",
     "slug": "cline",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Cline is an AI-powered coding assistant that runs directly in VS Code, enabling developers to build software through natural language conversations. It can autonomously execute terminal commands, edit files, and interact with your development environment to implement features and fix bugs.",
     "vendor": "Community-driven (Open Source)",
     "pricing_model": "Freemium",
@@ -1097,7 +1097,7 @@
   {
     "tool_name": "Aider",
     "slug": "aider",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Aider is an AI-powered pair programming tool that works directly in your terminal to help you edit code in your existing git repositories. It integrates with various LLMs to provide intelligent code suggestions, refactoring, and debugging assistance while maintaining full context of your project structure.",
     "vendor": "Paul Gauthier",
     "pricing_model": "Freemium",
@@ -1157,7 +1157,7 @@
   {
     "tool_name": "Rootly",
     "slug": "rootly",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Rootly is an incident management platform that automates incident response workflows and helps teams manage outages more effectively. It integrates with existing tools to streamline communication, tracking, and post-incident analysis.",
     "vendor": "Rootly",
     "pricing_model": "Freemium",
@@ -1172,7 +1172,7 @@
   {
     "tool_name": "incident.io",
     "slug": "incident-io",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "incident.io is a modern incident management platform that helps engineering teams respond to, learn from, and prevent incidents. It provides automated workflows, real-time collaboration tools, and comprehensive post-incident analysis to minimize downtime and improve system reliability.",
     "vendor": "incident.io",
     "pricing_model": "Freemium",
@@ -1187,7 +1187,7 @@
   {
     "tool_name": "Shoreline.io",
     "slug": "shoreline-io",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Shoreline is an intelligent incident response and automation platform that helps DevOps teams quickly diagnose and resolve production issues. It combines real-time monitoring with automated remediation capabilities to reduce mean time to resolution (MTTR).",
     "vendor": "Shoreline Software",
     "pricing_model": "Freemium",
@@ -1202,7 +1202,7 @@
   {
     "tool_name": "Coralogix",
     "slug": "coralogix",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Coralogix is a full-stack observability platform that provides real-time log analytics, metrics, and tracing capabilities. It uses machine learning to automatically detect anomalies and optimize data storage costs through intelligent tiering.",
     "vendor": "Coralogix Ltd.",
     "pricing_model": "Freemium",
@@ -1217,7 +1217,7 @@
   {
     "tool_name": "Chronosphere",
     "slug": "chronosphere",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Chronosphere is a cloud-native observability platform that provides monitoring, metrics, and alerting capabilities for modern distributed systems. It offers a scalable solution for collecting, storing, and analyzing time-series data with advanced features for high-cardinality metrics management.",
     "vendor": "Chronosphere",
     "pricing_model": "Paid",
@@ -1232,7 +1232,7 @@
   {
     "tool_name": "Greptile",
     "slug": "greptile",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Greptile is an AI-powered code analysis and understanding tool that helps developers navigate, analyze, and understand large codebases. It provides intelligent code search, documentation generation, and codebase insights through natural language queries.",
     "vendor": "Greptile Inc.",
     "pricing_model": "Freemium",
@@ -1247,7 +1247,7 @@
   {
     "tool_name": "Sourcery",
     "slug": "sourcery",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Sourcery is an AI-powered code review and refactoring tool that automatically suggests improvements to Python code. It integrates with IDEs and GitHub to provide instant code quality feedback and automated refactoring suggestions.",
     "vendor": "Sourcery Technologies",
     "pricing_model": "Freemium",
@@ -1262,7 +1262,7 @@
   {
     "tool_name": "CodeScene",
     "slug": "codescene",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "CodeScene is a code analysis platform that combines software metrics with behavioral code analysis to identify technical debt, code health issues, and team productivity patterns. It provides actionable insights by analyzing both code quality and developer behavior patterns to help teams prioritize refactoring efforts and improve code maintainability.",
     "vendor": "Empear AB",
     "pricing_model": "Freemium",
@@ -1307,7 +1307,7 @@
   {
     "tool_name": "CAST AI",
     "slug": "cast-ai",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "CAST AI is a Kubernetes optimization platform that automatically manages cloud costs, performance, and security. It uses AI to right-size workloads, schedule resources efficiently, and optimize cluster configurations across AWS, GCP, and Azure.",
     "vendor": "CAST AI",
     "pricing_model": "Freemium",
@@ -1322,7 +1322,7 @@
   {
     "tool_name": "Firefly.ai",
     "slug": "firefly-ai",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Firefly.ai is an AI-powered development assistant that helps developers write, debug, and optimize code through intelligent suggestions and automated code generation. It integrates seamlessly into existing development workflows to enhance productivity and code quality.",
     "vendor": "Firefly Technologies",
     "pricing_model": "Freemium",
@@ -1337,7 +1337,7 @@
   {
     "tool_name": "Bolt.new",
     "slug": "bolt-new",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Bolt.new is an AI-powered web development tool that allows developers to build, edit, and deploy full-stack web applications directly in the browser. It combines code generation, real-time preview, and deployment capabilities in a unified development environment.",
     "vendor": "StackBlitz",
     "pricing_model": "Freemium",
@@ -1352,7 +1352,7 @@
   {
     "tool_name": "Zed",
     "slug": "zed-ai",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Zed is a high-performance, collaborative code editor built for speed and AI-powered development. It features real-time collaboration, integrated AI assistance, and lightning-fast performance optimized for modern development workflows.",
     "vendor": "Zed Industries",
     "pricing_model": "Free",
@@ -1382,7 +1382,7 @@
   {
     "tool_name": "Cortex",
     "slug": "cortex-io",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Cortex is an internal developer portal and service catalog platform that provides engineering teams with comprehensive visibility into their services, infrastructure, and dependencies. It helps organizations manage service ownership, track deployments, monitor service health, and maintain documentation all in one centralized platform.",
     "vendor": "Cortex",
     "pricing_model": "Freemium",
@@ -1427,7 +1427,7 @@
   {
     "tool_name": "Komodor",
     "slug": "komodor",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Komodor is a Kubernetes-native troubleshooting and monitoring platform that provides real-time visibility into K8s deployments. It offers automated root cause analysis and deployment tracking to help DevOps teams quickly identify and resolve issues in their Kubernetes environments.",
     "vendor": "Komodor",
     "pricing_model": "Freemium",
@@ -1442,7 +1442,7 @@
   {
     "tool_name": "Kubiya",
     "slug": "kubiya",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Kubiya is an AI-powered conversational assistant designed specifically for DevOps teams. It integrates with existing DevOps tools and platforms to provide intelligent automation, troubleshooting assistance, and workflow optimization through natural language interactions.",
     "vendor": "Kubiya Technologies",
     "pricing_model": "Freemium",
@@ -1457,7 +1457,7 @@
   {
     "tool_name": "Quali Torque",
     "slug": "quali-torque",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Quali Torque is an Environment as Code platform that automates the provisioning, management, and orchestration of complex cloud environments. It enables teams to define, deploy, and manage entire application stacks and infrastructure environments through declarative blueprints and automated workflows.",
     "vendor": "Quali",
     "pricing_model": "Freemium",
@@ -1472,7 +1472,7 @@
   {
     "tool_name": "LinearB",
     "slug": "linearb",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "LinearB is a software delivery intelligence platform that provides metrics, insights, and automation for engineering teams. It helps optimize development workflows by tracking team performance, identifying bottlenecks, and improving delivery predictability through data-driven insights.",
     "vendor": "LinearB Inc.",
     "pricing_model": "Freemium",
@@ -1504,7 +1504,7 @@
   {
     "tool_name": "Spot by NetApp",
     "slug": "spot-by-netapp",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Spot by NetApp is a cloud optimization platform that automatically manages and optimizes cloud infrastructure costs by leveraging spot instances, rightsizing resources, and providing intelligent workload scheduling. It helps organizations reduce cloud spending by up to 90% while maintaining application availability and performance.",
     "vendor": "NetApp",
     "pricing_model": "Freemium",
@@ -1520,7 +1520,7 @@
   {
     "tool_name": "Lightrun",
     "slug": "lightrun",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Lightrun is a developer-native observability platform that enables real-time debugging and monitoring of applications in production without stopping code or redeploying. It allows developers to add logs, metrics, and traces dynamically to running applications.",
     "vendor": "Lightrun",
     "pricing_model": "Freemium",
@@ -1536,7 +1536,7 @@
   {
     "tool_name": "Reliably",
     "slug": "reliably",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Reliably is a chaos engineering and reliability platform that helps teams proactively identify and fix system weaknesses before they cause outages. It provides automated chaos experiments, observability insights, and reliability scoring to improve system resilience.",
     "vendor": "Reliably",
     "pricing_model": "Freemium",
@@ -1552,7 +1552,7 @@
   {
     "tool_name": "Gitpod",
     "slug": "gitpod",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Gitpod is a cloud-based development environment that provides instant, ready-to-code workspaces for any Git repository. It eliminates the need for local development setup by creating ephemeral, fully-configured development environments in the cloud.",
     "vendor": "Gitpod GmbH",
     "pricing_model": "Freemium",
@@ -1568,7 +1568,7 @@
   {
     "tool_name": "Runbook.ai",
     "slug": "runbook-ai",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Runbook.ai is an AI-powered incident response and automation platform that helps DevOps teams automatically diagnose, troubleshoot, and resolve infrastructure issues. It combines machine learning with runbook automation to reduce mean time to resolution (MTTR) and minimize manual intervention during incidents.",
     "vendor": "Runbook.ai",
     "pricing_model": "Freemium",
@@ -1584,7 +1584,7 @@
   {
     "tool_name": "ContainIQ",
     "slug": "containiq",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "ContainIQ is a Kubernetes monitoring and observability platform that provides comprehensive visibility into containerized applications. It offers real-time monitoring, alerting, and analytics specifically designed for Kubernetes environments.",
     "vendor": "ContainIQ Inc.",
     "pricing_model": "Freemium",
@@ -1616,7 +1616,7 @@
   {
     "tool_name": "Amplication",
     "slug": "amplication",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "An open-source low-code platform that automatically generates production-ready backend applications with Node.js, TypeScript, and React. It provides visual development tools and generates clean, customizable code for modern web applications.",
     "vendor": "Amplication",
     "pricing_model": "Freemium",
@@ -1648,7 +1648,7 @@
   {
     "tool_name": "Digger",
     "slug": "digger",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Digger is an open-source Infrastructure as Code (IaC) orchestration platform that runs Terraform in CI/CD pipelines. It provides GitOps workflows, policy enforcement, and state management for infrastructure deployments.",
     "vendor": "Digger",
     "pricing_model": "Freemium",
@@ -1664,7 +1664,7 @@
   {
     "tool_name": "Kubecost",
     "slug": "kubecost",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Kubecost provides real-time cost visibility and insights for Kubernetes environments, helping teams monitor, understand, and optimize their container spending. It offers detailed cost allocation, budgeting, and optimization recommendations for cloud-native applications.",
     "vendor": "Kubecost",
     "pricing_model": "Freemium",
@@ -1712,7 +1712,7 @@
   {
     "tool_name": "Zesty",
     "slug": "zesty-cloud-optimizer",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Zesty is an AI-powered cloud cost optimization platform that automatically scales cloud resources in real-time to eliminate waste and reduce costs. It provides intelligent resource management for AWS, Azure, and Google Cloud environments.",
     "vendor": "Zesty.co",
     "pricing_model": "Freemium",
@@ -1728,7 +1728,7 @@
   {
     "tool_name": "Bito AI",
     "slug": "bito-ai",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Bito AI is an AI-powered coding assistant that helps developers write, review, and optimize code across multiple programming languages. It integrates with popular IDEs and provides intelligent code suggestions, explanations, and automated code generation.",
     "vendor": "Bito Inc.",
     "pricing_model": "Freemium",
@@ -1760,7 +1760,7 @@
   {
     "tool_name": "Reviewer.ai",
     "slug": "reviewer-ai",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Reviewer.ai is an AI-powered code review tool that automatically analyzes pull requests and provides intelligent feedback on code quality, security vulnerabilities, and best practices. It integrates with popular version control systems to streamline the code review process and improve development team productivity.",
     "vendor": "Reviewer.ai Inc.",
     "pricing_model": "Freemium",
@@ -1792,7 +1792,7 @@
   {
     "tool_name": "Trag AI",
     "slug": "trag-ai",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Trag AI is an intelligent code analysis and automation platform that helps developers understand, refactor, and optimize codebases using AI-powered insights. It provides automated code reviews, technical debt analysis, and smart suggestions for code improvements across multiple programming languages.",
     "vendor": "Trag AI Inc.",
     "pricing_model": "Freemium",
@@ -1808,7 +1808,7 @@
   {
     "tool_name": "Trunk.io",
     "slug": "trunk-io",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Trunk.io is a comprehensive code quality platform that combines static analysis, security scanning, and automated code formatting in a single unified tool. It provides developers with real-time feedback on code quality issues and automatically fixes many common problems.",
     "vendor": "Trunk Technologies Inc.",
     "pricing_model": "Freemium",
@@ -1824,7 +1824,7 @@
   {
     "tool_name": "Pieces for Developers",
     "slug": "pieces-for-developers",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "An AI-powered code snippet manager and productivity assistant that helps developers save, organize, and reuse code snippets with intelligent context and metadata. It integrates with popular IDEs and browsers to streamline the development workflow.",
     "vendor": "Pieces Technologies Inc.",
     "pricing_model": "Freemium",
@@ -1872,7 +1872,7 @@
   {
     "tool_name": "Checkly",
     "slug": "checkly",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Checkly is a modern monitoring platform that provides API monitoring, browser checks, and synthetic monitoring with a developer-first approach. It offers monitoring as code capabilities, allowing teams to define and manage their monitoring setup through configuration files and CI/CD pipelines.",
     "vendor": "Checkly",
     "pricing_model": "Freemium",
@@ -1888,7 +1888,7 @@
   {
     "tool_name": "Codeflash AI",
     "slug": "codeflash-ai",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Codeflash AI is an intelligent code completion and generation tool that uses machine learning to assist developers with writing, debugging, and optimizing code across multiple programming languages. It integrates seamlessly with popular IDEs and provides real-time suggestions to improve coding productivity.",
     "vendor": "Codeflash Technologies",
     "pricing_model": "Freemium",
@@ -1904,7 +1904,7 @@
   {
     "tool_name": "Brev.dev",
     "slug": "brev-dev",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Brev.dev is a cloud development environment platform that provides instant, reproducible dev environments in the cloud. It allows developers to spin up fully configured development environments with pre-installed dependencies and tools within minutes.",
     "vendor": "Brev.dev Inc.",
     "pricing_model": "Freemium",
@@ -2000,7 +2000,7 @@
   {
     "tool_name": "Tabby",
     "slug": "tabby",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Tabby is an open-source, self-hosted AI coding assistant that provides intelligent code completion and chat capabilities. It serves as a privacy-focused alternative to GitHub Copilot, allowing developers to run AI-powered coding assistance on their own infrastructure.",
     "vendor": "TabbyML",
     "pricing_model": "Freemium",
@@ -2016,7 +2016,7 @@
   {
     "tool_name": "v0 by Vercel",
     "slug": "v0-by-vercel",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "v0 is an AI-powered generative user interface tool that creates React components and interfaces from text prompts. It leverages advanced AI models to generate production-ready code using modern web technologies like React, Tailwind CSS, and shadcn/ui components.",
     "vendor": "Vercel",
     "pricing_model": "Freemium",
@@ -2080,7 +2080,7 @@
   {
     "tool_name": "Dash0",
     "slug": "dash0",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Dash0 is an OpenTelemetry-native observability platform that provides distributed tracing, metrics, and logs for cloud-native applications. It focuses on simplified deployment and automatic instrumentation with zero-configuration observability for Kubernetes environments.",
     "vendor": "Dash0 Inc.",
     "pricing_model": "Freemium",
@@ -2096,7 +2096,7 @@
   {
     "tool_name": "Middleware",
     "slug": "middleware",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Full-stack observability platform that provides real-time monitoring, alerting, and performance insights for cloud infrastructure, applications, and services. Offers unified visibility across the entire technology stack with AI-powered anomaly detection.",
     "vendor": "Middleware Inc.",
     "pricing_model": "Freemium",
@@ -2112,7 +2112,7 @@
   {
     "tool_name": "Squadcast",
     "slug": "squadcast",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Squadcast is an incident management and alerting platform that helps DevOps teams respond to incidents faster. It provides intelligent alert routing, on-call scheduling, and incident response orchestration to minimize downtime and improve system reliability.",
     "vendor": "Squadcast Inc",
     "pricing_model": "Freemium",
@@ -2128,7 +2128,7 @@
   {
     "tool_name": "Scalr",
     "slug": "scalr",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Scalr is a remote state management and collaboration platform for Terraform that provides enterprise-grade governance, compliance, and team collaboration features. It enables organizations to standardize their infrastructure as code workflows while maintaining security and policy compliance across multiple teams and environments.",
     "vendor": "Scalr Inc.",
     "pricing_model": "Freemium",
@@ -2144,7 +2144,7 @@
   {
     "tool_name": "Infracost",
     "slug": "infracost",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Infracost shows cloud cost estimates for Terraform in pull requests, helping teams understand the financial impact of infrastructure changes before deployment. It integrates with CI/CD pipelines to provide cost transparency and budget control for infrastructure as code.",
     "vendor": "Infracost",
     "pricing_model": "Freemium",
@@ -2224,7 +2224,7 @@
   {
     "tool_name": "Refact.ai",
     "slug": "refact-ai",
-    "category": "AI Coding",
+    "category": "Code Assistant",
     "short_description": "Self-hostable AI coding assistant with code completion, refactoring, and chat. Supports private deployments on your own GPU infrastructure with BYOK support for OpenAI, Anthropic, and local Ollama models.",
     "vendor": "Refact.ai",
     "pricing_model": "Freemium",
@@ -2288,7 +2288,7 @@
   {
     "tool_name": "Cubic",
     "slug": "cubic",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "AI code review platform built for large, complex codebases with deep context understanding. Provides actionable PR feedback, analytics dashboards, and Slack integration for engineering teams.",
     "vendor": "Cubic",
     "pricing_model": "Freemium",
@@ -2304,7 +2304,7 @@
   {
     "tool_name": "Moderne",
     "slug": "moderne",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Agentic platform for large-scale automated code refactoring, framework migrations, and security remediation across thousands of repositories. Uses OpenRewrite recipes and AI agents for deterministic, mass-scale code transformations.",
     "vendor": "Moderne",
     "pricing_model": "Enterprise",
@@ -2368,7 +2368,7 @@
   {
     "tool_name": "StackGen",
     "slug": "stackgen",
-    "category": "Infrastructure & IaC",
+    "category": "IaC",
     "short_description": "Agentic IaC platform that generates, governs, self-heals, and optimizes cloud infrastructure from natural language business intent. Eliminates manual Terraform coding with AI-powered infrastructure automation.",
     "vendor": "StackGen",
     "pricing_model": "Freemium",
@@ -2384,7 +2384,7 @@
   {
     "tool_name": "CodeAnt AI",
     "slug": "codeant-ai",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "AI code health platform that unifies automated code review, SAST, secrets detection, and IaC security into a single PR-integrated workflow across GitHub, GitLab, Bitbucket, and Azure DevOps.",
     "vendor": "CodeAnt AI",
     "pricing_model": "Paid",
@@ -2400,7 +2400,7 @@
   {
     "tool_name": "Galileo",
     "slug": "galileo",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "AI evaluation and observability platform for production LLM and AI agent systems. Provides real-time guardrails, failure mode analysis, and evaluation metrics for teams building and operating GenAI applications.",
     "vendor": "Galileo",
     "pricing_model": "Freemium",
@@ -2448,7 +2448,7 @@
   {
     "tool_name": "Digma",
     "slug": "digma",
-    "category": "Monitoring & Observability",
+    "category": "Monitoring",
     "short_description": "Preemptive observability platform using dynamic code analysis to surface performance bottlenecks, scaling issues, and query problems in pre-production \u2014 before they impact users. OpenTelemetry-native.",
     "vendor": "Digma",
     "pricing_model": "Freemium",
@@ -2784,7 +2784,7 @@
   {
     "tool_name": "Augment Code",
     "slug": "augment-code",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Enterprise-grade AI coding and code review agent with full cross-file context retrieval \u2014 dependencies, call sites, type definitions, and history \u2014 to catch high-impact issues in large codebases at 65% precision.",
     "vendor": "Augment Code",
     "pricing_model": "Paid",
@@ -2800,7 +2800,7 @@
   {
     "tool_name": "Korbit AI",
     "slug": "korbit-ai",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "AI code review platform delivering deep project-context PR analysis, automated PR description generation, and a management dashboard for code quality metrics and team performance insights.",
     "vendor": "Korbit AI",
     "pricing_model": "Freemium",
@@ -2816,7 +2816,7 @@
   {
     "tool_name": "DeepSource",
     "slug": "deepsource",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Comprehensive static analysis and AI code review platform with Autofix AI that generates LLM-powered contextual fixes and autonomous DeepSource Agents for automated security vulnerability remediation.",
     "vendor": "DeepSource",
     "pricing_model": "Freemium",
@@ -2832,7 +2832,7 @@
   {
     "tool_name": "Panto AI",
     "slug": "panto-ai",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Context-driven AI code reviewer that integrates with Jira and Confluence to align PR feedback with business intent, security policies, and compliance requirements. Includes 30,000+ security checks.",
     "vendor": "Panto AI",
     "pricing_model": "Freemium",
@@ -2848,7 +2848,7 @@
   {
     "tool_name": "Pixee",
     "slug": "pixee",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Agentic AppSec platform that triages findings from 10+ scanners (Snyk, Checkmarx, Veracode, SonarQube), eliminates up to 98% of false positives, and automatically opens validated security fix PRs.",
     "vendor": "Pixee",
     "pricing_model": "Freemium",
@@ -2864,7 +2864,7 @@
   {
     "tool_name": "What the Diff",
     "slug": "what-the-diff",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "Lightweight AI GitHub and GitLab app that automatically generates plain-English explanations of pull request changes and writes human-readable PR descriptions for faster reviewer onboarding.",
     "vendor": "What the Diff",
     "pricing_model": "Freemium",
@@ -2880,7 +2880,7 @@
   {
     "tool_name": "Sweep AI",
     "slug": "sweep-ai",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "AI coding assistant that converts GitHub issues and Jira tickets into fully-formed pull requests and autonomously responds to reviewer comments to iterate on the code \u2014 closing the loop between review and implementation.",
     "vendor": "Sweep AI",
     "pricing_model": "Freemium",
@@ -2896,7 +2896,7 @@
   {
     "tool_name": "Zencoder",
     "slug": "zencoder",
-    "category": "Code Review",
+    "category": "AI Code Review",
     "short_description": "AI coding agent with proprietary Repo Grokking technology that understands full codebases and cross-repo dependencies for PR reviews, automated descriptions, vulnerability patching, and test generation.",
     "vendor": "Zencoder",
     "pricing_model": "Freemium",
@@ -3200,7 +3200,7 @@
   {
     "tool_name": "Resolve.ai",
     "slug": "resolve-ai",
-    "category": "AIOps",
+    "category": "Incident Management",
     "short_description": "Agentic AI SRE that autonomously investigates incidents across code, infra, and telemetry, generating Git PRs and executing closed-loop remediation.",
     "vendor": "Resolve.ai",
     "pricing_model": "Paid",
@@ -3216,7 +3216,7 @@
   {
     "tool_name": "ilert",
     "slug": "ilert",
-    "category": "AIOps",
+    "category": "Incident Management",
     "short_description": "AI-first incident management platform with an AI SRE agent that investigates every alert, proposes remediation, and integrates voice-based first response.",
     "vendor": "ilert GmbH",
     "pricing_model": "Freemium",
@@ -3408,7 +3408,7 @@
   {
     "tool_name": "Atlassian Intelligence",
     "slug": "atlassian-intelligence",
-    "category": "AI Coding",
+    "category": "Developer Productivity",
     "short_description": "AI embedded across Jira, Confluence, and Bitbucket for automatic issue summaries, smart triaging, PR descriptions, and organizational knowledge queries.",
     "vendor": "Atlassian",
     "pricing_model": "Included with Atlassian Cloud",
