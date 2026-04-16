@@ -3160,16 +3160,8 @@
     "website_url": "https://www.groundcover.com",
     "affiliate_url": "https://www.groundcover.com",
     "rating": 4.6,
-    "pros": [
-      "Zero-instrumentation with eBPF",
-      "AI-native root cause analysis",
-      "BYOC AI mode for data privacy",
-      "Fast Datadog migration path"
-    ],
-    "cons": [
-      "Kubernetes-focused (not ideal for non-K8s)",
-      "Newer platform with smaller community"
-    ],
+    "pros": "Zero-instrumentation with eBPF, AI-native root cause analysis, BYOC AI mode for data privacy, Fast Datadog migration path",
+    "cons": "Kubernetes-focused (not ideal for non-K8s), Newer platform with smaller community",
     "content": "## Groundcover: eBPF-Powered Observability with AI Investigation\n\nGroundcover is a cloud-native observability platform that uses eBPF technology to collect telemetry data without any code instrumentation. By deploying at the kernel level, it captures metrics, logs, and traces across all services automatically \u2014 no SDKs, no agents, no code changes required.\n\n### AI-Native Incident Investigation\n\nGroundcover's AI capabilities go beyond simple alerting. The platform includes an AI analyst mode (BYOC \u2014 Bring Your Own Cloud) that runs AI inference within the customer's own cloud environment, keeping sensitive telemetry data private while still providing intelligent root cause analysis.\n\n### Key Features\n\n- **Zero-instrumentation telemetry**: eBPF-based collection of metrics, logs, and distributed traces\n- **AI incident investigation**: Natural language queries across all telemetry\n- **BYOC AI mode**: AI processing in your own cloud for data privacy\n- **Kubernetes-native**: Deep Kubernetes context in every alert and dashboard\n- **Datadog migration**: Automated tooling to migrate from Datadog at lower cost\n- **Unified platform**: Replaces separate tools for metrics, logs, traces, and APM\n\n### Who Uses Groundcover?\n\nGroundcover is popular with cloud-native startups and scale-ups running Kubernetes who want full-stack observability without the complexity and cost of traditional APM tools. Teams migrating from Datadog often choose Groundcover for its cost efficiency and simplified setup.\n\n### Pricing\n\nGroundcover offers a free tier for small teams and usage-based pricing for larger deployments, significantly undercutting traditional APM pricing models.",
     "status": "Published"
   },
@@ -3184,17 +3176,8 @@
     "website_url": "https://betterstack.com",
     "affiliate_url": "https://betterstack.com",
     "rating": 4.7,
-    "pros": [
-      "Unified logs, metrics, traces, uptime in one platform",
-      "AI SRE for automated RCA",
-      "AI-written postmortems",
-      "ClickHouse-based for fast queries",
-      "Generous free tier"
-    ],
-    "cons": [
-      "Newer platform vs established competitors",
-      "Advanced features require paid plans"
-    ],
+    "pros": "Unified logs, metrics, traces, uptime in one platform, AI SRE for automated RCA, AI-written postmortems, ClickHouse-based for fast queries, Generous free tier",
+    "cons": "Newer platform vs established competitors, Advanced features require paid plans",
     "content": "## Better Stack: Full-Stack Observability with an AI SRE\n\nBetter Stack is a modern observability platform that combines logs, metrics, traces, uptime monitoring, and incident management in a single unified product. Built on ClickHouse for high-performance queries, it offers a refreshing alternative to fragmented tool stacks.\n\n### AI SRE Capabilities\n\nBetter Stack's AI SRE automatically investigates incidents as they occur. When an alert fires, the AI analyzes logs, metrics, deployment history, and error patterns to surface the most likely root cause \u2014 before a human even opens a terminal. After resolution, it generates AI-written postmortems with timeline, impact, and prevention recommendations.\n\n### Key Features\n\n- **Unified observability**: Logs, metrics, traces, uptime, and incidents in one platform\n- **AI SRE**: Automated incident investigation and root cause analysis\n- **AI postmortems**: Auto-generated incident retrospectives\n- **eBPF auto-instrumentation**: Zero-code telemetry collection\n- **Logtail integration**: Structured log management with SQL-like querying\n- **On-call scheduling**: Built-in escalation policies and on-call rotations\n- **Status pages**: Public and private status pages for customer communication\n\n### Who Uses Better Stack?\n\nBetter Stack is popular with SaaS companies and engineering teams looking to consolidate multiple monitoring tools into one platform. It competes with Datadog, PagerDuty, and Grafana Cloud simultaneously.\n\n### Pricing\n\nBetter Stack offers a generous free tier. Paid plans start based on log volume and team size, with transparent usage-based pricing.",
     "status": "Published"
   },
@@ -3209,18 +3192,8 @@
     "website_url": "https://metoro.io",
     "affiliate_url": "https://metoro.io",
     "rating": 4.5,
-    "pros": [
-      "Autonomous issue detection and investigation",
-      "Generates fix PRs automatically",
-      "eBPF-based zero-instrumentation",
-      "Deep Kubernetes context",
-      "Deployment verification built-in"
-    ],
-    "cons": [
-      "Kubernetes-only focus",
-      "Early-stage product",
-      "Pricing not publicly listed"
-    ],
+    "pros": "Autonomous issue detection and investigation, Generates fix PRs automatically, eBPF-based zero-instrumentation, Deep Kubernetes context, Deployment verification built-in",
+    "cons": "Kubernetes-only focus, Early-stage product, Pricing not publicly listed",
     "content": "## Metoro: Autonomous AI SRE for Kubernetes\n\nMetoro is an AI SRE platform purpose-built for Kubernetes environments. Using eBPF-based telemetry, it captures full-stack observability data without instrumentation and then applies AI to autonomously handle the entire incident lifecycle \u2014 from detection to remediation.\n\n### Autonomous Incident Management\n\nWhen something goes wrong in a Kubernetes cluster, Metoro doesn't just alert \u2014 it investigates. The platform correlates metrics, logs, traces, and Kubernetes events to identify the root cause, then generates actionable remediation steps or actual fix PRs that engineers can review and merge.\n\n### Key Features\n\n- **Autonomous issue detection**: Proactive anomaly detection without manual threshold tuning\n- **Deployment verification**: Automatically validates that new deployments are healthy\n- **Alert investigation**: AI-powered triage that summarizes what happened and why\n- **Fix PR generation**: Creates pull requests with proposed code or config fixes\n- **eBPF telemetry**: Zero-instrumentation data collection at kernel level\n- **Kubernetes-native**: Deep integration with K8s events, pods, deployments, and namespaces\n\n### Use Cases\n\n- Reducing on-call burden for platform engineering teams\n- Accelerating MTTR for Kubernetes incidents\n- Validating continuous deployments automatically\n- Providing AI-assisted debugging for developers unfamiliar with infrastructure\n\n### Pricing\n\nMetoro pricing is available on request. The platform is targeted at engineering teams running production Kubernetes workloads.",
     "status": "Published"
   },
@@ -3235,18 +3208,8 @@
     "website_url": "https://resolve.ai",
     "affiliate_url": "https://resolve.ai",
     "rating": 4.7,
-    "pros": [
-      "Fully autonomous incident investigation",
-      "Generates and executes remediation",
-      "Works across hybrid/multi-cloud",
-      "Used by Coinbase, DoorDash, Zscaler",
-      "Creates Git PRs for fixes"
-    ],
-    "cons": [
-      "Enterprise pricing",
-      "Requires significant integration setup",
-      "Pricing not public"
-    ],
+    "pros": "Fully autonomous incident investigation, Generates and executes remediation, Works across hybrid/multi-cloud, Used by Coinbase, DoorDash, Zscaler, Creates Git PRs for fixes",
+    "cons": "Enterprise pricing, Requires significant integration setup, Pricing not public",
     "content": "## Resolve.ai: Agentic AI SRE for Autonomous Incident Response\n\nResolve.ai is an agentic AI SRE platform that goes beyond alert correlation and dashboards \u2014 it autonomously investigates production incidents end-to-end, determines root cause, and executes remediation across code, infrastructure, and telemetry.\n\n### Agentic Incident Response\n\nWhen an incident fires, Resolve.ai's AI agent immediately begins investigating. It pulls logs, queries metrics, reads recent deployments, examines code changes, and correlates events across the entire stack. Within minutes, it produces a root cause analysis and then takes action \u2014 generating kubectl commands, creating Git PRs with fixes, or executing predefined runbooks.\n\n### Key Features\n\n- **Autonomous investigation**: End-to-end incident analysis without human intervention\n- **Code + infra correlation**: Connects code changes to infrastructure behavior\n- **Git PR generation**: Creates actual fix pull requests for engineers to review\n- **kubectl execution**: Can run Kubernetes commands to remediate live\n- **Runbook automation**: Executes existing runbooks in closed-loop fashion\n- **Multi-cloud support**: Works across AWS, GCP, Azure, and hybrid environments\n- **Enterprise integrations**: PagerDuty, Slack, Jira, GitHub, GitLab\n\n### Who Uses Resolve.ai?\n\nResolve.ai is trusted by high-scale engineering organizations including Coinbase, DoorDash, and Zscaler. It's designed for teams that handle a high volume of incidents and want to reduce MTTR and on-call fatigue significantly.\n\n### Pricing\n\nPricing is available on request. Resolve.ai targets enterprise and high-growth engineering teams.",
     "status": "Published"
   },
@@ -3261,17 +3224,8 @@
     "website_url": "https://www.ilert.com",
     "affiliate_url": "https://www.ilert.com",
     "rating": 4.5,
-    "pros": [
-      "AI SRE agent investigates every alert",
-      "Voice agent for on-call first response",
-      "GDPR-compliant on-prem option",
-      "MCP protocol integration",
-      "Strong European data residency"
-    ],
-    "cons": [
-      "Less known than PagerDuty/Opsgenie",
-      "Some advanced features in higher tiers"
-    ],
+    "pros": "AI SRE agent investigates every alert, Voice agent for on-call first response, GDPR-compliant on-prem option, MCP protocol integration, Strong European data residency",
+    "cons": "Less known than PagerDuty/Opsgenie, Some advanced features in higher tiers",
     "content": "## ilert: AI-First Incident Management with Voice SRE Agent\n\nilert is a modern incident management platform designed from the ground up for AI-augmented operations. Unlike traditional alerting tools that simply page humans, ilert's AI SRE agent actively investigates every alert before escalating to on-call engineers.\n\n### AI SRE Agent\n\nWhen an alert fires, ilert's AI agent analyzes the alert in context \u2014 checking logs, metrics, recent deployments, and related alerts. It proposes remediation steps and, for pre-approved actions, can execute them autonomously. This dramatically reduces the number of alerts that actually require human intervention.\n\n### Key Features\n\n- **AI SRE agent**: Investigates and triages every incoming alert\n- **Voice agent**: First-response voice calls powered by AI for on-call notification\n- **Autonomous remediation**: Execute pre-approved fixes without human involvement\n- **MCP integration**: Model Context Protocol support for AI assistant connectivity\n- **On-premises option**: GDPR-compliant self-hosted deployment for European teams\n- **On-call scheduling**: Flexible rotation scheduling with escalation policies\n- **Status pages**: Public and private status pages with AI-generated updates\n\n### Who Uses ilert?\n\nilert is popular with European engineering teams and organizations with strict data sovereignty requirements. Its GDPR-compliant on-premises option makes it particularly attractive for financial services, healthcare, and government customers.\n\n### Pricing\n\nFree tier available for small teams. Paid plans based on users and features.",
     "status": "Published"
   },
@@ -3286,18 +3240,8 @@
     "website_url": "https://duplocloud.com",
     "affiliate_url": "https://duplocloud.com",
     "rating": 4.5,
-    "pros": [
-      "Full DevSecOps automation in one platform",
-      "AI agents for infra management",
-      "Built-in compliance and governance",
-      "Multi-cloud support",
-      "Reduces need for dedicated DevOps team"
-    ],
-    "cons": [
-      "Pricing not public",
-      "Can be overkill for small teams",
-      "Learning curve for platform configuration"
-    ],
+    "pros": "Full DevSecOps automation in one platform, AI agents for infra management, Built-in compliance and governance, Multi-cloud support, Reduces need for dedicated DevOps team",
+    "cons": "Pricing not public, Can be overkill for small teams, Learning curve for platform configuration",
     "content": "## DuploCloud: AI-Powered DevSecOps Platform\n\nDuploCloud is a comprehensive DevSecOps automation platform that helps engineering teams provision cloud infrastructure, manage Kubernetes, and maintain compliance \u2014 all without a dedicated DevOps team. AI agents are embedded throughout the platform to automate routine operations.\n\n### AI-Augmented Cloud Operations\n\nDuploCloud's AI agents handle routine infrastructure tasks: scaling Kubernetes workloads, responding to alerts, optimizing resource utilization, and enforcing security policies. This allows small teams to operate cloud infrastructure at scale without deep DevOps expertise.\n\n### Key Features\n\n- **Cloud provisioning**: Automated infrastructure setup on AWS, GCP, and Azure\n- **Kubernetes management**: AI-assisted pod scheduling, scaling, and troubleshooting\n- **Security and compliance**: Built-in SOC 2, HIPAA, PCI-DSS controls\n- **AI agents**: Purpose-built agents for infra, Kubernetes, and observability tasks\n- **Internal developer portal**: Self-service infrastructure for development teams\n- **No-code infrastructure**: Visual tools for cloud resource provisioning\n\n### Who Uses DuploCloud?\n\nDuploCloud is used by startups and mid-market companies that want enterprise-grade DevSecOps capabilities without hiring a large platform engineering team. It's particularly popular with SOC 2-compliant SaaS companies.\n\n### Pricing\n\nPricing is available on request and based on cloud spend and team size.",
     "status": "Published"
   },
@@ -3312,18 +3256,8 @@
     "website_url": "https://sysdig.com",
     "affiliate_url": "https://sysdig.com",
     "rating": 4.6,
-    "pros": [
-      "Sysdig Sage AI analyst integrated natively",
-      "76% faster MTTR reported",
-      "Strong Kubernetes and container security",
-      "Runtime threat detection",
-      "Compliance support"
-    ],
-    "cons": [
-      "Premium pricing",
-      "Complex for small teams",
-      "Kubernetes-heavy focus"
-    ],
+    "pros": "Sysdig Sage AI analyst integrated natively, 76% faster MTTR reported, Strong Kubernetes and container security, Runtime threat detection, Compliance support",
+    "cons": "Premium pricing, Complex for small teams, Kubernetes-heavy focus",
     "content": "## Sysdig: CNAPP with AI Security Analyst Sysdig Sage\n\nSysdig is a leading Cloud-Native Application Protection Platform (CNAPP) that provides runtime security, vulnerability management, and compliance for containers, Kubernetes, and cloud environments. Its AI analyst, Sysdig Sage, is now integrated throughout the platform.\n\n### Sysdig Sage: AI Security Analyst\n\nSysdig Sage is the first fully integrated AI analyst for cloud security. It allows security teams to ask natural language questions across all cloud assets, get AI-guided remediation for vulnerabilities, and investigate threats with AI-generated context. Over 50% of Sysdig customers have adopted Sage, with teams reporting 76% faster mean time to respond.\n\n### Key Features\n\n- **Sysdig Sage**: Natural language security queries and AI-guided remediation\n- **Runtime security**: Real-time threat detection using Falco (open source engine)\n- **Vulnerability management**: Container and host vulnerability scanning with prioritization\n- **Cloud Security Posture Management (CSPM)**: Misconfiguration detection\n- **Identity security**: Cloud infrastructure entitlement management (CIEM)\n- **Compliance**: SOC 2, PCI-DSS, CIS benchmarks automation\n- **Kubernetes security**: Deep K8s context for all security findings\n\n### Who Uses Sysdig?\n\nSysdig is used by security and platform engineering teams at enterprises running cloud-native workloads. It's particularly strong in regulated industries like financial services, healthcare, and government.\n\n### Pricing\n\nSysdig pricing is available on request. It competes with Prisma Cloud and Wiz in the CNAPP market.",
     "status": "Published"
   },
@@ -3338,18 +3272,8 @@
     "website_url": "https://kubescape.io",
     "affiliate_url": "https://kubescape.io",
     "rating": 4.5,
-    "pros": [
-      "Free and open source (CNCF Incubating)",
-      "Covers full K8s security lifecycle",
-      "NSA-CISA and MITRE ATT&CK compliance",
-      "Runtime threat detection via eBPF",
-      "IDE and CI/CD integration"
-    ],
-    "cons": [
-      "Kubernetes-only",
-      "Commercial features require ARMO platform",
-      "Steep learning curve for compliance frameworks"
-    ],
+    "pros": "Free and open source (CNCF Incubating), Covers full K8s security lifecycle, NSA-CISA and MITRE ATT&CK compliance, Runtime threat detection via eBPF, IDE and CI/CD integration",
+    "cons": "Kubernetes-only, Commercial features require ARMO platform, Steep learning curve for compliance frameworks",
     "content": "## Kubescape: Open-Source Kubernetes Security Platform\n\nKubescape is a CNCF Incubating open-source project that provides comprehensive Kubernetes security scanning across the entire development and deployment lifecycle \u2014 from IDE to CI/CD pipeline to live cluster.\n\n### End-to-End Kubernetes Security\n\nKubescape scans Kubernetes manifests, Helm charts, and running clusters for vulnerabilities, misconfigurations, and compliance violations. It maps findings to industry frameworks including NSA-CISA Kubernetes Hardening Guidelines, MITRE ATT&CK, and CIS Benchmarks, giving security teams actionable, context-rich results.\n\n### Key Features\n\n- **Multi-stage scanning**: IDE plugin, CI/CD integration, and live cluster scanning\n- **Compliance frameworks**: NSA-CISA, MITRE ATT&CK, CIS Kubernetes Benchmark\n- **Runtime threat detection**: eBPF-based runtime security with Kubescape 3.0+\n- **Vulnerability scanning**: Container image CVE detection with EPSS scoring\n- **RBAC analysis**: Identifies overly permissive Kubernetes role bindings\n- **AI integration**: KAgent plugin for AI assistants to query security posture\n- **ARMO Platform**: Commercial SaaS dashboard for team collaboration\n\n### Who Uses Kubescape?\n\nKubescape is used by DevSecOps teams and security engineers who need open-source Kubernetes security scanning without vendor lock-in. The ARMO Platform adds team management, historical trending, and enterprise features on top of the open-source core.\n\n### Pricing\n\nKubescape is free and open source. ARMO Platform has a free tier and paid plans for teams.",
     "status": "Published"
   },
@@ -3364,18 +3288,8 @@
     "website_url": "https://apiiro.com",
     "affiliate_url": "https://apiiro.com",
     "rating": 4.5,
-    "pros": [
-      "Risk graph for intelligent prioritization",
-      "Connects developer behavior to security risk",
-      "Strong for agentic CI/CD pipelines",
-      "ASPM covering code to production",
-      "Reduces alert fatigue"
-    ],
-    "cons": [
-      "Enterprise pricing",
-      "Complex initial setup",
-      "Best suited for larger codebases"
-    ],
+    "pros": "Risk graph for intelligent prioritization, Connects developer behavior to security risk, Strong for agentic CI/CD pipelines, ASPM covering code to production, Reduces alert fatigue",
+    "cons": "Enterprise pricing, Complex initial setup, Best suited for larger codebases",
     "content": "## Apiiro: Risk Graph-Powered Application Security Posture Management\n\nApiiro is an Application Security Posture Management (ASPM) platform that uses an AI-powered risk graph to model and prioritize security risks across the entire software supply chain \u2014 from code commits to production deployment.\n\n### The Risk Graph Approach\n\nUnlike traditional SAST tools that generate flat lists of vulnerabilities, Apiiro builds a contextual risk graph that understands how code changes, developer behavior, asset sensitivity, and deployment context interact. This allows security teams to focus on the 5% of vulnerabilities that actually matter, rather than drowning in false positives.\n\n### Key Features\n\n- **Risk graph**: AI model connecting code, developers, assets, and deployment context\n- **ASPM coverage**: Unified view from code to cloud\n- **Developer behavior analysis**: Understands who changed what and why it matters\n- **CI/CD pipeline security**: Native integration with GitHub Actions, Jenkins, GitLab CI\n- **Agentic pipeline support**: Designed for AI-driven CI/CD workflows\n- **Remediation guidance**: Prioritized fix recommendations with business context\n- **SBOM generation**: Software Bill of Materials for compliance\n\n### Who Uses Apiiro?\n\nApiiro is used by enterprise security and AppSec teams managing large codebases across many repositories and teams. It's particularly valuable for organizations with complex microservices architectures.\n\n### Pricing\n\nApiiro pricing is available on request, targeting enterprise security teams.",
     "status": "Published"
   },
@@ -3390,18 +3304,8 @@
     "website_url": "https://www.legitsecurity.com",
     "affiliate_url": "https://www.legitsecurity.com",
     "rating": 4.4,
-    "pros": [
-      "Full software supply chain coverage",
-      "Runtime prevention capabilities",
-      "Developer-friendly remediation",
-      "Compliance support",
-      "CI/CD pipeline security"
-    ],
-    "cons": [
-      "Newer player vs established AppSec vendors",
-      "Pricing not public",
-      "Complex enterprise deployment"
-    ],
+    "pros": "Full software supply chain coverage, Runtime prevention capabilities, Developer-friendly remediation, Compliance support, CI/CD pipeline security",
+    "cons": "Newer player vs established AppSec vendors, Pricing not public, Complex enterprise deployment",
     "content": "## Legit Security: Full Software Supply Chain Security\n\nLegit Security is an Application Security Posture Management (ASPM) platform that secures the entire software supply chain \u2014 from the moment a developer writes code through CI/CD pipelines to production deployment.\n\n### Supply Chain Security Focus\n\nLegit Security maps every component of the software supply chain: SCM repositories, CI/CD systems, artifact registries, deployment pipelines, and runtime environments. It identifies security gaps, policy violations, and vulnerabilities at every stage, with particular focus on preventing supply chain attacks like those that affected SolarWinds and Log4j.\n\n### Key Features\n\n- **Full supply chain visibility**: Maps SCM, CI/CD, registries, and production\n- **Runtime prevention**: Blocks malicious code and unauthorized changes at runtime\n- **Pipeline security**: Detects insecure CI/CD configurations and secrets exposure\n- **Developer remediation**: Actionable fix guidance integrated into developer workflows\n- **Compliance**: SOC 2, ISO 27001, SLSA supply chain security framework support\n- **AI-powered analysis**: Intelligent risk scoring and prioritization\n- **SBOM tracking**: Software Bill of Materials generation and monitoring\n\n### Who Uses Legit Security?\n\nLegit Security is used by enterprise AppSec teams and CISOs focused on supply chain security risk. It's particularly relevant for organizations in regulated industries or those with government contracts requiring SLSA compliance.\n\n### Pricing\n\nPricing is available on request. Legit Security targets enterprise security teams.",
     "status": "Published"
   },
@@ -3416,18 +3320,8 @@
     "website_url": "https://www.stackhawk.com",
     "affiliate_url": "https://www.stackhawk.com",
     "rating": 4.4,
-    "pros": [
-      "Developer-first DAST in CI/CD pipelines",
-      "Fast scanning with actionable results",
-      "API security testing focus",
-      "Free tier for single app",
-      "Easy setup vs traditional DAST tools"
-    ],
-    "cons": [
-      "DAST only (no SAST)",
-      "Limited enterprise features on lower tiers",
-      "Narrower scope than full CNAPP platforms"
-    ],
+    "pros": "Developer-first DAST in CI/CD pipelines, Fast scanning with actionable results, API security testing focus, Free tier for single app, Easy setup vs traditional DAST tools",
+    "cons": "DAST only (no SAST), Limited enterprise features on lower tiers, Narrower scope than full CNAPP platforms",
     "content": "## StackHawk: Developer-First API Security Testing\n\nStackHawk is a Dynamic Application Security Testing (DAST) tool built for modern DevOps workflows. Unlike traditional DAST scanners that run in QA and take hours, StackHawk integrates directly into CI/CD pipelines and delivers results in minutes \u2014 making security testing a natural part of the development process.\n\n### Developer-First Approach\n\nStackHawk puts security findings directly in front of developers in their existing workflows. Results appear in pull requests, CI pipelines, and Slack channels with enough context for developers to understand and fix issues without security expertise. This eliminates the traditional handoff between security and development teams.\n\n### Key Features\n\n- **CI/CD integration**: Native support for GitHub Actions, GitLab CI, Jenkins, CircleCI\n- **API security testing**: OWASP Top 10, GraphQL, REST, and gRPC API scanning\n- **Fast scanning**: Minutes instead of hours for typical API security tests\n- **Developer-friendly reports**: Actionable findings with code-level remediation\n- **Custom test scripts**: HawkScan engine supports custom security test cases\n- **Authentication handling**: Supports OAuth, API keys, JWT, and custom auth flows\n- **Trending and history**: Track security posture over time across releases\n\n### Who Uses StackHawk?\n\nStackHawk is used by DevOps and security teams at software companies that want to shift API security testing left into the development process. It's particularly popular with API-first companies and microservices teams.\n\n### Pricing\n\nStackHawk offers a free tier for one application. Paid plans start at $99/month for small teams.",
     "status": "Published"
   },
@@ -3442,18 +3336,8 @@
     "website_url": "https://getport.io",
     "affiliate_url": "https://getport.io",
     "rating": 4.6,
-    "pros": [
-      "Easy no-code portal building",
-      "AI-powered service catalog",
-      "Self-service infrastructure for devs",
-      "Strong integrations ecosystem",
-      "Fast time-to-value"
-    ],
-    "cons": [
-      "Advanced customization requires engineering",
-      "Newer product vs Backstage ecosystem",
-      "Some enterprise features require paid plan"
-    ],
+    "pros": "Easy no-code portal building, AI-powered service catalog, Self-service infrastructure for devs, Strong integrations ecosystem, Fast time-to-value",
+    "cons": "Advanced customization requires engineering, Newer product vs Backstage ecosystem, Some enterprise features require paid plan",
     "content": "## Port: AI-Powered Internal Developer Portal\n\nPort is a modern Internal Developer Portal (IDP) that enables platform engineering teams to build self-service developer experiences without maintaining complex custom tooling. Its AI features make the portal intelligent \u2014 surfacing insights, automating workflows, and helping developers find what they need faster.\n\n### Why Internal Developer Portals Matter\n\nAs engineering organizations scale, developers spend increasing time navigating fragmented toolchains, waiting for infrastructure provisioning, and searching for service documentation. Internal Developer Portals like Port centralize this experience, giving developers a single place to understand services, trigger workflows, and provision resources.\n\n### Key Features\n\n- **Service catalog**: Unified view of all services, APIs, and infrastructure components\n- **Self-service actions**: Developers provision environments, create services, and run workflows without platform team involvement\n- **AI assistant**: Natural language queries across the service catalog and documentation\n- **No-code portal builder**: Visual tools for building custom developer experiences\n- **Scorecards**: Track service quality, security, and production readiness\n- **Extensive integrations**: GitHub, GitLab, Jira, PagerDuty, Kubernetes, AWS, and 100+ more\n- **RBAC**: Role-based access control for enterprise compliance\n\n### Who Uses Port?\n\nPort is used by platform engineering teams at fast-growing companies that want to provide a great developer experience without building custom tooling from scratch. It competes with Backstage (self-hosted) and OpsLevel.\n\n### Pricing\n\nPort offers a free tier. Paid plans are available for larger teams with advanced features.",
     "status": "Published"
   },
@@ -3468,18 +3352,8 @@
     "website_url": "https://www.opslevel.com",
     "affiliate_url": "https://www.opslevel.com",
     "rating": 4.4,
-    "pros": [
-      "Comprehensive service catalog",
-      "AI-driven productivity metrics",
-      "Production readiness scoring",
-      "Strong Backstage alternative",
-      "Good integrations"
-    ],
-    "cons": [
-      "Pricing not publicly listed",
-      "Smaller community than Backstage",
-      "Best suited for mid to large teams"
-    ],
+    "pros": "Comprehensive service catalog, AI-driven productivity metrics, Production readiness scoring, Strong Backstage alternative, Good integrations",
+    "cons": "Pricing not publicly listed, Smaller community than Backstage, Best suited for mid to large teams",
     "content": "## OpsLevel: Service Catalog and Engineering Effectiveness Platform\n\nOpsLevel is a service catalog and Internal Developer Portal (IDP) that helps engineering teams standardize how software is built and operated. With AI-driven productivity metrics and production readiness scoring, it gives engineering leaders visibility into engineering effectiveness alongside developer self-service capabilities.\n\n### Service Catalog at the Core\n\nOpsLevel's service catalog is the single source of truth for all software components \u2014 microservices, libraries, APIs, data pipelines, and infrastructure. Every service has an owner, a maturity level, and production readiness criteria that teams can track over time.\n\n### Key Features\n\n- **Service catalog**: Centralized inventory of all software components with ownership\n- **Maturity levels**: Track service production readiness across custom criteria\n- **AI productivity metrics**: Engineering effectiveness insights powered by ML\n- **Self-service actions**: Developer workflows for common operational tasks\n- **Checks and scorecards**: Automated policy enforcement across all services\n- **Integrations**: GitHub, PagerDuty, Datadog, Jira, AWS, Kubernetes, and more\n- **Dependency mapping**: Visualize relationships between services\n\n### Who Uses OpsLevel?\n\nOpsLevel is used by engineering teams at mid-market and enterprise companies looking for a Backstage alternative that doesn't require significant engineering investment to set up and maintain. It's popular with companies transitioning from monoliths to microservices.\n\n### Pricing\n\nOpsLevel pricing is available on request.",
     "status": "Published"
   },
@@ -3494,18 +3368,8 @@
     "website_url": "https://k8sgpt.ai",
     "affiliate_url": "https://k8sgpt.ai",
     "rating": 4.6,
-    "pros": [
-      "Free and open source (CNCF Sandbox)",
-      "Supports 11+ AI backends",
-      "Plain English Kubernetes diagnostics",
-      "Active CNCF community",
-      "Easy CLI and operator installation"
-    ],
-    "cons": [
-      "Diagnostic only (no automated remediation)",
-      "Requires AI API key for most backends",
-      "Kubernetes-only scope"
-    ],
+    "pros": "Free and open source (CNCF Sandbox), Supports 11+ AI backends, Plain English Kubernetes diagnostics, Active CNCF community, Easy CLI and operator installation",
+    "cons": "Diagnostic only (no automated remediation), Requires AI API key for most backends, Kubernetes-only scope",
     "content": "## K8sGPT: AI-Powered Kubernetes Diagnostics\n\nK8sGPT is a CNCF Sandbox open-source tool that uses AI to scan Kubernetes clusters for problems and explain them in plain English. It eliminates the need to manually parse cryptic Kubernetes error messages by translating complex cluster states into actionable, human-readable diagnostics.\n\n### How K8sGPT Works\n\nK8sGPT scans your Kubernetes cluster for common issues \u2014 pending pods, failing deployments, misconfigured services, resource quota violations, and more. It then sends the relevant context to an AI backend (OpenAI, Azure OpenAI, Google Gemini, Bedrock, LocalAI, or others) and returns a plain-language explanation with remediation suggestions.\n\n### Key Features\n\n- **11+ AI backends**: OpenAI, Azure OpenAI, Google Gemini, Amazon Bedrock, LocalAI, Ollama, and more\n- **Multi-resource analysis**: Pods, deployments, services, ingresses, PVCs, and custom resources\n- **Kubernetes Operator**: Deploy as an in-cluster operator for continuous scanning\n- **CLI tool**: Simple `k8sgpt analyze` command for one-off diagnostics\n- **Custom analyzers**: Extend with your own resource analysis logic\n- **Multi-language support**: Explanations in multiple human languages\n- **CNCF Sandbox**: Vendor-neutral governance under CNCF\n\n### Who Uses K8sGPT?\n\nK8sGPT is used by Kubernetes operators, SREs, and DevOps engineers who want faster cluster troubleshooting. It's particularly valuable for teams with mixed Kubernetes experience levels, as it makes expert-level diagnostics accessible to everyone.\n\n### Pricing\n\nK8sGPT is completely free and open source. AI backend costs depend on your chosen provider.",
     "status": "Published"
   },
@@ -3520,18 +3384,8 @@
     "website_url": "https://kagent.dev",
     "affiliate_url": "https://kagent.dev",
     "rating": 4.4,
-    "pros": [
-      "Free and open source (CNCF Sandbox)",
-      "Build custom AI agents for K8s",
-      "MCP protocol support",
-      "Wide tool integrations (Argo, Helm, Istio)",
-      "AutoGen-based multi-agent framework"
-    ],
-    "cons": [
-      "Very early stage",
-      "Requires significant setup",
-      "Developer-focused \u2014 not plug-and-play"
-    ],
+    "pros": "Free and open source (CNCF Sandbox), Build custom AI agents for K8s, MCP protocol support, Wide tool integrations (Argo, Helm, Istio), AutoGen-based multi-agent framework",
+    "cons": "Very early stage, Requires significant setup, Developer-focused \u2014 not plug-and-play",
     "content": "## Kagent: Open-Source AI Agent Framework for Kubernetes\n\nKagent is a CNCF Sandbox open-source framework donated by Solo.io that enables teams to build and run AI agents directly within Kubernetes environments. Built on the AutoGen multi-agent framework and supporting the Model Context Protocol (MCP), Kagent provides the infrastructure for custom AI-powered automation in cloud-native stacks.\n\n### Building AI Agents for Kubernetes\n\nKagent provides a Kubernetes Operator and a set of pre-built tools for common cloud-native operations. Teams can define AI agents that have access to Kubernetes API, Helm, Argo CD, Istio, Grafana, Prometheus, and more \u2014 enabling automation workflows that were previously only possible with custom scripting or expensive commercial tools.\n\n### Key Features\n\n- **Kubernetes-native deployment**: Agents run as Kubernetes CRDs and operators\n- **MCP support**: Model Context Protocol for connecting to AI assistant ecosystems\n- **AutoGen framework**: Multi-agent orchestration for complex workflows\n- **Pre-built tool catalog**: Kubernetes, Helm, Argo CD, Istio, Grafana, Prometheus integrations\n- **Custom agents**: Build domain-specific agents for your stack\n- **CNCF governance**: Vendor-neutral project under CNCF Sandbox\n- **Open source**: Full Apache 2.0 license\n\n### Who Uses Kagent?\n\nKagent is for platform engineers and DevOps practitioners who want to build custom AI-powered automation for their Kubernetes environments without vendor lock-in. It's a building block rather than a finished product \u2014 ideal for teams with the engineering capacity to build custom AI workflows.\n\n### Pricing\n\nKagent is free and open source under Apache 2.0.",
     "status": "Published"
   },
@@ -3546,18 +3400,8 @@
     "website_url": "https://aws.amazon.com/codeguru",
     "affiliate_url": "https://aws.amazon.com/codeguru",
     "rating": 4.2,
-    "pros": [
-      "Native AWS integration",
-      "Automated code and security review",
-      "Performance profiling in production",
-      "Pay per use \u2014 no fixed cost",
-      "Trained on millions of Amazon code reviews"
-    ],
-    "cons": [
-      "Java and Python only (limited language support)",
-      "Best value only within AWS ecosystem",
-      "Less effective outside AWS workflows"
-    ],
+    "pros": "Native AWS integration, Automated code and security review, Performance profiling in production, Pay per use \u2014 no fixed cost, Trained on millions of Amazon code reviews",
+    "cons": "Java and Python only (limited language support), Best value only within AWS ecosystem, Less effective outside AWS workflows",
     "content": "## AWS CodeGuru: AI-Powered Code Review and Profiling\n\nAWS CodeGuru is Amazon's AI-powered developer tool that automates code reviews and identifies application performance issues. Trained on millions of code reviews from Amazon's internal codebase and open-source repositories, CodeGuru detects defects, security vulnerabilities, and performance bottlenecks that manual reviews often miss.\n\n### Two Core Capabilities\n\nCodeGuru has two main components: **CodeGuru Reviewer** for static code analysis and security scanning during pull requests, and **CodeGuru Profiler** for identifying CPU utilization and latency bottlenecks in production applications.\n\n### Key Features\n\n- **Automated PR reviews**: AI comments on pull requests with specific line-level recommendations\n- **Security scanning**: Detects OWASP Top 10, AWS credential exposure, and injection vulnerabilities\n- **Performance profiling**: Identifies expensive code paths in production with flame graphs\n- **AWS best practices**: Recommendations based on Amazon's internal engineering standards\n- **CI/CD integration**: GitHub, GitHub Enterprise, Bitbucket, AWS CodeCommit\n- **Machine learning**: Continuously improving models trained on real code reviews\n\n### Who Uses AWS CodeGuru?\n\nAWS CodeGuru is used by development teams already in the AWS ecosystem who want automated code quality and security feedback without adopting a separate third-party tool. It's particularly strong for Java and Python applications.\n\n### Pricing\n\nCodeGuru Reviewer charges $0.75 per 100 lines of code analyzed. CodeGuru Profiler charges $0.005 per hour of profiling per host.",
     "status": "Published"
   },
@@ -3572,18 +3416,8 @@
     "website_url": "https://www.atlassian.com/atlassian-intelligence",
     "affiliate_url": "https://www.atlassian.com/atlassian-intelligence",
     "rating": 4.3,
-    "pros": [
-      "Integrated across entire Atlassian suite",
-      "No additional tool to deploy",
-      "AI-powered issue triaging and summaries",
-      "Organizational knowledge graph",
-      "Natural language Jira/Confluence queries"
-    ],
-    "cons": [
-      "Only useful if already using Atlassian tools",
-      "AI quality varies by feature",
-      "Limited customization vs standalone AI tools"
-    ],
+    "pros": "Integrated across entire Atlassian suite, No additional tool to deploy, AI-powered issue triaging and summaries, Organizational knowledge graph, Natural language Jira/Confluence queries",
+    "cons": "Only useful if already using Atlassian tools, AI quality varies by feature, Limited customization vs standalone AI tools",
     "content": "## Atlassian Intelligence: AI Across Jira, Confluence, and Bitbucket\n\nAtlassian Intelligence is Atlassian's AI layer embedded across its entire product suite \u2014 Jira, Confluence, Bitbucket, and Jira Service Management. Rather than a standalone AI tool, it brings AI capabilities directly into the workflows where engineering and product teams already work.\n\n### AI Across the Engineering Workflow\n\nAtlassian Intelligence uses an organizational knowledge graph built from all content in a company's Atlassian products to provide contextually relevant AI assistance. It understands the relationships between issues, documents, codebases, and team members \u2014 making its AI suggestions more accurate than generic LLMs.\n\n### Key Features\n\n- **Jira AI**: Auto-generated issue summaries, smart backlog triaging, sprint planning assistance\n- **Confluence AI**: Document generation, meeting note summarization, knowledge search\n- **Bitbucket AI**: PR description generation, code review summaries, inline suggestions\n- **Natural language queries**: Ask questions across all Atlassian data in plain English\n- **Automated classification**: AI routes and assigns issues based on historical patterns\n- **Team Anywhere AI**: Meeting and async communication summaries\n\n### Who Uses Atlassian Intelligence?\n\nAny team using Atlassian Cloud products (Jira, Confluence, Bitbucket) automatically has access to Atlassian Intelligence features. It's particularly valuable for organizations using the full Atlassian suite who want AI without adopting additional point solutions.\n\n### Pricing\n\nAtlassian Intelligence is included in Atlassian Cloud Premium and Enterprise plans.",
     "status": "Published"
   }
