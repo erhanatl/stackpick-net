@@ -186,7 +186,7 @@ function estimateReadingTime(content: string): number {
   )}
 
   <!-- Hero Search Script -->
-  <script define:vars={{ toolsData: publishedTools.map(t => ({ name: t.tool_name, slug: t.slug, category: t.category, description: t.short_description })) }}>
+  <script define:vars={{ toolsData: publishedTools.map(t => ({ name: t.tool_name, slug: t.slug, category: t.category, description: t.short_description, website: t.website_url })) }}>
     const input = document.getElementById('hero-search');
     const resultsBox = document.getElementById('hero-search-results');
     let activeIndex = -1;
@@ -202,15 +202,17 @@ function estimateReadingTime(content: string): number {
         return;
       }
 
-      resultsBox.innerHTML = matches.map((t, i) => `
+      resultsBox.innerHTML = matches.map((t, i) => {
+        const domain = t.website ? new URL(t.website).hostname : '';
+        return `
         <a href="/tools/${t.slug}/" data-index="${i}" class="search-item flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
-          <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(t.name)}&sz=32" class="w-6 h-6 rounded" alt="" onerror="this.style.display='none'" />
+          <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" class="w-6 h-6 rounded" alt="" onerror="this.style.display='none'" />
           <div>
             <p class="text-sm font-medium text-gray-900">${t.name}</p>
             <p class="text-xs text-gray-400">${t.category}</p>
           </div>
         </a>
-      `).join('');
+      `}).join('');
 
       resultsBox.classList.remove('hidden');
     }
