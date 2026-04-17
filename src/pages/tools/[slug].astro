@@ -39,7 +39,7 @@ const categoryColors: Record<string, string> = {
 };
 
 const allRelatedTools = tools.filter(t => t.category === tool.category && t.slug !== tool.slug && t.status === 'Published');
-const relatedTools = [...allRelatedTools].sort((a, b) => a.tool_name.localeCompare(b.tool_name)).slice(0, 6);
+const relatedTools = [...allRelatedTools].sort((a, b) => a.tool_name.localeCompare(b.tool_name)).slice(0, 4);
 const relatedComparisons = comparisons.filter(c => c.tools.includes(tool.slug));
 const relatedGuides = guides.filter(g => g.category === tool.category);
 
@@ -237,7 +237,7 @@ const faqs = [
         <section>
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold">Other {tool.category} Tools</h2>
-            {allRelatedTools.length > 6 && (
+            {allRelatedTools.length > 4 && (
               <a href={`/category/${categorySlug[tool.category]}/`} class="text-primary hover:text-primary-dark font-medium text-sm">
                 View all {allRelatedTools.length} tools &rarr;
               </a>
