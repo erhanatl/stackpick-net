@@ -3232,7 +3232,7 @@
   {
     "tool_name": "DuploCloud",
     "slug": "duplocloud",
-    "category": "Platform Engineering",
+    "category": "AIOps",
     "short_description": "DevSecOps automation platform with built-in AI agents for cloud provisioning, Kubernetes ops, and compliance across AWS, GCP, and Azure.",
     "vendor": "DuploCloud",
     "pricing_model": "Paid",
@@ -3328,7 +3328,7 @@
   {
     "tool_name": "Port",
     "slug": "port",
-    "category": "Platform Engineering",
+    "category": "AIOps",
     "short_description": "AI-powered Internal Developer Portal for self-service infrastructure, service catalog, and workflow automation that democratizes platform engineering.",
     "vendor": "Port",
     "pricing_model": "Freemium",
@@ -3344,7 +3344,7 @@
   {
     "tool_name": "OpsLevel",
     "slug": "opslevel",
-    "category": "Platform Engineering",
+    "category": "AIOps",
     "short_description": "Service catalog and engineering effectiveness platform with AI-driven developer productivity metrics and internal developer portal capabilities.",
     "vendor": "OpsLevel",
     "pricing_model": "Paid",

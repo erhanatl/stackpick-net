@@ -38,10 +38,5 @@
     "name": "AIOps",
     "slug": "aiops",
     "description": "AI-powered IT operations tools that automate incident management, root cause analysis, and operational intelligence for DevOps teams."
-  },
-  {
-    "name": "Platform Engineering",
-    "slug": "platform-engineering",
-    "description": "AI-powered platform engineering tools that help teams build internal developer portals, automate cloud provisioning, and improve developer experience."
   }
 ]
