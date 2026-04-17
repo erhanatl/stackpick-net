@@ -165,6 +165,13 @@ const publishedTools = tools.filter(t => t.status === 'Published');
         sortFilter.addEventListener('change', filterAndSort);
         resetBtn!.addEventListener('click', resetFilters);
 
+        // Pre-fill search from URL ?q= param (from hero search)
+        const urlParams = new URLSearchParams(window.location.search);
+        const qParam = urlParams.get('q');
+        if (qParam) {
+          searchInput.value = qParam;
+        }
+
         // Initial sort A→Z
         filterAndSort();
       </script>

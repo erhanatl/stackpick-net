@@ -42,10 +42,29 @@ function estimateReadingTime(content: string): number {
           Pick the Right AI Tools<br />
           <span class="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">for Your DevOps Stack</span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
           Independent, unbiased comparisons of AI-powered DevOps tools.
           Side-by-side reviews to help your team make the right choice.
         </p>
+
+        <!-- Hero Search -->
+        <div class="relative max-w-xl mx-auto mb-8">
+          <div class="relative">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              id="hero-search"
+              placeholder="Search tools, e.g. &quot;GitHub Copilot&quot; or &quot;CI/CD&quot;..."
+              autocomplete="off"
+              class="w-full pl-12 pr-4 py-4 rounded-xl text-gray-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent shadow-lg"
+            />
+          </div>
+          <!-- Dropdown -->
+          <div id="hero-search-results" class="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-xl border border-gray-100 z-50 hidden max-h-72 overflow-y-auto text-left">
+          </div>
+        </div>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="/tools/" class="bg-primary hover:bg-primary-dark text-white px-8 py-3.5 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-primary/25">
@@ -164,6 +183,59 @@ function estimateReadingTime(content: string): number {
       </div>
     </section>
   )}
+
+  <!-- Hero Search Script -->
+  <script define:vars={{ toolsData: publishedTools.map(t => ({ name: t.tool_name, slug: t.slug, category: t.category, description: t.short_description })) }}>
+    const input = document.getElementById('hero-search');
+    const resultsBox = document.getElementById('hero-search-results');
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      if (q.length < 2) {
+        resultsBox.classList.add('hidden');
+        resultsBox.innerHTML = '';
+        return;
+      }
+
+      const matches = toolsData.filter(t =>
+        t.name.toLowerCase().includes(q) ||
+        t.category.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q)
+      ).slice(0, 8);
+
+      if (matches.length === 0) {
+        resultsBox.classList.add('hidden');
+        resultsBox.innerHTML = '';
+        return;
+      }
+
+      resultsBox.innerHTML = matches.map(t => `
+        <a href="/tools/${t.slug}/" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
+          <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(t.name)}&sz=32" class="w-6 h-6 rounded" alt="" onerror="this.style.display='none'" />
+          <div>
+            <p class="text-sm font-medium text-gray-900">${t.name}</p>
+            <p class="text-xs text-gray-400">${t.category}</p>
+          </div>
+        </a>
+      `).join('');
+
+      resultsBox.classList.remove('hidden');
+    });
+
+    // Enter → tools page with search
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && input.value.trim()) {
+        window.location.href = `/tools/?q=${encodeURIComponent(input.value.trim())}`;
+      }
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!input.contains(e.target) && !resultsBox.contains(e.target)) {
+        resultsBox.classList.add('hidden');
+      }
+    });
+  </script>
 
   <!-- Suggest Tool Section -->
   <section class="py-16 bg-surface">
