@@ -188,20 +188,12 @@ function estimateReadingTime(content: string): number {
   <script define:vars={{ toolsData: publishedTools.map(t => ({ name: t.tool_name, slug: t.slug, category: t.category, description: t.short_description })) }}>
     const input = document.getElementById('hero-search');
     const resultsBox = document.getElementById('hero-search-results');
+    let activeIndex = -1;
+    let currentMatches = [];
 
-    input.addEventListener('input', () => {
-      const q = input.value.trim().toLowerCase();
-      if (q.length < 2) {
-        resultsBox.classList.add('hidden');
-        resultsBox.innerHTML = '';
-        return;
-      }
-
-      const matches = toolsData.filter(t =>
-        t.name.toLowerCase().includes(q) ||
-        t.category.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q)
-      ).slice(0, 8);
+    function renderResults(matches) {
+      currentMatches = matches;
+      activeIndex = -1;
 
       if (matches.length === 0) {
         resultsBox.classList.add('hidden');
@@ -209,8 +201,8 @@ function estimateReadingTime(content: string): number {
         return;
       }
 
-      resultsBox.innerHTML = matches.map(t => `
-        <a href="/tools/${t.slug}/" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
+      resultsBox.innerHTML = matches.map((t, i) => `
+        <a href="/tools/${t.slug}/" data-index="${i}" class="search-item flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
           <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(t.name)}&sz=32" class="w-6 h-6 rounded" alt="" onerror="this.style.display='none'" />
           <div>
             <p class="text-sm font-medium text-gray-900">${t.name}</p>
@@ -220,12 +212,57 @@ function estimateReadingTime(content: string): number {
       `).join('');
 
       resultsBox.classList.remove('hidden');
+    }
+
+    function setActive(index) {
+      const items = resultsBox.querySelectorAll('.search-item');
+      items.forEach(el => el.classList.remove('bg-gray-100'));
+      if (index >= 0 && index < items.length) {
+        items[index].classList.add('bg-gray-100');
+        items[index].scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      if (q.length < 2) {
+        resultsBox.classList.add('hidden');
+        resultsBox.innerHTML = '';
+        currentMatches = [];
+        activeIndex = -1;
+        return;
+      }
+
+      const matches = toolsData.filter(t =>
+        t.name.toLowerCase().includes(q) ||
+        t.category.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q)
+      ).slice(0, 8);
+
+      renderResults(matches);
     });
 
-    // Enter → tools page with search
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && input.value.trim()) {
-        window.location.href = `/tools/?q=${encodeURIComponent(input.value.trim())}`;
+      const items = resultsBox.querySelectorAll('.search-item');
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, items.length - 1);
+        setActive(activeIndex);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, -1);
+        setActive(activeIndex);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (activeIndex >= 0 && currentMatches[activeIndex]) {
+          window.location.href = `/tools/${currentMatches[activeIndex].slug}/`;
+        } else if (input.value.trim()) {
+          window.location.href = `/tools/?q=${encodeURIComponent(input.value.trim())}`;
+        }
+      } else if (e.key === 'Escape') {
+        resultsBox.classList.add('hidden');
+        activeIndex = -1;
       }
     });
 
@@ -233,6 +270,7 @@ function estimateReadingTime(content: string): number {
     document.addEventListener('click', (e) => {
       if (!input.contains(e.target) && !resultsBox.contains(e.target)) {
         resultsBox.classList.add('hidden');
+        activeIndex = -1;
       }
     });
   </script>
