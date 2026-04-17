@@ -3200,7 +3200,7 @@
   {
     "tool_name": "Resolve.ai",
     "slug": "resolve-ai",
-    "category": "Incident Management",
+    "category": "AIOps",
     "short_description": "Agentic AI SRE that autonomously investigates incidents across code, infra, and telemetry, generating Git PRs and executing closed-loop remediation.",
     "vendor": "Resolve.ai",
     "pricing_model": "Paid",
@@ -3216,7 +3216,7 @@
   {
     "tool_name": "ilert",
     "slug": "ilert",
-    "category": "Incident Management",
+    "category": "AIOps",
     "short_description": "AI-first incident management platform with an AI SRE agent that investigates every alert, proposes remediation, and integrates voice-based first response.",
     "vendor": "ilert GmbH",
     "pricing_model": "Freemium",
@@ -3408,7 +3408,7 @@
   {
     "tool_name": "Atlassian Intelligence",
     "slug": "atlassian-intelligence",
-    "category": "Developer Productivity",
+    "category": "Code Assistant",
     "short_description": "AI embedded across Jira, Confluence, and Bitbucket for automatic issue summaries, smart triaging, PR descriptions, and organizational knowledge queries.",
     "vendor": "Atlassian",
     "pricing_model": "Included with Atlassian Cloud",
