@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import hubPages from '../../data/hub-pages.json';
+---
+
+<BaseLayout
+  title="Best AI DevOps Tools by Category 2026"
+  description="Curated lists of the best AI-powered DevOps tools in every category. Expert picks with rankings, buyer's guides, and side-by-side comparisons."
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-sm text-text-muted mb-8">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-text">Best Tools</span>
+      </nav>
+
+      <h1 class="text-4xl font-bold mb-4">Best AI DevOps Tools by Category</h1>
+      <p class="text-lg text-text-muted mb-12">Expert-curated rankings of the top AI tools in every DevOps category, with buyer's guides and head-to-head comparisons.</p>
+
+      <div class="grid gap-6">
+        {hubPages.map(hub => (
+          <a href={`/best/${hub.slug}/`} class="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-shadow group">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-xs font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full mb-3 inline-block">{hub.category}</span>
+                <h2 class="text-xl font-bold group-hover:text-primary transition-colors mb-2">{hub.title}</h2>
+                <p class="text-text-muted">{hub.description}</p>
+              </div>
+              <span class="text-primary font-medium shrink-0 ml-6">View picks →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import tools from '../../data/tools.json';
+import comparisons from '../../data/comparisons.json';
+import hubPages from '../../data/hub-pages.json';
+
+export function getStaticPaths() {
+  return hubPages.map(hub => ({
+    params: { slug: hub.slug },
+    props: { hub }
+  }));
+}
+
+const { hub } = Astro.props;
+
+const topTools = hub.topTools.map(t => {
+  const tool = tools.find(tool => tool.slug === t.slug);
+  return { ...t, tool };
+}).filter(t => t.tool);
+
+const relatedComparisons = hub.relatedComparisons
+  .map(slug => comparisons.find(c => c.slug === slug))
+  .filter(Boolean);
+
+const categoryTools = tools
+  .filter(t => t.category === hub.category && t.status === 'Published')
+  .sort((a, b) => a.tool_name.localeCompare(b.tool_name));
+
+const categorySlugMap: Record<string, string> = {
+  'Monitoring': 'monitoring',
+  'CI/CD': 'ci-cd',
+  'Security': 'security',
+  'Testing': 'testing',
+  'AI Code Review': 'ai-code-review',
+  'AIOps': 'aiops',
+  'Code Assistant': 'code-assistant',
+  'IaC': 'iac',
+};
+const catSlug = categorySlugMap[hub.category] || hub.category.toLowerCase();
+---
+
+<BaseLayout title={hub.title} description={hub.description}>
+  <article class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-text-muted mb-8">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/best/" class="hover:text-primary">Best Tools</a>
+        <span class="mx-2">/</span>
+        <span class="text-text">{hub.title}</span>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-10">
+        <h1 class="text-4xl font-bold mb-4">{hub.title}</h1>
+        <p class="text-lg text-text-muted">{hub.intro}</p>
+      </header>
+
+      <!-- Quick Nav -->
+      <div class="flex flex-wrap gap-2 mb-10 p-4 bg-surface rounded-xl border border-border">
+        <span class="text-sm font-medium text-text-muted self-center mr-2">Jump to:</span>
+        <a href="#top-picks" class="text-sm text-primary hover:underline">Top Picks</a>
+        <span class="text-text-muted">·</span>
+        <a href="#buyers-guide" class="text-sm text-primary hover:underline">Buyer's Guide</a>
+        <span class="text-text-muted">·</span>
+        <a href="#comparisons" class="text-sm text-primary hover:underline">Comparisons</a>
+        <span class="text-text-muted">·</span>
+        <a href="#all-tools" class="text-sm text-primary hover:underline">All {hub.category} Tools</a>
+      </div>
+
+      <!-- Top 5 -->
+      <section id="top-picks" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6">Our Top {topTools.length} Picks</h2>
+        <div class="space-y-4">
+          {topTools.map(({ rank, reason, tool }) => {
+            const domain = tool.website_url ? (() => { try { return new URL(tool.website_url).hostname; } catch { return ''; } })() : '';
+            return (
+              <div class="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-start gap-4">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
+                    {rank}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-3 mb-2">
+                      {domain && (
+                        <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" class="w-6 h-6 rounded" />
+                      )}
+                      <a href={`/tools/${tool.slug}/`} class="text-xl font-bold hover:text-primary transition-colors">
+                        {tool.tool_name}
+                      </a>
+                      <span class="text-sm text-text-muted">by {tool.vendor}</span>
+                    </div>
+                    <p class="text-text-muted mb-3">{reason}</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                      <span class="bg-surface px-3 py-1 rounded-full">{tool.pricing_model}</span>
+                      <span class="bg-surface px-3 py-1 rounded-full">{tool.starting_price}</span>
+                      <a href={`/tools/${tool.slug}/`} class="text-primary hover:underline">Review →</a>
+                      <a href={`/pricing/${tool.slug}/`} class="text-primary hover:underline">Pricing →</a>
+                      <a href={`/alternatives/${tool.slug}/`} class="text-primary hover:underline">Alternatives →</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Buyer's Guide -->
+      <section id="buyers-guide" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6">Buyer's Guide</h2>
+        <div class="space-y-4">
+          {hub.buyersGuide.map((item) => (
+            <div class="bg-white border border-border rounded-xl p-6">
+              <h3 class="font-semibold text-lg mb-2">{item.question}</h3>
+              <p class="text-text-muted">{item.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Comparisons -->
+      {relatedComparisons.length > 0 && (
+        <section id="comparisons" class="mb-12">
+          <h2 class="text-2xl font-bold mb-6">{hub.category} Tool Comparisons</h2>
+          <div class="grid gap-4">
+            {relatedComparisons.map(comp => (
+              <a href={`/compare/${comp.slug}/`} class="flex items-center justify-between bg-white border border-border rounded-xl p-5 hover:shadow-md transition-shadow group">
+                <div>
+                  <p class="font-semibold group-hover:text-primary transition-colors">{comp.title}</p>
+                  <p class="text-sm text-text-muted mt-1">{comp.description}</p>
+                </div>
+                <span class="text-primary text-sm font-medium shrink-0 ml-4">Compare →</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- All Tools -->
+      <section id="all-tools" class="mb-12">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold">All {hub.category} Tools ({categoryTools.length})</h2>
+          <a href={`/category/${catSlug}/`} class="text-primary hover:text-primary-dark font-medium text-sm">
+            View full list →
+          </a>
+        </div>
+        <div class="grid md:grid-cols-2 gap-3">
+          {categoryTools.map(t => {
+            const domain = t.website_url ? (() => { try { return new URL(t.website_url).hostname; } catch { return ''; } })() : '';
+            return (
+              <a href={`/tools/${t.slug}/`} class="flex items-center gap-3 bg-white border border-border rounded-lg p-4 hover:border-primary hover:shadow-sm transition-all group">
+                {domain && <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" class="w-6 h-6 rounded shrink-0" />}
+                <div class="min-w-0">
+                  <p class="font-medium group-hover:text-primary transition-colors truncate">{t.tool_name}</p>
+                  <p class="text-xs text-text-muted truncate">{t.starting_price} · {t.pricing_model}</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
+    </div>
+  </article>
+</BaseLayout>
