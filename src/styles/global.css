@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary: #2563eb;
-  --color-primary-dark: #1d4ed8;
+  --color-primary: #7c3aed;
+  --color-primary-dark: #6d28d9;
   --color-secondary: #0f172a;
   --color-accent: #06b6d4;
   --color-surface: #f8fafc;
@@ -34,18 +34,25 @@ html {
 }
 
 .hero-gradient {
-  background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a, #1a2744);
+  background: linear-gradient(-45deg, #0f172a, #1e1b4b, #0f172a, #1a1040, #0f172a);
   background-size: 400% 400%;
-  animation: gradient-shift 12s ease infinite;
+  animation: gradient-shift 14s ease infinite;
+}
+
+/* Dot grid overlay */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(124,58,237,0.2) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 /* Card hover lift */
 .card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 25px -5px rgba(124, 58, 237, 0.12), 0 4px 10px -6px rgba(0, 0, 0, 0.05);
+  border-color: #c4b5fd;
 }
 
 /* Fade in animation */
@@ -55,4 +62,20 @@ html {
 }
 .animate-fade-up {
   animation: fade-up 0.5s ease forwards;
+}
+
+/* Monospace numbers */
+.mono {
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  font-feature-settings: 'tnum';
+}
+
+/* Category card left border */
+.cat-card {
+  border-left-width: 3px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0,0,0,0.1);
 }

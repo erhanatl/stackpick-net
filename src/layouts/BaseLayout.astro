@@ -45,7 +45,7 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
     <title>{pageTitle}</title>
 
@@ -60,36 +60,53 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
   </head>
   <body class="min-h-screen flex flex-col">
     <!-- Header -->
-    <header class="bg-secondary text-white">
+    <header class="bg-secondary text-white border-t-2 border-primary">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2">
-          <span class="text-2xl font-bold">Stackpick</span>
-          <span class="w-2 h-2 rounded-full bg-accent self-center"></span>
+        <a href="/" class="flex items-center gap-2 group">
+          <span class="text-2xl font-bold bg-gradient-to-r from-white to-violet-300 bg-clip-text text-transparent group-hover:to-accent transition-all duration-300">Stackpick</span>
+          <span class="w-2 h-2 rounded-full bg-accent self-center animate-pulse"></span>
         </a>
         <div class="hidden md:flex items-center gap-6 text-sm">
-          <a href="/tools/" class="hover:text-accent transition-colors">All Tools</a>
-          <a href="/best/" class="hover:text-accent transition-colors">Best Tools</a>
+          <a href="/tools/" class="text-gray-300 hover:text-white transition-colors">All Tools</a>
+          <a href="/best/" class="text-gray-300 hover:text-white transition-colors">Best Tools</a>
           <div class="relative group">
-            <button class="hover:text-accent transition-colors flex items-center gap-1">
+            <button class="text-gray-300 hover:text-white transition-colors flex items-center gap-1">
               Categories
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-              <a href="/category/ci-cd/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">CI/CD</a>
-              <a href="/category/code-assistant/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Code Assistants</a>
-              <a href="/category/monitoring/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Monitoring</a>
-              <a href="/category/security/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Security</a>
-              <a href="/category/testing/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">Testing</a>
-              <a href="/category/iac/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">IaC</a>
-              <a href="/category/ai-code-review/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">AI Code Review</a>
-              <a href="/category/aiops/" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-accent">AIOps</a>
+            <div class="absolute top-full left-0 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
+              <div class="px-3 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">Browse</div>
+              <a href="/category/ci-cd/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>CI/CD
+              </a>
+              <a href="/category/code-assistant/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>Code Assistants
+              </a>
+              <a href="/category/monitoring/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>Monitoring
+              </a>
+              <a href="/category/security/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>Security
+              </a>
+              <a href="/category/testing/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>Testing
+              </a>
+              <a href="/category/iac/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>IaC
+              </a>
+              <a href="/category/ai-code-review/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>AI Code Review
+              </a>
+              <a href="/category/aiops/" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-violet-50 hover:text-primary transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>AIOps
+              </a>
             </div>
           </div>
-          <a href="/compare/" class="hover:text-accent transition-colors">Compare</a>
-          <a href="/blog/" class="hover:text-accent transition-colors">Blog</a>
-          <a href="/about/" class="hover:text-accent transition-colors">About</a>
-          <a href="/contact/" class="hover:text-accent transition-colors">Contact</a>
-          <a href="/suggest/" class="bg-accent text-secondary px-4 py-1.5 rounded-lg font-medium hover:bg-cyan-400 transition-colors">Suggest a Tool</a>
+          <a href="/compare/" class="text-gray-300 hover:text-white transition-colors">Compare</a>
+          <a href="/blog/" class="text-gray-300 hover:text-white transition-colors">Blog</a>
+          <a href="/about/" class="text-gray-300 hover:text-white transition-colors">About</a>
+          <a href="/contact/" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+          <a href="/suggest/" class="bg-primary hover:bg-primary-dark text-white px-4 py-1.5 rounded-lg font-medium transition-colors shadow-lg shadow-primary/25">Suggest a Tool</a>
         </div>
         <!-- Mobile menu button -->
         <button id="mobile-menu-btn" class="md:hidden text-white" aria-label="Menu">
@@ -102,6 +119,7 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
       <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
         <div class="flex flex-col gap-1 text-sm">
           <a href="/tools/" class="py-2 hover:text-accent transition-colors font-medium">All Tools</a>
+          <a href="/best/" class="py-2 hover:text-accent transition-colors font-medium">Best Tools</a>
           <div class="border-t border-gray-700 my-1"></div>
           <span class="text-xs text-gray-500 uppercase tracking-wide pt-1">Categories</span>
           <div class="grid grid-cols-2 gap-1 pl-2">
@@ -119,7 +137,7 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
           <a href="/blog/" class="py-2 hover:text-accent transition-colors">Blog</a>
           <a href="/about/" class="py-2 hover:text-accent transition-colors">About</a>
           <a href="/contact/" class="py-2 hover:text-accent transition-colors">Contact</a>
-          <a href="/suggest/" class="py-2 text-accent hover:text-white transition-colors font-medium">Suggest a Tool</a>
+          <a href="/suggest/" class="py-2 text-primary hover:text-white transition-colors font-medium">Suggest a Tool</a>
         </div>
       </div>
     </header>
@@ -132,43 +150,66 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
     <!-- Footer -->
     <footer class="bg-secondary text-white mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Footer top: logo + tagline -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-8 border-b border-gray-700/60">
           <div>
-            <h3 class="text-lg font-bold mb-4">Stackpick</h3>
-            <p class="text-sm text-gray-400">Independent AI tools comparison for DevOps teams. Unbiased reviews, real comparisons.</p>
+            <a href="/" class="inline-flex items-center gap-2 mb-2">
+              <span class="text-xl font-bold bg-gradient-to-r from-white to-violet-300 bg-clip-text text-transparent">Stackpick</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+            </a>
+            <p class="text-sm text-gray-400 max-w-xs">Independent AI tools comparison for DevOps teams. Unbiased reviews, real comparisons.</p>
           </div>
+          <div class="mt-4 md:mt-0">
+            <a href="/suggest/" class="inline-flex items-center gap-2 text-sm bg-primary/20 hover:bg-primary/30 text-violet-300 border border-primary/30 px-4 py-2 rounded-lg transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              Suggest a Tool
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <h4 class="font-semibold mb-3">Categories</h4>
+            <h4 class="font-semibold mb-3 text-white text-sm uppercase tracking-wider">Categories</h4>
             <ul class="text-sm text-gray-400 space-y-2">
-              <li><a href="/category/ci-cd/" class="hover:text-white">CI/CD</a></li>
-              <li><a href="/category/code-assistant/" class="hover:text-white">Code Assistants</a></li>
-              <li><a href="/category/monitoring/" class="hover:text-white">Monitoring</a></li>
-              <li><a href="/category/security/" class="hover:text-white">Security</a></li>
-              <li><a href="/category/testing/" class="hover:text-white">Testing</a></li>
-              <li><a href="/category/iac/" class="hover:text-white">IaC</a></li>
-              <li><a href="/category/ai-code-review/" class="hover:text-white">AI Code Review</a></li>
-              <li><a href="/category/aiops/" class="hover:text-white">AIOps</a></li>
+              <li><a href="/category/ci-cd/" class="hover:text-violet-300 transition-colors">CI/CD</a></li>
+              <li><a href="/category/code-assistant/" class="hover:text-violet-300 transition-colors">Code Assistants</a></li>
+              <li><a href="/category/monitoring/" class="hover:text-violet-300 transition-colors">Monitoring</a></li>
+              <li><a href="/category/security/" class="hover:text-violet-300 transition-colors">Security</a></li>
+              <li><a href="/category/testing/" class="hover:text-violet-300 transition-colors">Testing</a></li>
+              <li><a href="/category/iac/" class="hover:text-violet-300 transition-colors">IaC</a></li>
+              <li><a href="/category/ai-code-review/" class="hover:text-violet-300 transition-colors">AI Code Review</a></li>
+              <li><a href="/category/aiops/" class="hover:text-violet-300 transition-colors">AIOps</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-semibold mb-3">Resources</h4>
+            <h4 class="font-semibold mb-3 text-white text-sm uppercase tracking-wider">Resources</h4>
             <ul class="text-sm text-gray-400 space-y-2">
-              <li><a href="/tools/" class="hover:text-white">All Tools</a></li>
-              <li><a href="/compare/" class="hover:text-white">Comparisons</a></li>
-              <li><a href="/blog/" class="hover:text-white">Blog & Guides</a></li>
-              <li><a href="/suggest/" class="hover:text-white">Suggest a Tool</a></li>
+              <li><a href="/tools/" class="hover:text-violet-300 transition-colors">All Tools</a></li>
+              <li><a href="/best/" class="hover:text-violet-300 transition-colors">Best Tools</a></li>
+              <li><a href="/compare/" class="hover:text-violet-300 transition-colors">Comparisons</a></li>
+              <li><a href="/blog/" class="hover:text-violet-300 transition-colors">Blog & Guides</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-semibold mb-3">About</h4>
+            <h4 class="font-semibold mb-3 text-white text-sm uppercase tracking-wider">Company</h4>
             <ul class="text-sm text-gray-400 space-y-2">
-              <li><a href="/about/" class="hover:text-white">About Stackpick</a></li>
-              <li><a href="/contact/" class="hover:text-white">Contact</a></li>
+              <li><a href="/about/" class="hover:text-violet-300 transition-colors">About Stackpick</a></li>
+              <li><a href="/contact/" class="hover:text-violet-300 transition-colors">Contact</a></li>
+              <li><a href="/suggest/" class="hover:text-violet-300 transition-colors">Suggest a Tool</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-3 text-white text-sm uppercase tracking-wider">Top Comparisons</h4>
+            <ul class="text-sm text-gray-400 space-y-2">
+              <li><a href="/compare/cursor-vs-github-copilot/" class="hover:text-violet-300 transition-colors">Cursor vs Copilot</a></li>
+              <li><a href="/compare/datadog-vs-dynatrace/" class="hover:text-violet-300 transition-colors">Datadog vs Dynatrace</a></li>
+              <li><a href="/compare/snyk-vs-checkmarx/" class="hover:text-violet-300 transition-colors">Snyk vs Checkmarx</a></li>
+              <li><a href="/compare/flux-cd-vs-argo-cd/" class="hover:text-violet-300 transition-colors">Flux vs Argo CD</a></li>
             </ul>
           </div>
         </div>
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Stackpick. All rights reserved.</p>
+        <div class="border-t border-gray-700/60 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between gap-2 text-sm text-gray-500">
+          <p>&copy; {new Date().getFullYear()} Stackpick. Independent. Unbiased. Unsponsored.</p>
+          <p class="mono text-xs text-gray-600">v2.0 · {new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'})}</p>
         </div>
       </div>
     </footer>
