@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import useCases from '../../data/use-cases.json';
+
+const accentClasses: Record<string, { bg: string; text: string; border: string; ring: string }> = {
+  amber:   { bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-l-amber-400',   ring: 'group-hover:ring-amber-200' },
+  red:     { bg: 'bg-red-50',     text: 'text-red-700',     border: 'border-l-red-400',     ring: 'group-hover:ring-red-200' },
+  violet:  { bg: 'bg-violet-50',  text: 'text-violet-700',  border: 'border-l-violet-400',  ring: 'group-hover:ring-violet-200' },
+  blue:    { bg: 'bg-blue-50',    text: 'text-blue-700',    border: 'border-l-blue-400',    ring: 'group-hover:ring-blue-200' },
+  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-l-emerald-400', ring: 'group-hover:ring-emerald-200' },
+};
+---
+
+<BaseLayout
+  title="AI DevOps Tool Stacks by Use Case"
+  description="Pick the right AI DevOps stack based on what you're trying to accomplish — reduce MTTR, shift security left, set up AI pair programming, manage Kubernetes, or cut cloud costs."
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-sm text-text-muted mb-8">
+        <a href="/" class="hover:text-primary">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-text">Use Cases</span>
+      </nav>
+
+      <h1 class="text-4xl font-bold mb-4">Tool Stacks by Use Case</h1>
+      <p class="text-lg text-text-muted mb-12">
+        Don't know which category to start with? Pick what you're trying to accomplish, and we'll show you the AI-powered DevOps stack for it — tools, comparisons, and how to put them together.
+      </p>
+
+      <div class="grid gap-4">
+        {useCases.map((uc) => {
+          const cfg = accentClasses[uc.accentColor] || accentClasses.violet;
+          return (
+            <a
+              href={`/use-case/${uc.slug}/`}
+              class={`cat-card bg-white border border-border rounded-xl p-6 hover:shadow-md transition-all group ${cfg.border}`}
+            >
+              <div class="flex items-start gap-4">
+                <div class={`flex-shrink-0 w-12 h-12 rounded-xl ${cfg.bg} flex items-center justify-center text-2xl`}>
+                  {uc.icon}
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h2 class="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{uc.title}</h2>
+                  <p class={`text-sm font-medium ${cfg.text} mb-2`}>{uc.headline}</p>
+                  <p class="text-sm text-text-muted">{uc.description}</p>
+                  <div class="flex items-center gap-3 mt-3 text-xs text-text-muted">
+                    <span>{uc.topTools.length} tools</span>
+                    <span>·</span>
+                    <span>{uc.stages.length} stages</span>
+                    {uc.relatedComparisons.length > 0 && (
+                      <>
+                        <span>·</span>
+                        <span>{uc.relatedComparisons.length} comparison{uc.relatedComparisons.length !== 1 ? 's' : ''}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <span class="text-primary font-medium shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">View stack →</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
