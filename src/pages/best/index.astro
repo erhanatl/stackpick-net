@@ -1,6 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import hubPages from '../../data/hub-pages.json';
+
+const categoryConfig: Record<string, { badge: string; dot: string; borderClass: string; icon: string }> = {
+  'CI/CD':          { badge: 'bg-blue-50 text-blue-700 border-blue-100',          dot: 'bg-blue-400',    borderClass: 'border-l-blue-400',    icon: '⚙️' },
+  'Code Assistant': { badge: 'bg-violet-50 text-violet-700 border-violet-100',    dot: 'bg-violet-400',  borderClass: 'border-l-violet-400',  icon: '🤖' },
+  'Monitoring':     { badge: 'bg-emerald-50 text-emerald-700 border-emerald-100', dot: 'bg-emerald-400', borderClass: 'border-l-emerald-400', icon: '📡' },
+  'Testing':        { badge: 'bg-orange-50 text-orange-700 border-orange-100',    dot: 'bg-orange-400',  borderClass: 'border-l-orange-400',  icon: '🧪' },
+  'Security':       { badge: 'bg-red-50 text-red-700 border-red-100',             dot: 'bg-red-400',     borderClass: 'border-l-red-400',     icon: '🛡️' },
+  'IaC':            { badge: 'bg-cyan-50 text-cyan-700 border-cyan-100',          dot: 'bg-cyan-400',    borderClass: 'border-l-cyan-400',    icon: '🏗️' },
+  'AI Code Review': { badge: 'bg-indigo-50 text-indigo-700 border-indigo-100',    dot: 'bg-indigo-400',  borderClass: 'border-l-indigo-400',  icon: '🔍' },
+  'AIOps':          { badge: 'bg-amber-50 text-amber-700 border-amber-100',       dot: 'bg-amber-400',   borderClass: 'border-l-amber-400',   icon: '⚡' },
+};
 ---
 
 <BaseLayout
@@ -18,19 +29,28 @@ import hubPages from '../../data/hub-pages.json';
       <h1 class="text-4xl font-bold mb-4">Best AI DevOps Tools by Category</h1>
       <p class="text-lg text-text-muted mb-12">Expert-curated rankings of the top AI tools in every DevOps category, with buyer's guides and head-to-head comparisons.</p>
 
-      <div class="grid gap-6">
-        {hubPages.map(hub => (
-          <a href={`/best/${hub.slug}/`} class="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-shadow group">
-            <div class="flex items-start justify-between">
-              <div>
-                <span class="text-xs font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full mb-3 inline-block">{hub.category}</span>
-                <h2 class="text-xl font-bold group-hover:text-primary transition-colors mb-2">{hub.title}</h2>
-                <p class="text-text-muted">{hub.description}</p>
+      <div class="grid gap-4">
+        {hubPages.map(hub => {
+          const cfg = categoryConfig[hub.category] || { badge: 'bg-gray-50 text-gray-700 border-gray-100', dot: 'bg-gray-400', borderClass: 'border-l-gray-400', icon: '🔧' };
+          return (
+            <a href={`/best/${hub.slug}/`} class={`cat-card bg-white border border-border rounded-xl p-6 hover:shadow-md transition-all group ${cfg.borderClass}`}>
+              <div class="flex items-start justify-between">
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 mb-3">
+                    <span class="text-lg">{cfg.icon}</span>
+                    <span class={`text-xs font-medium px-2 py-0.5 rounded-full border flex items-center gap-1 ${cfg.badge}`}>
+                      <span class={`w-1.5 h-1.5 rounded-full ${cfg.dot}`}></span>
+                      {hub.category}
+                    </span>
+                  </div>
+                  <h2 class="text-xl font-bold group-hover:text-primary transition-colors mb-2">{hub.title}</h2>
+                  <p class="text-text-muted text-sm">{hub.description}</p>
+                </div>
+                <span class="text-primary font-medium shrink-0 ml-6 opacity-60 group-hover:opacity-100 transition-opacity">View picks →</span>
               </div>
-              <span class="text-primary font-medium shrink-0 ml-6">View picks →</span>
-            </div>
-          </a>
-        ))}
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>

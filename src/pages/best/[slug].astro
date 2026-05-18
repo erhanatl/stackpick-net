@@ -26,6 +26,18 @@ const categoryTools = tools
   .filter(t => t.category === hub.category && t.status === 'Published')
   .sort((a, b) => a.tool_name.localeCompare(b.tool_name));
 
+const categoryConfig: Record<string, { badge: string; dot: string; borderClass: string; rankBg: string; hoverBorder: string }> = {
+  'CI/CD':          { badge: 'bg-blue-50 text-blue-700 border-blue-100',          dot: 'bg-blue-400',    borderClass: 'border-l-blue-400',    rankBg: 'bg-blue-600',    hoverBorder: 'hover:border-blue-300' },
+  'Code Assistant': { badge: 'bg-violet-50 text-violet-700 border-violet-100',    dot: 'bg-violet-400',  borderClass: 'border-l-violet-400',  rankBg: 'bg-violet-600',  hoverBorder: 'hover:border-violet-300' },
+  'Monitoring':     { badge: 'bg-emerald-50 text-emerald-700 border-emerald-100', dot: 'bg-emerald-400', borderClass: 'border-l-emerald-400', rankBg: 'bg-emerald-600', hoverBorder: 'hover:border-emerald-300' },
+  'Testing':        { badge: 'bg-orange-50 text-orange-700 border-orange-100',    dot: 'bg-orange-400',  borderClass: 'border-l-orange-400',  rankBg: 'bg-orange-600',  hoverBorder: 'hover:border-orange-300' },
+  'Security':       { badge: 'bg-red-50 text-red-700 border-red-100',             dot: 'bg-red-400',     borderClass: 'border-l-red-400',     rankBg: 'bg-red-600',     hoverBorder: 'hover:border-red-300' },
+  'IaC':            { badge: 'bg-cyan-50 text-cyan-700 border-cyan-100',          dot: 'bg-cyan-400',    borderClass: 'border-l-cyan-400',    rankBg: 'bg-cyan-600',    hoverBorder: 'hover:border-cyan-300' },
+  'AI Code Review': { badge: 'bg-indigo-50 text-indigo-700 border-indigo-100',    dot: 'bg-indigo-400',  borderClass: 'border-l-indigo-400',  rankBg: 'bg-indigo-600',  hoverBorder: 'hover:border-indigo-300' },
+  'AIOps':          { badge: 'bg-amber-50 text-amber-700 border-amber-100',       dot: 'bg-amber-400',   borderClass: 'border-l-amber-400',   rankBg: 'bg-amber-500',   hoverBorder: 'hover:border-amber-300' },
+};
+const cfg = categoryConfig[hub.category] || { badge: 'bg-gray-50 text-gray-700 border-gray-100', dot: 'bg-gray-400', borderClass: 'border-l-gray-400', rankBg: 'bg-gray-600', hoverBorder: 'hover:border-gray-300' };
+
 const categorySlugMap: Record<string, string> = {
   'Monitoring': 'monitoring',
   'CI/CD': 'ci-cd',
@@ -54,6 +66,12 @@ const catSlug = categorySlugMap[hub.category] || hub.category.toLowerCase();
 
       <!-- Header -->
       <header class="mb-10">
+        <div class="flex items-center gap-2 mb-4">
+          <span class={`text-xs font-medium px-2.5 py-1 rounded-full border flex items-center gap-1.5 ${cfg.badge}`}>
+            <span class={`w-1.5 h-1.5 rounded-full ${cfg.dot}`}></span>
+            {hub.category}
+          </span>
+        </div>
         <h1 class="text-4xl font-bold mb-4">{hub.title}</h1>
         <p class="text-lg text-text-muted">{hub.intro}</p>
       </header>
@@ -77,9 +95,9 @@ const catSlug = categorySlugMap[hub.category] || hub.category.toLowerCase();
           {topTools.map(({ rank, reason, tool }) => {
             const domain = tool.website_url ? (() => { try { return new URL(tool.website_url).hostname; } catch { return ''; } })() : '';
             return (
-              <div class="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-shadow">
+              <div class={`cat-card bg-white border border-border rounded-xl p-6 hover:shadow-md transition-all ${cfg.borderClass}`}>
                 <div class="flex items-start gap-4">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
+                  <div class={`flex-shrink-0 w-10 h-10 rounded-full ${cfg.rankBg} text-white flex items-center justify-center font-bold text-lg mono`}>
                     {rank}
                   </div>
                   <div class="flex-1 min-w-0">
@@ -151,7 +169,7 @@ const catSlug = categorySlugMap[hub.category] || hub.category.toLowerCase();
           {categoryTools.map(t => {
             const domain = t.website_url ? (() => { try { return new URL(t.website_url).hostname; } catch { return ''; } })() : '';
             return (
-              <a href={`/tools/${t.slug}/`} class="flex items-center gap-3 bg-white border border-border rounded-lg p-4 hover:border-primary hover:shadow-sm transition-all group">
+              <a href={`/tools/${t.slug}/`} class={`flex items-center gap-3 bg-white border border-border rounded-lg p-4 hover:shadow-sm transition-all group ${cfg.hoverBorder}`}>
                 {domain && <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" class="w-6 h-6 rounded shrink-0" />}
                 <div class="min-w-0">
                   <p class="font-medium group-hover:text-primary transition-colors truncate">{t.tool_name}</p>
