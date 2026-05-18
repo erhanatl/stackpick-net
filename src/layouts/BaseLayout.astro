@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -51,6 +52,9 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
     <title>{pageTitle}</title>
+
+    <!-- View Transitions for fluid page navigation -->
+    <ClientRouter />
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({

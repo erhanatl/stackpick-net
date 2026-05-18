@@ -10,6 +10,9 @@ const comparisons = (await import('../data/comparisons.json')).default;
 const latestGuides = [...guides]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
+// "Recently Added" — last entries in tools.json represent most recent additions.
+// We take 6 to fill a 3-column grid on 2 rows.
+const recentlyAddedTools = [...publishedTools].slice(-6).reverse();
 
 const categoryConfig: Record<string, { color: string; border: string; icon: string }> = {
   'CI/CD':          { color: 'bg-blue-50 text-blue-700',      border: 'border-l-blue-400',   icon: '⚙️' },
@@ -130,18 +133,23 @@ function estimateReadingTime(content: string): number {
     </div>
   </section>
 
-  <!-- Featured Tools Section -->
+  <!-- Recently Added Section -->
   <section class="py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between mb-10">
+      <div class="flex items-center justify-between mb-3">
         <h2 class="text-2xl font-bold flex items-center gap-3">
           <span class="w-1 h-7 rounded-full bg-gradient-to-b from-primary to-accent block"></span>
-          Featured Tools
+          Recently Added
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100 px-2 py-0.5 rounded-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            New
+          </span>
         </h2>
         <a href="/tools/" class="text-primary hover:text-primary-dark font-medium text-sm transition-colors">View all →</a>
       </div>
+      <p class="text-sm text-text-muted mb-8">The latest AI DevOps tools we've reviewed and added to the index.</p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {publishedTools.filter(t => ['github-copilot', 'datadog-ai', 'snyk'].includes(t.slug)).map((tool) => (
+        {recentlyAddedTools.map((tool) => (
           <ToolCard
             name={tool.tool_name}
             slug={tool.slug}
