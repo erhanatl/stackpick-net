@@ -14,7 +14,22 @@ const { title, description, canonical, ogImage, noindex } = Astro.props;
 const siteUrl = 'https://stackpick.net';
 const pageTitle = title === 'Home' ? 'Stackpick — Best AI Tools for DevOps' : `${title} | Stackpick`;
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
-const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
+
+// Map page pathname to dynamic OG PNG endpoint when available.
+// Pattern: /<section>/<slug>/ → /og/<section>/<slug>.png
+function resolveOgUrl(pathname: string): string {
+  const sections = ['tools', 'compare', 'best', 'use-case', 'blog'];
+  // Match /section/slug/ or /section/slug
+  const match = pathname.match(/^\/(tools|compare|best|use-case|blog)\/([^/]+)\/?$/);
+  if (match) {
+    const [, section, slug] = match;
+    if (sections.includes(section)) {
+      return `${siteUrl}/og/${section}/${slug}.png`;
+    }
+  }
+  return `${siteUrl}/og-default.svg`;
+}
+const ogImageUrl = ogImage || resolveOgUrl(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -32,6 +47,9 @@ const ogImageUrl = ogImage || `${siteUrl}/og-default.svg`;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:site_name" content="Stackpick" />
 
     <!-- Twitter -->
