@@ -246,10 +246,23 @@ const ogImageUrl = ogImage || resolveOgUrl(Astro.url.pathname);
       </div>
     </footer>
 
-    <script>
-      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.toggle('hidden');
-      });
+    <script is:inline>
+      // Event delegation on document — survives View Transitions DOM swaps.
+      // Guard prevents duplicate listeners if the script ever re-runs.
+      if (!window.__stackpickMobileMenuBound) {
+        window.__stackpickMobileMenuBound = true;
+        document.addEventListener('click', (e) => {
+          const target = e.target;
+          if (target && target.closest && target.closest('#mobile-menu-btn')) {
+            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+          }
+        });
+        // Close menu before navigating to a new page (otherwise it lingers
+        // open during the transition and reappears mid-load).
+        document.addEventListener('astro:before-preparation', () => {
+          document.getElementById('mobile-menu')?.classList.add('hidden');
+        });
+      }
     </script>
   </body>
 </html>
