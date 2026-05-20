@@ -100,6 +100,25 @@ const publishedTools = tools.filter(t => t.status === 'Published');
         const searchCount = document.getElementById('search-count');
         const total = document.querySelectorAll('.tool-card').length;
 
+        // Relevance score for ranked search results.
+        // Higher score = better match → sorted first.
+        // 4: name starts with query
+        // 3: name contains query
+        // 2: vendor starts with query
+        // 1: vendor contains query
+        // 0: description contains query (broadest match, shown last)
+        function searchScore(card: HTMLElement, query: string): number {
+          const name = card.dataset.name!;
+          const vendor = card.dataset.vendor!;
+          const desc = card.dataset.description!;
+          if (name.startsWith(query)) return 4;
+          if (name.includes(query)) return 3;
+          if (vendor.startsWith(query)) return 2;
+          if (vendor.includes(query)) return 1;
+          if (desc.includes(query)) return 0;
+          return -1; // no match
+        }
+
         function filterAndSort() {
           const query = searchInput.value.toLowerCase().trim();
           const category = categoryFilter.value;
@@ -110,29 +129,35 @@ const publishedTools = tools.filter(t => t.status === 'Published');
           const cards = Array.from(document.querySelectorAll('.tool-card')) as HTMLElement[];
           let visible = 0;
 
-          // Filter
-          const visibleCards = cards.filter(card => {
-            const matchesSearch = !query ||
-              card.dataset.name!.includes(query) ||
-              card.dataset.vendor!.includes(query) ||
-              card.dataset.description!.includes(query);
+          // Filter + score
+          const visibleCards: { card: HTMLElement; score: number }[] = [];
+          cards.forEach(card => {
+            const score = query ? searchScore(card, query) : 0;
+            const matchesSearch = !query || score >= 0;
             const matchesCategory = !category || card.dataset.category === category;
             const matchesPricing = !pricing || card.dataset.pricing === pricing;
-            return matchesSearch && matchesCategory && matchesPricing;
+            if (matchesSearch && matchesCategory && matchesPricing) {
+              visibleCards.push({ card, score });
+            }
           });
 
-          // Sort
+          // Sort: by relevance when querying, otherwise by chosen sort
           visibleCards.sort((a, b) => {
-            if (sort === 'name-asc') return a.dataset.name!.localeCompare(b.dataset.name!);
-            if (sort === 'name-desc') return b.dataset.name!.localeCompare(a.dataset.name!);
-            if (sort === 'category') return a.dataset.category!.localeCompare(b.dataset.category!);
-            if (sort === 'pricing') return a.dataset.pricing!.localeCompare(b.dataset.pricing!);
+            if (query) {
+              // Primary: relevance desc; secondary: name-asc tiebreaker
+              if (b.score !== a.score) return b.score - a.score;
+            }
+            const ac = a.card, bc = b.card;
+            if (sort === 'name-asc') return ac.dataset.name!.localeCompare(bc.dataset.name!);
+            if (sort === 'name-desc') return bc.dataset.name!.localeCompare(ac.dataset.name!);
+            if (sort === 'category') return ac.dataset.category!.localeCompare(bc.dataset.category!);
+            if (sort === 'pricing') return ac.dataset.pricing!.localeCompare(bc.dataset.pricing!);
             return 0;
           });
 
           // Apply visibility and order
           cards.forEach(card => card.style.display = 'none');
-          visibleCards.forEach(card => {
+          visibleCards.forEach(({ card }) => {
             card.style.display = '';
             grid!.appendChild(card);
             visible++;
