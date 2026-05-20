@@ -90,7 +90,7 @@
         "reason": "Best for large-scale pipelines. Self-hosted agents with a cloud dashboard. Scales to thousands of builds per day with consistent performance."
       },
       {
-        "slug": "gitlab-ci-cd",
+        "slug": "gitlab-cicd",
         "rank": 4,
         "reason": "Best for GitLab users. Deeply integrated with GitLab repositories, built-in security scanning, and GitLab Duo AI assistance throughout."
       },
