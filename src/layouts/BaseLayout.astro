@@ -27,7 +27,7 @@ function resolveOgUrl(pathname: string): string {
       return `${siteUrl}/og/${section}/${slug}.png`;
     }
   }
-  return `${siteUrl}/og-default.svg`;
+  return `${siteUrl}/og-default.png`;
 }
 const ogImageUrl = ogImage || resolveOgUrl(Astro.url.pathname);
 ---
