@@ -563,7 +563,7 @@
   {
     "title": "Mergify vs Aviator",
     "slug": "mergify-vs-aviator",
-    "description": "Mergify ve Aviator karşılaştırması — hangi merge queue ve PR otomasyon platformu ekibiniz için daha uygun?",
+    "description": "Mergify vs Aviator — which merge queue and PR automation platform keeps your team's main branch green and shipping faster?",
     "tools": [
       "mergify",
       "aviator"
@@ -573,7 +573,7 @@
   {
     "title": "Coder vs Gitpod",
     "slug": "coder-vs-gitpod",
-    "description": "Coder ve Gitpod karşılaştırması — hangi Cloud Development Environment platformu ekibiniz için doğru seçim?",
+    "description": "Coder vs Gitpod — which Cloud Development Environment platform is the better fit for standardized, on-demand dev environments?",
     "tools": [
       "coder",
       "gitpod"
@@ -583,7 +583,7 @@
   {
     "title": "Earthly vs Dagger",
     "slug": "earthly-vs-dagger",
-    "description": "Earthly ve Dagger karşılaştırması — CI/CD bağımsız, reproducible build sistemi olarak hangisi ekibinize daha uygun?",
+    "description": "Earthly vs Dagger — which CI-agnostic, reproducible build system better fits modern pipelines? A practical comparison.",
     "tools": [
       "earthly",
       "dagger"
@@ -593,7 +593,7 @@
   {
     "title": "Wiz AI vs Snyk",
     "slug": "wiz-ai-vs-snyk",
-    "description": "Wiz AI ve Snyk karşılaştırması — cloud-native güvenlik ile developer-first güvenlik arasındaki fark ve hangisini seçmelisiniz?",
+    "description": "Wiz vs Snyk — cloud-native security posture vs developer-first vulnerability scanning. Which approach fits your security strategy?",
     "tools": [
       "wiz-ai",
       "snyk"
@@ -603,7 +603,7 @@
   {
     "title": "Greptile vs Sourcegraph Cody",
     "slug": "greptile-vs-sourcegraph-cody",
-    "description": "Greptile ve Sourcegraph Cody karşılaştırması — codebase-aware AI asistanları arasında hangisi büyük kod tabanları için daha iyi çalışır?",
+    "description": "Greptile vs Sourcegraph Cody — which codebase-aware AI assistant works better for large repositories and deep code understanding?",
     "tools": [
       "greptile",
       "sourcegraph-cody"
@@ -668,7 +668,7 @@
   {
     "slug": "grafana-vs-prometheus",
     "title": "Grafana vs Prometheus",
-    "description": "Grafana ve Prometheus karşılaştırması — aslında rakip değil tamamlayıcı iki araç. Hangisi neyi yapar, ikisini birlikte mi kullanmalısınız?",
+    "description": "Grafana vs Prometheus — not competitors but complementary tools. What each one does, and why you usually run both together.",
     "tools": [
       "grafana",
       "prometheus"
@@ -678,7 +678,7 @@
   {
     "slug": "github-actions-vs-circleci",
     "title": "GitHub Actions vs CircleCI",
-    "description": "GitHub Actions ve CircleCI karşılaştırması — entegrasyon, fiyatlandırma ve performans açısından hangi CI/CD platformu ekibiniz için doğru?",
+    "description": "GitHub Actions vs CircleCI — which CI/CD platform is right for your team on integration, pricing, and build performance?",
     "tools": [
       "github-actions",
       "circleci"
@@ -688,7 +688,7 @@
   {
     "slug": "snyk-vs-sonarqube",
     "title": "Snyk vs SonarQube",
-    "description": "Snyk ve SonarQube karşılaştırması — biri güvenlik açıklarına, diğeri kod kalitesine odaklanıyor. Hangisi sizin için, yoksa ikisi birden mi?",
+    "description": "Snyk vs SonarQube — one focuses on security vulnerabilities, the other on code quality. Which do you need, or do you need both?",
     "tools": [
       "snyk",
       "sonarqube"
@@ -698,7 +698,7 @@
   {
     "slug": "claude-code-vs-github-copilot",
     "title": "Claude Code vs GitHub Copilot",
-    "description": "Claude Code ve GitHub Copilot karşılaştırması — agentic terminal asistanı mı yoksa IDE içi autocomplete mi? 2026'da hangisi geliştirici verimliliğini daha çok artırıyor?",
+    "description": "Claude Code vs GitHub Copilot — agentic terminal assistant or in-editor autocomplete? Which boosts developer productivity more in 2026?",
     "tools": [
       "claude-code",
       "github-copilot"
@@ -708,7 +708,7 @@
   {
     "slug": "sentry-vs-datadog-ai",
     "title": "Sentry vs Datadog",
-    "description": "Sentry ve Datadog karşılaştırması — odaklı hata izleme mi yoksa tam kapsamlı gözlemlenebilirlik platformu mu? Bütçe ve ihtiyaca göre hangisi?",
+    "description": "Sentry vs Datadog — focused error tracking or full-stack observability platform? How to choose based on budget and needs.",
     "tools": [
       "sentry",
       "datadog-ai"
@@ -718,7 +718,7 @@
   {
     "slug": "tabnine-vs-codeium",
     "title": "Tabnine vs Codeium",
-    "description": "Tabnine ve Codeium karşılaştırması — gizlilik odaklı kurumsal asistan mı yoksa cömert ücretsiz katmanlı seçenek mi? AI kod asistanları kafa kafaya.",
+    "description": "Tabnine vs Codeium — privacy-first enterprise assistant or generous free-tier option? Two AI code assistants head to head.",
     "tools": [
       "tabnine",
       "codeium"
@@ -728,7 +728,7 @@
   {
     "slug": "pagerduty-vs-datadog-ai",
     "title": "PagerDuty vs Datadog",
-    "description": "PagerDuty ve Datadog karşılaştırması — özelleşmiş olay yönetimi/on-call mı yoksa gözlemlemeyle entegre uyarı mı? İkisini birlikte mi kullanmalı?",
+    "description": "PagerDuty vs Datadog — dedicated incident management and on-call, or alerting integrated with observability? When to use each (or both).",
     "tools": [
       "pagerduty",
       "datadog-ai"
@@ -738,7 +738,7 @@
   {
     "slug": "amazon-q-developer-vs-cursor",
     "title": "Amazon Q Developer vs Cursor",
-    "description": "Amazon Q Developer ve Cursor karşılaştırması — AWS-native asistan mı yoksa AI-first IDE mi? Bulut ağırlıklı ekip mi yoksa power user mı?",
+    "description": "Amazon Q Developer vs Cursor — AWS-native assistant or AI-first IDE? Which fits cloud-heavy teams versus power users.",
     "tools": [
       "amazon-q-developer",
       "cursor"
@@ -748,7 +748,7 @@
   {
     "slug": "aqua-security-ai-vs-wiz-ai",
     "title": "Aqua Security vs Wiz",
-    "description": "Aqua Security ve Wiz karşılaştırması — derin container/runtime güvenliği mi yoksa agentless bulut güvenlik duruşu (CNAPP) mı? Hangi cloud güvenlik yaklaşımı?",
+    "description": "Aqua Security vs Wiz — deep container/runtime security or agentless cloud security posture (CNAPP)? Which cloud security approach fits you.",
     "tools": [
       "aqua-security-ai",
       "wiz-ai"
@@ -758,7 +758,7 @@
   {
     "slug": "datadog-ai-vs-sumo-logic",
     "title": "Datadog vs Sumo Logic",
-    "description": "Datadog ve Sumo Logic karşılaştırması — full-stack gözlemlenebilirlik platformu mu yoksa log analitiği odaklı, esnek fiyatlı seçenek mi?",
+    "description": "Datadog vs Sumo Logic — full-stack observability platform or log-analytics-focused option with flexible pricing? A practical comparison.",
     "tools": [
       "datadog-ai",
       "sumo-logic"
