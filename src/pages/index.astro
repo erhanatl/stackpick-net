@@ -340,15 +340,14 @@ function estimateReadingTime(content: string): number {
       const COUNT = 90;
       const dashes: Dash[] = [];
 
-      function spawn(initialY = true): Dash {
+      function spawn(): Dash {
         const W = canvas.width, H = canvas.height;
         return {
           x:     Math.random() * W,
-          // on init scatter across whole height; on respawn start just above top
-          y:     initialY ? Math.random() * H : -10 - Math.random() * 40,
+          y:     Math.random() * H,
           vx:    (Math.random() - 0.5) * 0.6,
-          vy:    0.3 + Math.random() * 0.7,   // slow downward drift
-          len:   8 + Math.random() * 14,
+          vy:    (Math.random() - 0.5) * 0.6,  // no downward bias
+          len:   (5 + Math.random() * 9),       // 2/3 of original size
           thick: 1.5 + Math.random() * 1.5,
           angle: Math.random() * Math.PI * 2,
           spin:  (Math.random() - 0.5) * 0.025,
@@ -393,20 +392,17 @@ function estimateReadingTime(content: string): number {
           d.y     += d.vy;
           d.angle += d.spin;
 
-          // Horizontal sway + damping
+          // Gentle random drift, damping
           d.vx += (Math.random() - 0.5) * 0.04;
-          d.vx *= 0.96;
-          // Always drift downward; dampen upward velocity but keep downward base
-          d.vy = d.vy * 0.96 + 0.018;
+          d.vy += (Math.random() - 0.5) * 0.04;
+          d.vx *= 0.97;
+          d.vy *= 0.97;
 
-          // Respawn above when fallen below hero
-          if (d.y > H + 20) {
-            dashes[i] = spawn(false);
-            continue;
-          }
-          // Wrap horizontal
+          // Wrap all edges
           if (d.x < -20) d.x = W + 20;
           else if (d.x > W + 20) d.x = -20;
+          if (d.y < -20) d.y = H + 20;
+          else if (d.y > H + 20) d.y = -20;
 
           // Draw dash
           ctx.save();
