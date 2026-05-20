@@ -41,6 +41,16 @@ const categoryColors: Record<string, string> = {
 const allRelatedTools = tools.filter(t => t.category === tool.category && t.slug !== tool.slug && t.status === 'Published');
 const relatedTools = [...allRelatedTools].sort((a, b) => a.tool_name.localeCompare(b.tool_name)).slice(0, 4);
 const relatedComparisons = comparisons.filter(c => c.tools.includes(tool.slug));
+
+// "Also compare" widget: up to 4 comparison chips shown after Pros & Cons.
+// Each chip shows the name(s) of the other tool(s) in the comparison.
+const alsoCompare = relatedComparisons.slice(0, 4).map(comp => {
+  const otherSlugs = comp.tools.filter((s: string) => s !== tool.slug);
+  const otherNames = otherSlugs
+    .map((s: string) => tools.find(t => t.slug === s)?.tool_name ?? s)
+    .join(' & ');
+  return { slug: comp.slug, otherNames };
+});
 const relatedGuides = guides.filter(g =>
   g.category === tool.category ||
   g.title.toLowerCase().includes(tool.tool_name.toLowerCase()) ||
@@ -175,6 +185,31 @@ const faqs = [
         </div>
       </section>
 
+      <!-- Also Compare Widget -->
+      {alsoCompare.length > 0 && (
+        <section class="mb-10">
+          <h2 class="text-base font-semibold text-text-muted uppercase tracking-wide mb-3">Compare {tool.tool_name} with</h2>
+          <div class="flex flex-wrap gap-2">
+            {alsoCompare.map(({ slug, otherNames }) => (
+              <a
+                href={`/compare/${slug}/`}
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border bg-white text-sm font-medium hover:border-primary hover:text-primary transition-colors"
+              >
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                </svg>
+                {otherNames}
+              </a>
+            ))}
+            {relatedComparisons.length > 4 && (
+              <a href="#comparisons" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-dashed border-border text-sm text-text-muted hover:text-primary hover:border-primary transition-colors">
+                +{relatedComparisons.length - 4} more
+              </a>
+            )}
+          </div>
+        </section>
+      )}
+
       <!-- FAQ Section -->
       <section class="mb-10">
         <h2 class="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
@@ -193,7 +228,7 @@ const faqs = [
 
       <!-- Related Comparisons -->
       {relatedComparisons.length > 0 && (
-        <section class="mb-10">
+        <section id="comparisons" class="mb-10">
           <h2 class="text-2xl font-bold mb-4">{tool.tool_name} Comparisons</h2>
           <div class="space-y-3">
             {relatedComparisons.map((comp) => (
@@ -260,7 +295,7 @@ const faqs = [
 
       <!-- Related Tools -->
       {relatedTools.length > 0 && (
-        <section id="comparisons">
+        <section>
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold">Other {tool.category} Tools</h2>
             {allRelatedTools.length > 4 && (
