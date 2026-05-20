@@ -71,7 +71,7 @@ const toolNames = comparedTools.map(t => t.tool_name).join(' vs ');
         ))}
       </div>
 
-      <!-- JSON-LD -->
+      <!-- JSON-LD: Article -->
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
@@ -82,6 +82,17 @@ const toolNames = comparedTools.map(t => t.tool_name).join(' vs ');
           "@type": "Organization",
           "name": "Stackpick"
         }
+      })} />
+
+      <!-- JSON-LD: BreadcrumbList -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://stackpick.net/" },
+          { "@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://stackpick.net/compare/" },
+          { "@type": "ListItem", "position": 3, "name": toolNames, "item": `https://stackpick.net/compare/${comparison.slug}/` }
+        ]
       })} />
     </div>
   </article>
