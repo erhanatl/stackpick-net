@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import tools from '../../data/tools.json';
+import comparisons from '../../data/comparisons.json';
+import guides from '../../data/guides.json';
+
+const toolCount = tools.filter(t => t.status === 'Published').length;
+const comparisonCount = comparisons.length;
+const guideCount = guides.length;
+---
+
+<BaseLayout
+  title="Our Methodology"
+  description="How Stackpick selects, evaluates, and ranks AI DevOps tools. Learn about our editorial independence, review criteria, and ranking process."
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="mb-12">
+        <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Editorial Standards</p>
+        <h1 class="text-4xl font-bold mb-4">Our Methodology</h1>
+        <p class="text-lg text-text-muted leading-relaxed">
+          Stackpick reviews {toolCount} AI DevOps tools, {comparisonCount} head-to-head comparisons, and {guideCount} buyer guides.
+          Here's exactly how we decide what to include, how we evaluate tools, and how we rank them.
+        </p>
+      </div>
+
+      <!-- Section: Independence -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold">Editorial Independence</h2>
+        </div>
+        <div class="prose prose-lg max-w-none">
+          <p>
+            Stackpick is not sponsored, affiliated with, or paid by any tool vendor. We do not accept payment for inclusion, favorable reviews, or higher rankings. Every tool is evaluated on the same criteria regardless of the vendor's size or popularity.
+          </p>
+          <p>
+            We may use affiliate links on some tool pages (clearly disclosed where applicable). Affiliate revenue never influences review scores, rankings, or editorial decisions — it only helps cover hosting and research costs.
+          </p>
+          <p>
+            If a vendor reaches out to request changes to their tool page, we evaluate the request on factual accuracy alone, not commercial relationship.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section: Inclusion -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold">How Tools Get Included</h2>
+        </div>
+        <div class="prose prose-lg max-w-none">
+          <p>A tool is considered for inclusion when it meets all three criteria:</p>
+          <ol>
+            <li>
+              <strong>Relevance</strong> — The tool must be meaningfully AI-powered and serve DevOps workflows (CI/CD, code assistance, monitoring, security, testing, IaC, code review, or AIOps). Generic SaaS tools without a clear AI component are not included.
+            </li>
+            <li>
+              <strong>Availability</strong> — The tool must be commercially available or in public beta. Vaporware, private-access-only tools, or tools that have been discontinued are excluded or marked accordingly.
+            </li>
+            <li>
+              <strong>Verifiable pricing</strong> — Pricing must be publicly available or confirmable via the vendor's official documentation. We do not include tools where pricing is entirely opaque.
+            </li>
+          </ol>
+          <p>
+            New tools are added when discovered through community reports, product launches, or <a href="/suggest/">reader submissions</a>. There is no fee or waiting list for inclusion.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section: Review criteria -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold">How We Evaluate Tools</h2>
+        </div>
+        <div class="prose prose-lg max-w-none">
+          <p>Each tool page documents the following dimensions. These are factual data points, not subjective scores:</p>
+        </div>
+
+        <div class="mt-5 grid gap-4">
+          {[
+            {
+              label: 'Pricing & Value',
+              desc: 'We record the pricing model (Free, Freemium, Paid, Enterprise), starting price, and any free tier limits. Pricing is pulled from official vendor documentation and updated when changes are reported.',
+            },
+            {
+              label: 'Core Capabilities',
+              desc: 'What the tool actually does — derived from product documentation, release notes, and public demos. We focus on DevOps-specific functionality rather than generic feature lists.',
+            },
+            {
+              label: 'Pros & Cons',
+              desc: 'Strengths and limitations written from an evaluator\'s perspective. These reflect genuine trade-offs and are not marketing copy. We pull from user reviews, technical blogs, and hands-on testing where available.',
+            },
+            {
+              label: 'Category Fit',
+              desc: 'Tools are assigned to exactly one primary category based on their dominant use case. A tool that does both CI/CD and monitoring is placed in whichever is its primary purpose.',
+            },
+            {
+              label: 'Integration & Ecosystem',
+              desc: 'How well the tool fits into standard DevOps workflows — CI/CD platform support, IDE plugins, API availability, and compatibility with common infrastructure stacks.',
+            },
+          ].map(item => (
+            <div class="bg-surface rounded-xl p-5">
+              <h3 class="font-semibold mb-1">{item.label}</h3>
+              <p class="text-sm text-text-muted leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Section: Rankings -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold">How Rankings Work</h2>
+        </div>
+        <div class="prose prose-lg max-w-none">
+          <p>
+            Rankings on <a href="/best/">"Best Tools"</a> hub pages are editorial picks, not algorithmic scores. They reflect our assessment of which tools provide the most value for the majority of DevOps teams in that category, considering:
+          </p>
+          <ul>
+            <li><strong>Breadth of use</strong> — Adoption signals from job listings, community mentions, and ecosystem integrations</li>
+            <li><strong>Value at each pricing tier</strong> — A tool that does 80% of the job for free may rank higher than a premium tool for teams just starting out</li>
+            <li><strong>Maturity & reliability</strong> — Newer tools may rank lower until they have a proven track record</li>
+            <li><strong>Active development</strong> — Tools that are actively maintained and improving rank higher than stagnant ones</li>
+          </ul>
+          <p>
+            We do not assign numerical star ratings. Past experiments with ratings showed they were too easy to misinterpret as objective scores when they were inherently subjective. The ranked list itself conveys our assessment without a false sense of precision.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section: Updates -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold">How We Keep Data Fresh</h2>
+        </div>
+        <div class="prose prose-lg max-w-none">
+          <p>
+            The AI DevOps landscape changes fast — tools pivot, pricing changes, new competitors emerge. We update tool pages when:
+          </p>
+          <ul>
+            <li>A vendor releases a significant feature update or pricing change</li>
+            <li>A reader or vendor submits a correction via the <a href="/contact/">contact form</a></li>
+            <li>We discover outdated information during a category review</li>
+          </ul>
+          <p>
+            Tool pages include the year in their title (e.g., "Review 2026") and are reviewed at least annually. If you spot an error or outdated information, <a href="/contact/">let us know</a> — we correct factual mistakes promptly.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="bg-surface rounded-xl p-8 text-center">
+        <h3 class="text-xl font-bold mb-2">Questions or corrections?</h3>
+        <p class="text-text-muted mb-5">If you believe something on our site is inaccurate or outdated, we want to know.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="/contact/" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+            Contact Us
+          </a>
+          <a href="/suggest/" class="bg-white hover:bg-gray-50 border border-border text-secondary px-6 py-3 rounded-lg font-semibold transition-colors">
+            Suggest a Tool
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
