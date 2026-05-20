@@ -359,6 +359,18 @@ function estimateReadingTime(content: string): number {
 
       for (let i = 0; i < COUNT; i++) dashes.push(spawn(true));
 
+      // Mouse repulsion tracking
+      let mx = -9999, my = -9999;
+      const REPEL_RADIUS = 140;
+      const REPEL_FORCE  = 2.8;
+
+      hero.addEventListener('mousemove', (e: MouseEvent) => {
+        const r = hero.getBoundingClientRect();
+        mx = e.clientX - r.left;
+        my = e.clientY - r.top;
+      });
+      hero.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
+
       let rafId: number;
 
       function frame() {
@@ -368,13 +380,24 @@ function estimateReadingTime(content: string): number {
         for (let i = 0; i < dashes.length; i++) {
           const d = dashes[i];
 
+          // Mouse repulsion — push away from cursor
+          const dx = d.x - mx, dy = d.y - my;
+          const dist = Math.hypot(dx, dy);
+          if (dist < REPEL_RADIUS && dist > 0) {
+            const force = (1 - dist / REPEL_RADIUS) * REPEL_FORCE;
+            d.vx += (dx / dist) * force;
+            d.vy += (dy / dist) * force;
+          }
+
           d.x     += d.vx;
           d.y     += d.vy;
           d.angle += d.spin;
 
-          // Very slight horizontal sway
+          // Horizontal sway + damping
           d.vx += (Math.random() - 0.5) * 0.04;
-          d.vx *= 0.98;
+          d.vx *= 0.96;
+          // Always drift downward; dampen upward velocity but keep downward base
+          d.vy = d.vy * 0.96 + 0.018;
 
           // Respawn above when fallen below hero
           if (d.y > H + 20) {
