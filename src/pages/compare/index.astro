@@ -5,6 +5,14 @@ import comparisons from '../../data/comparisons.json';
 
 const publishedTools = tools.filter(t => t.status === 'Published');
 const categories = [...new Set(publishedTools.map(t => t.category))].sort();
+
+// Enrich each comparison with tool names + categories for client-side filtering
+const comparisonsWithMeta = comparisons.map(comp => {
+  const compTools = comp.tools.map((s: string) => publishedTools.find(t => t.slug === s)).filter(Boolean);
+  const toolNames = compTools.map((t: any) => t.tool_name).join(' ');
+  const compCategories = [...new Set(compTools.map((t: any) => t.category))].filter(Boolean) as string[];
+  return { ...comp, toolNames, compCategories };
+});
 ---
 
 <BaseLayout
@@ -60,39 +68,68 @@ const categories = [...new Set(publishedTools.map(t => t.category))].sort();
       <!-- Divider -->
       <div class="border-t border-border my-12" id="featured-divider"></div>
 
-      <!-- Featured Comparisons -->
+      <!-- All Comparisons with search/filter -->
       <div>
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold">Featured Comparisons</h2>
-          <span class="text-sm text-text-muted">{comparisons.length} comparisons</span>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-bold">All Comparisons</h2>
+          <span id="comp-count" class="text-sm text-text-muted">{comparisons.length} comparisons</span>
         </div>
-        <div class="space-y-4">
-          {comparisons.slice(0, 3).map((comp) => (
-            <a href={`/compare/${comp.slug}/`} class="card-hover block bg-white border border-border rounded-xl p-6">
-              <h3 class="text-xl font-bold mb-2">{comp.title}</h3>
-              <p class="text-text-muted">{comp.description}</p>
-              <span class="inline-block mt-4 text-primary font-medium text-sm">Read detailed comparison &rarr;</span>
+
+        <!-- Search + filter row -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+          <div class="relative flex-1">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input
+              type="text"
+              id="comp-search"
+              placeholder="Search by tool name or comparison title..."
+              class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            />
+          </div>
+          <select
+            id="comp-category"
+            class="px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          >
+            <option value="">All Categories</option>
+            {categories.map(cat => <option value={cat}>{cat}</option>)}
+          </select>
+          <button
+            id="comp-reset"
+            class="hidden px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm text-text-muted hover:text-danger hover:border-danger transition-colors"
+          >
+            ✕ Clear
+          </button>
+        </div>
+
+        <!-- Cards -->
+        <div id="comp-list" class="space-y-3">
+          {comparisonsWithMeta.map((comp) => (
+            <a
+              href={`/compare/${comp.slug}/`}
+              class="comp-card card-hover block bg-white border border-border rounded-xl p-5 group"
+              data-title={comp.title.toLowerCase()}
+              data-tools={comp.toolNames.toLowerCase()}
+              data-categories={comp.compCategories.join(',')}
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div class="min-w-0">
+                  <h3 class="text-lg font-semibold group-hover:text-primary transition-colors">{comp.title}</h3>
+                  <p class="text-sm text-text-muted mt-1 line-clamp-2">{comp.description}</p>
+                </div>
+                <div class="flex flex-wrap gap-1 shrink-0">
+                  {comp.compCategories.slice(0, 2).map(cat => (
+                    <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary whitespace-nowrap">{cat}</span>
+                  ))}
+                </div>
+              </div>
+              <span class="inline-block mt-3 text-primary font-medium text-sm">Read comparison &rarr;</span>
             </a>
           ))}
         </div>
 
-        <!-- All Comparisons (collapsed) -->
-        <div id="all-comparisons" class="hidden mt-4 space-y-4">
-          {comparisons.slice(3).map((comp) => (
-            <a href={`/compare/${comp.slug}/`} class="card-hover block bg-white border border-border rounded-xl p-6">
-              <h3 class="text-xl font-bold mb-2">{comp.title}</h3>
-              <p class="text-text-muted">{comp.description}</p>
-              <span class="inline-block mt-4 text-primary font-medium text-sm">Read detailed comparison &rarr;</span>
-            </a>
-          ))}
-        </div>
-
-        <button
-          id="show-all-btn"
-          class="mt-6 w-full py-3 rounded-lg border border-border bg-white text-sm font-medium text-primary hover:bg-surface transition-colors"
-        >
-          Show all {comparisons.length} comparisons
-        </button>
+        <p id="comp-no-results" class="hidden text-center text-text-muted py-12">No comparisons found.</p>
       </div>
     </div>
   </section>
@@ -262,17 +299,45 @@ const categories = [...new Set(publishedTools.map(t => t.category))].sort();
       document.getElementById('comparison-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    // Show all comparisons toggle
-    document.getElementById('show-all-btn')?.addEventListener('click', () => {
-      const allSection = document.getElementById('all-comparisons');
-      const btn = document.getElementById('show-all-btn');
-      if (allSection.classList.contains('hidden')) {
-        allSection.classList.remove('hidden');
-        btn.textContent = 'Show less';
-      } else {
-        allSection.classList.add('hidden');
-        btn.textContent = `Show all ${document.querySelectorAll('#all-comparisons a').length + 3} comparisons`;
-      }
+    // --- Comparison list search/filter ---
+    const compSearch = document.getElementById('comp-search');
+    const compCategory = document.getElementById('comp-category');
+    const compReset = document.getElementById('comp-reset');
+    const compCount = document.getElementById('comp-count');
+    const compNoResults = document.getElementById('comp-no-results');
+    const total = document.querySelectorAll('.comp-card').length;
+
+    function filterComparisons() {
+      const query = compSearch.value.toLowerCase().trim();
+      const cat = compCategory.value;
+      const cards = Array.from(document.querySelectorAll('.comp-card'));
+      let visible = 0;
+
+      cards.forEach(card => {
+        const matchesSearch = !query ||
+          card.dataset.title.includes(query) ||
+          card.dataset.tools.includes(query);
+        const matchesCat = !cat || card.dataset.categories.split(',').includes(cat);
+        const show = matchesSearch && matchesCat;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      compCount.textContent = visible === total
+        ? `${total} comparisons`
+        : `Showing ${visible} of ${total} comparisons`;
+      compNoResults.classList.toggle('hidden', visible > 0);
+
+      const isFiltered = query || cat;
+      compReset.classList.toggle('hidden', !isFiltered);
+    }
+
+    compSearch.addEventListener('input', filterComparisons);
+    compCategory.addEventListener('change', filterComparisons);
+    compReset.addEventListener('click', () => {
+      compSearch.value = '';
+      compCategory.value = '';
+      filterComparisons();
     });
   </script>
 </BaseLayout>
