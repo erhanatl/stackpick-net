@@ -299,13 +299,15 @@ function estimateReadingTime(content: string): number {
 
   <!-- Confetti-dash particle effect — hero section only (Antigravity-style) -->
   <script>
-    (function initHeroParticles() {
+    // Must be a named function so astro:after-swap can re-trigger it
+    function initHeroParticles() {
       if ((window as any).__heroParticles) return;
-      (window as any).__heroParticles = true;
 
       const hero   = document.getElementById('hero-section') as HTMLElement;
       const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
-      if (!hero || !canvas) return;
+      if (!hero || !canvas) return; // not on homepage, skip silently
+
+      (window as any).__heroParticles = true;
       const ctx = canvas.getContext('2d')!;
 
       function resize() {
@@ -316,38 +318,33 @@ function estimateReadingTime(content: string): number {
       const ro = new ResizeObserver(resize);
       ro.observe(hero);
 
-      // Brand palette — violet, light-violet, cyan, white-ish
       const COLORS = [
-        'rgba(167,139,250,',  // violet-400
-        'rgba(139,92,246,',   // violet-500
-        'rgba(196,181,253,',  // violet-300
-        'rgba(6,182,212,',    // cyan-500
-        'rgba(103,232,249,',  // cyan-300
-        'rgba(255,255,255,',  // white
+        'rgba(167,139,250,',
+        'rgba(139,92,246,',
+        'rgba(196,181,253,',
+        'rgba(6,182,212,',
+        'rgba(103,232,249,',
+        'rgba(255,255,255,',
       ];
 
       interface Dash {
         x: number; y: number;
         vx: number; vy: number;
-        len: number;        // length of the dash
-        thick: number;      // stroke width
-        angle: number;      // current rotation (radians)
-        spin: number;       // rotation speed
-        alpha: number;
-        color: string;
+        len: number; thick: number;
+        angle: number; spin: number;
+        alpha: number; color: string;
       }
 
       const COUNT = 90;
       const dashes: Dash[] = [];
 
       function spawn(): Dash {
-        const W = canvas.width, H = canvas.height;
         return {
-          x:     Math.random() * W,
-          y:     Math.random() * H,
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
           vx:    (Math.random() - 0.5) * 0.6,
-          vy:    (Math.random() - 0.5) * 0.6,  // no downward bias
-          len:   (5 + Math.random() * 9),       // 2/3 of original size
+          vy:    (Math.random() - 0.5) * 0.6,
+          len:   2.5 + Math.random() * 4.5,   // half of previous size
           thick: 1.5 + Math.random() * 1.5,
           angle: Math.random() * Math.PI * 2,
           spin:  (Math.random() - 0.5) * 0.025,
@@ -355,13 +352,12 @@ function estimateReadingTime(content: string): number {
           color: COLORS[Math.floor(Math.random() * COLORS.length)],
         };
       }
+      for (let i = 0; i < COUNT; i++) dashes.push(spawn());
 
-      for (let i = 0; i < COUNT; i++) dashes.push(spawn(true));
-
-      // Mouse repulsion tracking
+      // Mouse repulsion
       let mx = -9999, my = -9999;
       const REPEL_RADIUS = 140;
-      const REPEL_FORCE  = 2.8;
+      const REPEL_FORCE  = 0.7;  // 1/4 of previous strength
 
       hero.addEventListener('mousemove', (e: MouseEvent) => {
         const r = hero.getBoundingClientRect();
@@ -374,37 +370,31 @@ function estimateReadingTime(content: string): number {
 
       function frame() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const H = canvas.height, W = canvas.width;
+        const W = canvas.width, H = canvas.height;
 
-        for (let i = 0; i < dashes.length; i++) {
-          const d = dashes[i];
-
-          // Mouse repulsion — push away from cursor
+        for (const d of dashes) {
+          // Repulsion
           const dx = d.x - mx, dy = d.y - my;
           const dist = Math.hypot(dx, dy);
           if (dist < REPEL_RADIUS && dist > 0) {
-            const force = (1 - dist / REPEL_RADIUS) * REPEL_FORCE;
-            d.vx += (dx / dist) * force;
-            d.vy += (dy / dist) * force;
+            const f = (1 - dist / REPEL_RADIUS) * REPEL_FORCE;
+            d.vx += (dx / dist) * f;
+            d.vy += (dy / dist) * f;
           }
 
-          d.x     += d.vx;
-          d.y     += d.vy;
-          d.angle += d.spin;
-
-          // Gentle random drift, damping
+          // Drift + damping
           d.vx += (Math.random() - 0.5) * 0.04;
           d.vy += (Math.random() - 0.5) * 0.04;
           d.vx *= 0.97;
           d.vy *= 0.97;
 
-          // Wrap all edges
-          if (d.x < -20) d.x = W + 20;
-          else if (d.x > W + 20) d.x = -20;
-          if (d.y < -20) d.y = H + 20;
-          else if (d.y > H + 20) d.y = -20;
+          d.x += d.vx; d.y += d.vy; d.angle += d.spin;
 
-          // Draw dash
+          // Wrap edges
+          if (d.x < -20) d.x = W + 20; else if (d.x > W + 20) d.x = -20;
+          if (d.y < -20) d.y = H + 20; else if (d.y > H + 20) d.y = -20;
+
+          // Draw
           ctx.save();
           ctx.translate(d.x, d.y);
           ctx.rotate(d.angle);
@@ -420,14 +410,18 @@ function estimateReadingTime(content: string): number {
 
         rafId = requestAnimationFrame(frame);
       }
-
       rafId = requestAnimationFrame(frame);
 
+      // Cleanup on navigation away — reset guard so re-init works on return
       document.addEventListener('astro:before-preparation', () => {
         cancelAnimationFrame(rafId);
         ro.disconnect();
         (window as any).__heroParticles = false;
       }, { once: true });
-    })();
+    }
+
+    // Run on first load and after every View Transitions swap
+    initHeroParticles();
+    document.addEventListener('astro:after-swap', initHeroParticles);
   </script>
 </BaseLayout>
