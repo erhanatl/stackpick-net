@@ -38,6 +38,22 @@ const categoryColors: Record<string, string> = {
   'AIOps': 'bg-amber-100 text-amber-800',
 };
 
+const pricingColors: Record<string, { bg: string; border: string; text: string; label: string }> = {
+  'Free':        { bg: 'bg-green-50',   border: 'border-green-200',  text: 'text-green-700',  label: 'Free' },
+  'Freemium':    { bg: 'bg-blue-50',    border: 'border-blue-200',   text: 'text-blue-700',   label: 'Free Tier Available' },
+  'Paid':        { bg: 'bg-orange-50',  border: 'border-orange-200', text: 'text-orange-700', label: 'Paid Only' },
+  'Enterprise':  { bg: 'bg-purple-50',  border: 'border-purple-200', text: 'text-purple-700', label: 'Enterprise' },
+  'Open Source': { bg: 'bg-emerald-50', border: 'border-emerald-200',text: 'text-emerald-700',label: 'Open Source' },
+};
+const pricingStyle = pricingColors[tool.pricing_model] || { bg: 'bg-gray-50', border: 'border-gray-200', text: 'text-gray-700', label: tool.pricing_model };
+
+const getDomain = (url: string | undefined) => {
+  if (!url) return null;
+  try { return new URL(url).hostname; } catch { return null; }
+};
+const toolDomain = getDomain(tool.website_url);
+const toolLogo = toolDomain ? `https://www.google.com/s2/favicons?domain=${toolDomain}&sz=64` : null;
+
 const allRelatedTools = tools.filter(t => t.category === tool.category && t.slug !== tool.slug && t.status === 'Published');
 const relatedTools = [...allRelatedTools].sort((a, b) => a.tool_name.localeCompare(b.tool_name)).slice(0, 4);
 const relatedComparisons = comparisons.filter(c => c.tools.includes(tool.slug));
@@ -101,11 +117,57 @@ const faqs = [
         <span class="text-text">{tool.tool_name}</span>
       </nav>
 
-      <!-- Header -->
-      <header class="mb-10">
-        <h1 class="text-4xl font-bold mb-2">{tool.tool_name}</h1>
-        <p class="text-lg text-text-muted">by {tool.vendor}</p>
-      </header>
+      <!-- Hero Card -->
+      <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-violet-50 border border-border rounded-2xl p-6 md:p-8 mb-8">
+        <!-- Decorative blobs -->
+        <div class="absolute -top-16 -right-16 w-56 h-56 bg-primary/5 rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-10 -left-10 w-36 h-36 bg-accent/5 rounded-full pointer-events-none"></div>
+
+        <div class="relative flex flex-col md:flex-row md:items-start gap-6">
+          <!-- Left: Logo + identity -->
+          <div class="flex items-start gap-4 flex-1 min-w-0">
+            {toolLogo ? (
+              <img src={toolLogo} alt={`${tool.tool_name} logo`} width="56" height="56"
+                class="rounded-xl shrink-0 shadow-sm border border-white" loading="lazy" />
+            ) : (
+              <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 shadow-sm">
+                <span class="text-2xl font-bold text-primary">{tool.tool_name.charAt(0)}</span>
+              </div>
+            )}
+            <div class="min-w-0">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[tool.category] || 'bg-gray-100 text-gray-700'}`}>
+                  {tool.category}
+                </span>
+                <span class={`text-xs font-semibold px-2.5 py-1 rounded-full border ${pricingStyle.bg} ${pricingStyle.border} ${pricingStyle.text}`}>
+                  {pricingStyle.label}
+                </span>
+              </div>
+              <h1 class="text-3xl md:text-4xl font-bold leading-tight">{tool.tool_name}</h1>
+              <p class="text-text-muted mt-1">by {tool.vendor}</p>
+            </div>
+          </div>
+
+          <!-- Right: Price + CTAs -->
+          <div class="shrink-0 md:text-right">
+            <p class="text-xs font-medium text-text-muted uppercase tracking-wider mb-1">Starting at</p>
+            <p class="text-3xl font-bold text-secondary">{tool.starting_price}</p>
+            <div class="flex md:flex-col gap-2 mt-3">
+              <a href={tool.affiliate_url || tool.website_url} target="_blank" rel="noopener noreferrer"
+                class="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-lg font-semibold transition-colors text-sm text-center flex-1 md:flex-none">
+                Visit Website
+              </a>
+              <a href={`/pricing/${tool.slug}/`}
+                class="bg-white hover:bg-gray-50 text-secondary border border-border px-5 py-2.5 rounded-lg font-semibold transition-colors text-sm text-center flex-1 md:flex-none">
+                View Pricing →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p class="relative mt-5 pt-5 border-t border-gray-100 text-gray-700 leading-relaxed">{tool.short_description}</p>
+      </div>
 
       <!-- Internal Link Bar -->
       <div class="flex flex-wrap gap-2 mb-8">
@@ -126,23 +188,6 @@ const faqs = [
         <a href={`/category/${categorySlug[tool.category]}/`} class="flex items-center gap-1.5 text-sm bg-white border border-border rounded-lg px-3 py-1.5 hover:border-primary hover:text-primary transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
           All {tool.category} Tools
-        </a>
-      </div>
-
-      <!-- Quick Info -->
-      <div class="grid grid-cols-3 gap-4 mb-10">
-        <div class="bg-surface rounded-lg p-4 text-center">
-          <p class="text-sm text-text-muted">Category</p>
-          <p class="font-semibold">{tool.category}</p>
-        </div>
-        <div class="bg-surface rounded-lg p-4 text-center">
-          <p class="text-sm text-text-muted">Pricing</p>
-          <p class="font-semibold">{tool.pricing_model}</p>
-        </div>
-        <a href={`/pricing/${tool.slug}/`} class="bg-surface rounded-lg p-4 text-center hover:shadow-md transition-shadow">
-          <p class="text-sm text-text-muted">Starting Price</p>
-          <p class="font-semibold">{tool.starting_price}</p>
-          <p class="text-xs text-primary mt-1">View pricing &rarr;</p>
         </a>
       </div>
 

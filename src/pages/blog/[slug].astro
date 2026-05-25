@@ -32,101 +32,272 @@ const publishedTools = tools.filter(t => t.status === 'Published');
 const allCategoryTools = publishedTools.filter(t => t.category === guide.category);
 const relatedTools = allCategoryTools.sort((a, b) => a.tool_name.localeCompare(b.tool_name)).slice(0, 6);
 
-const typeBadge = guide.type === 'best-tools' ? 'Best Tools' : 'How to Choose';
+const typeBadge = guide.type === 'best-tools' ? 'Best Tools'
+  : guide.type === 'buyer-guide' ? 'Buyer Guide'
+  : 'How to Choose';
 const typeBadgeClass = guide.type === 'best-tools'
-  ? 'bg-primary/10 text-primary'
-  : 'bg-accent/10 text-secondary';
+  ? 'bg-violet-100 text-violet-700'
+  : guide.type === 'buyer-guide'
+    ? 'bg-orange-100 text-orange-700'
+    : 'bg-cyan-100 text-cyan-700';
+
+// Extract ToC headings from raw markdown (h2 and h3 only)
+const tocHeadings: { level: number; text: string; id: string }[] = [];
+for (const line of guide.content.split('\n')) {
+  const match = line.match(/^(#{2,3})\s+(.+)$/);
+  if (match) {
+    const level = match[1].length;
+    const rawText = match[2].trim()
+      .replace(/\*\*(.+?)\*\*/g, '$1')
+      .replace(/\*(.+?)\*/g, '$1')
+      .replace(/`(.+?)`/g, '$1')
+      .replace(/\[(.+?)\]\(.+?\)/g, '$1');
+    const id = rawText
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    tocHeadings.push({ level, text: rawText, id });
+  }
+}
+
+// Render markdown and inject heading IDs (sequential match — same order as tocHeadings)
+let tocIdx = 0;
+const renderedContent = (marked(guide.content) as string).replace(/<h([23])>/g, (_match, lvl) => {
+  const id = tocHeadings[tocIdx]?.id ?? '';
+  tocIdx++;
+  return `<h${lvl} id="${id}">`;
+});
+
+// Share URLs
+const pageUrl = `${siteUrl}/blog/${guide.slug}/`;
+const xShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(guide.title)}`;
 ---
 
 <BaseLayout
   title={guide.title}
   description={guide.description}
 >
-  <article class="py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <article class="py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
       <!-- Breadcrumb -->
-      <nav class="text-sm text-text-muted mb-8">
+      <nav class="text-sm text-text-muted mb-6">
         <a href="/" class="hover:text-primary">Home</a>
         <span class="mx-2">/</span>
         <a href="/blog/" class="hover:text-primary">Blog</a>
         <span class="mx-2">/</span>
-        <span class="text-text">{guide.title}</span>
+        <span class="text-text line-clamp-1">{guide.title}</span>
       </nav>
 
-      <!-- Header -->
-      <header class="mb-10">
-        <div class="flex items-center gap-3 mb-4">
-          <span class={`text-xs font-medium px-2.5 py-1 rounded-full ${typeBadgeClass}`}>{typeBadge}</span>
-          <span class="text-xs font-medium bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">{guide.category}</span>
-        </div>
-        <h1 class="text-4xl font-bold mb-4">{guide.title}</h1>
-        <p class="text-lg text-text-muted mb-4">{guide.description}</p>
-        <div class="flex items-center gap-4 text-sm text-text-muted">
-          <span>{new Date(guide.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-          <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
-          <span>{readingTime} min read</span>
+      <!-- Gradient Hero Header -->
+      <header class="relative overflow-hidden bg-gradient-to-br from-violet-50 via-white to-cyan-50 border border-violet-100 rounded-2xl p-7 md:p-10 mb-10">
+        <div class="absolute -top-12 -right-12 w-48 h-48 bg-violet-200/20 rounded-full pointer-events-none"></div>
+        <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-cyan-200/20 rounded-full pointer-events-none"></div>
+        <div class="relative">
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class={`text-xs font-semibold px-3 py-1 rounded-full ${typeBadgeClass}`}>{typeBadge}</span>
+            <span class="text-xs font-medium bg-white border border-gray-200 text-gray-600 px-3 py-1 rounded-full">{guide.category}</span>
+          </div>
+
+          <!-- Title -->
+          <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4">{guide.title}</h1>
+
+          <!-- Description -->
+          <p class="text-lg text-text-muted mb-6 max-w-2xl">{guide.description}</p>
+
+          <!-- Meta row -->
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              {new Date(guide.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
+            <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              {readingTime} min read
+            </span>
+            <!-- Share buttons -->
+            <div class="flex items-center gap-2 sm:ml-auto">
+              <a href={xShareUrl} target="_blank" rel="noopener noreferrer"
+                class="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 bg-white border border-gray-200 rounded-lg hover:border-primary hover:text-primary transition-colors">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                Share
+              </a>
+              <button id="copy-link-btn"
+                class="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 bg-white border border-gray-200 rounded-lg hover:border-primary hover:text-primary transition-colors cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                Copy link
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
-      <!-- Content -->
-      <section class="prose prose-lg max-w-none mb-12" set:html={marked(guide.content)} />
+      <!-- Content + ToC sidebar -->
+      <div class="lg:grid lg:grid-cols-[1fr_220px] lg:gap-12 lg:items-start">
 
-      <!-- Related Tools -->
-      {relatedTools.length > 0 && (
-        <section class="border-t border-border pt-10">
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold">{guide.category} Tools on Stackpick</h2>
-            {allCategoryTools.length > 6 && (
-              <a href={`/category/${categorySlug}/`} class="text-primary hover:text-primary-dark font-medium text-sm">
-                View all {allCategoryTools.length} tools &rarr;
-              </a>
-            )}
-          </div>
-          <div class="grid md:grid-cols-2 gap-4">
-            {relatedTools.map((tool) => (
-              <a href={`/tools/${tool.slug}/`} class="bg-white border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
-                <h4 class="font-semibold">{tool.tool_name}</h4>
-                <p class="text-sm text-text-muted mt-1">{tool.short_description}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
+        <!-- Main content -->
+        <div>
+          <section
+            class="prose prose-lg max-w-none mb-12
+              prose-headings:scroll-mt-8
+              prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-secondary
+              prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-3
+              prose-p:text-gray-700 prose-p:leading-relaxed
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-secondary
+              prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:text-secondary prose-code:before:content-none prose-code:after:content-none
+              prose-pre:bg-gray-900 prose-pre:text-gray-100
+              prose-blockquote:border-l-primary prose-blockquote:bg-violet-50 prose-blockquote:rounded-r-lg prose-blockquote:py-1
+              prose-table:text-sm prose-table:w-full
+              prose-thead:bg-secondary prose-th:text-white prose-th:font-semibold prose-th:p-3
+              prose-td:border prose-td:border-gray-200 prose-td:p-3
+              prose-tr:even:bg-gray-50
+              prose-li:text-gray-700"
+            set:html={renderedContent}
+          />
 
-      <!-- JSON-LD: Article -->
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": guide.title,
-        "description": guide.description,
-        "datePublished": guide.date,
-        "dateModified": guide.date,
-        "author": {
-          "@type": "Organization",
-          "name": "Stackpick",
-          "url": siteUrl
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Stackpick",
-          "url": siteUrl
-        },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": `${siteUrl}/blog/${guide.slug}/`
-        }
-      })} />
+          <!-- Related Tools -->
+          {relatedTools.length > 0 && (
+            <section class="border-t border-border pt-10">
+              <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold">{guide.category} Tools on Stackpick</h2>
+                {allCategoryTools.length > 6 && (
+                  <a href={`/category/${categorySlug}/`} class="text-primary hover:text-primary-dark font-medium text-sm">
+                    View all {allCategoryTools.length} →
+                  </a>
+                )}
+              </div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                {relatedTools.map((tool) => {
+                  const domain = tool.website_url ? (() => { try { return new URL(tool.website_url).hostname; } catch { return null; } })() : null;
+                  const logoUrl = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null;
+                  return (
+                    <a href={`/tools/${tool.slug}/`} class="flex items-start gap-3 bg-white border border-border rounded-xl p-4 hover:shadow-md hover:border-primary/30 transition-all group">
+                      {logoUrl ? (
+                        <img src={logoUrl} alt={`${tool.tool_name} logo`} width="32" height="32" class="rounded-md shrink-0 mt-0.5" loading="lazy" />
+                      ) : (
+                        <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <span class="text-sm font-bold text-gray-400">{tool.tool_name.charAt(0)}</span>
+                        </div>
+                      )}
+                      <div class="min-w-0">
+                        <h4 class="font-semibold group-hover:text-primary transition-colors text-sm">{tool.tool_name}</h4>
+                        <p class="text-xs text-text-muted mt-0.5 line-clamp-2">{tool.short_description}</p>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+        </div>
 
-      <!-- JSON-LD: Breadcrumb -->
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/` },
-          { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog/` },
-          { "@type": "ListItem", "position": 3, "name": guide.title }
-        ]
-      })} />
+        <!-- Sticky ToC sidebar (desktop only) -->
+        {tocHeadings.length > 2 && (
+          <aside class="hidden lg:block">
+            <div class="sticky top-8 bg-white border border-border rounded-xl p-5 shadow-sm">
+              <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-4">On this page</p>
+              <nav id="toc-nav">
+                <ul class="space-y-1.5">
+                  {tocHeadings.map((h) => (
+                    <li class={h.level === 3 ? 'pl-3' : ''}>
+                      <a
+                        href={`#${h.id}`}
+                        data-toc-id={h.id}
+                        class="toc-link block text-sm text-text-muted hover:text-primary transition-colors py-0.5 leading-snug"
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </aside>
+        )}
+      </div>
+
     </div>
   </article>
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": guide.title,
+    "description": guide.description,
+    "datePublished": guide.date,
+    "dateModified": guide.date,
+    "author": { "@type": "Organization", "name": "Stackpick", "url": siteUrl },
+    "publisher": { "@type": "Organization", "name": "Stackpick", "url": siteUrl },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/blog/${guide.slug}/` }
+  })} />
+
+  <!-- JSON-LD: Breadcrumb -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/` },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog/` },
+      { "@type": "ListItem", "position": 3, "name": guide.title }
+    ]
+  })} />
+
+  <script is:inline>
+    // Copy link button
+    const copyBtn = document.getElementById('copy-link-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          const orig = copyBtn.innerHTML;
+          copyBtn.textContent = '✓ Copied!';
+          copyBtn.classList.add('text-green-600', 'border-green-300');
+          setTimeout(() => {
+            copyBtn.innerHTML = orig;
+            copyBtn.classList.remove('text-green-600', 'border-green-300');
+          }, 2000);
+        } catch (e) {}
+      });
+    }
+
+    // Active ToC highlighting via IntersectionObserver
+    const tocLinks = document.querySelectorAll('.toc-link');
+    if (tocLinks.length > 0) {
+      const headingEls = Array.from(tocLinks).map(link => {
+        const id = link.getAttribute('data-toc-id');
+        return id ? document.getElementById(id) : null;
+      }).filter(Boolean);
+
+      let activeLink = null;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (activeLink) {
+              activeLink.classList.remove('text-primary', 'font-semibold');
+            }
+            const sel = `.toc-link[data-toc-id="${entry.target.id}"]`;
+            activeLink = document.querySelector(sel);
+            activeLink?.classList.add('text-primary', 'font-semibold');
+          }
+        });
+      }, { rootMargin: '-10% 0% -75% 0%', threshold: 0 });
+
+      headingEls.forEach(el => el && observer.observe(el));
+    }
+  </script>
 </BaseLayout>
