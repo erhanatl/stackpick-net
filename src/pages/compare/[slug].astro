@@ -48,7 +48,6 @@ const toolNames = comparedTools.map(t => t.tool_name).join(' vs ');
         cons: t.cons
       }))} />
 
-      <!-- AI Generated Content -->
       {comparison.content && (
         <section class="mt-12 prose prose-lg max-w-none" set:html={marked(comparison.content)} />
       )}
