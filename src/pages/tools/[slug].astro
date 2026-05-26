@@ -237,6 +237,28 @@ const faqs = [
         </div>
       </section>
 
+      <!-- Community Intel: Known Issues + Avoid If -->
+      {((tool as any).known_issues || (tool as any).avoid_if) && (
+        <section class="mb-10 rounded-xl border border-amber-200 bg-amber-50 p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            </svg>
+            <h2 class="text-lg font-bold text-amber-900">What Users Actually Complain About</h2>
+          </div>
+          {(tool as any).known_issues && (
+            <p class="text-amber-800 leading-relaxed mb-4">{(tool as any).known_issues}</p>
+          )}
+          {(tool as any).avoid_if && (
+            <div class="pt-4 border-t border-amber-200">
+              <p class="text-sm font-semibold text-amber-900 mb-1">Skip it if:</p>
+              <p class="text-amber-800 text-sm leading-relaxed">{(tool as any).avoid_if}</p>
+            </div>
+          )}
+          <p class="text-xs text-amber-600 mt-4">Based on community feedback from Reddit, HN, and G2 reviews.</p>
+        </section>
+      )}
+
       <!-- Also Compare Widget -->
       {alsoCompare.length > 0 && (
         <section class="mb-10">
