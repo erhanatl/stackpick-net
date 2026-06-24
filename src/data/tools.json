@@ -4758,16 +4758,16 @@
     "short_description": "Google's async AI coding agent built on Gemini 2.5 Pro.",
     "vendor": "Google",
     "pricing_model": "Freemium",
-    "starting_price": "Free tier available; paid plans for higher usage",
+    "starting_price": "Free tier (15 daily tasks, 3 concurrent); paid via Google AI Pro ($19.99/mo) and Ultra ($124.99/mo) for 5x/20x higher limits",
     "website_url": "https://jules.google",
     "affiliate_url": "",
     "pros": "Runs on Gemini 2.5 Pro with strong reasoning for complex multi-file tasks, Works asynchronously so you can assign tasks and return to results, Native GitHub integration — reads issues and opens PRs directly, Sandboxed Google Cloud environment for safe code execution, Multimodal output with test visualization support",
     "cons": "Still maturing — autonomous agent errors require manual review, Limited to GitHub (no GitLab or Bitbucket support at launch), Per-task credit model can get expensive for heavy usage, Less control over execution steps than interactive tools like Cursor",
     "status": "Published",
     "content": "## What Jules does\n\nJules is Google's bet on asynchronous AI coding agents. Unlike Cursor or Copilot, which work inline while you type, Jules takes a task, disappears, and comes back with a PR. You assign it a GitHub issue, it clones the repo into a sandboxed Google Cloud environment, writes the code, runs the tests, and opens a pull request for your review.\n\nIt went out of beta on August 7, 2025, and has since handled over 140,000 code improvements for public projects during the beta period alone.\n\n## How it works\n\nJules reads from GitHub Issues, understands the codebase using Gemini 2.5 Pro's long-context window, and operates entirely in the background. You don't need to stay in a chat window. Assign a task, do other work, review the result when it's ready.\n\nThis makes it useful for a different workflow than most AI coding tools: not inline suggestions, but delegated tasks. Bug fixes, documentation updates, test coverage, dependency upgrades — work you'd otherwise add to a backlog.\n\n## Who uses it\n\nTeams that want to offload predictable, well-scoped coding tasks. Solo developers handling backlog debt. Open-source maintainers who want help triaging and fixing reported issues. It's less suited for exploratory or architectural work where you need the back-and-forth of a conversation.\n\n## Pricing\n\nFree tier available for individual use. Paid plans use a credit model billed per task, making it cost-predictable for teams with consistent workloads.",
-    "known_issues": "Autonomous execution means Jules can make incorrect assumptions about intent. Always review the PR before merging, especially for complex tasks. Currently GitHub-only.",
+    "known_issues": "Autonomous execution means Jules can make incorrect assumptions about intent — always review the PR before merging. Currently GitHub-only. Paid plans are tied to Google AI subscriptions and, as of 2026, only available on individual @gmail.com accounts; Workspace/org upgrade paths are still rolling out.",
     "avoid_if": "You need real-time collaborative coding or your repos are on GitLab or Bitbucket. Jules works best for well-defined, isolated tasks — not open-ended architectural work.",
-    "last_updated": "2026-05-29"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "ScaleOps",
@@ -4785,7 +4785,7 @@
     "content": "## What ScaleOps does\n\nScaleOps manages Kubernetes resource allocation autonomously. Instead of engineering teams manually setting CPU and memory limits — or relying on Kubernetes' built-in VPA, which is notoriously slow to react — ScaleOps continuously adjusts allocations based on real workload behavior.\n\nThe result is that clusters stop wasting money on over-provisioned resources and stop falling over from under-provisioned ones. The platform handles this without anyone setting thresholds or writing rules.\n\n## Why it matters in 2026\n\nAs AI/ML workloads moved into production, GPU resource management became a separate headache. ScaleOps extended its optimization to cover GPU allocations — which are far more expensive to over-provision than CPU or memory. For teams running model inference or training in Kubernetes, this is a meaningful cost lever.\n\nThe company raised $130M in a Series C in March 2026, valuing it at over $800M. That's not a signal of hype — it reflects real enterprise traction from companies using it in production.\n\n## Who uses it\n\nEngineering teams running large Kubernetes clusters where resource waste is measurable in dollars per month. Organizations with AI/ML workloads in production where GPU costs are significant. Platform engineering teams who want less manual toil around capacity management.\n\n## Pricing\n\nEnterprise pricing via sales. Typically structured as a percentage of demonstrated cost savings, which aligns incentives between ScaleOps and the customer.",
     "known_issues": "No self-serve trial. Evaluating the tool requires a sales engagement, which adds friction for smaller teams.",
     "avoid_if": "Your infrastructure runs on bare metal or VMs rather than Kubernetes, or you're a small team where manual resource tuning is manageable.",
-    "last_updated": "2026-05-29"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "XBOW",
@@ -4794,16 +4794,16 @@
     "short_description": "Autonomous AI penetration testing platform that runs full web application pentests on demand.",
     "vendor": "XBOW",
     "pricing_model": "Paid",
-    "starting_price": "From $4,000 per pentest",
+    "starting_price": "Pentest On-Demand from $6,000 per test (self-serve, ~5 business days)",
     "website_url": "https://xbow.com",
     "affiliate_url": "",
     "pros": "Delivers pentest results in under 5 business days — no scoping calls or scheduling delays, Validates findings with actual PoC exploits rather than just theoretical vulnerabilities, Reports meet compliance requirements for SOC2, ISO 27001, and similar frameworks, Partnered with Vanta for direct integration into compliance workflows, Significantly cheaper than traditional pentests ($15K-50K) for comparable scope",
     "cons": "Per-pentest pricing adds up quickly for organizations needing frequent retests, Focused on web applications — not suitable for network, mobile, or hardware pentests, AI-driven testing may miss highly context-specific business logic vulnerabilities, Relatively new platform with shorter track record than established security firms",
     "status": "Published",
     "content": "## What XBOW does\n\nXBOW automates offensive security testing for web applications. Traditional penetration tests take weeks to schedule, weeks to execute, and cost between $15,000 and $50,000 for a mid-scope engagement. XBOW does the same work in under 5 business days, starting at $4,000.\n\nThe key difference from a vulnerability scanner is validation. XBOW agents don't just flag potential issues — they run actual proof-of-concept exploits in a safety-controlled environment to confirm exploitability before including anything in the report. What you get isn't a list of theoretical risks; it's a list of confirmed vulnerabilities with working exploit scripts and step-by-step remediation.\n\n## Compliance use case\n\nSOC2 Type II, ISO 27001, and several other frameworks require periodic penetration testing as a control. XBOW's reports are structured to satisfy these requirements, which is why Vanta integrated it directly into their compliance platform in August 2025. Startups going through their first SOC2 audit can now run a compliant pentest without hiring a security firm.\n\n## Who uses it\n\nStartups and mid-market companies that need regular pentests for compliance or customer requirements but don't have the budget or relationships for a traditional security firm. Security teams that want continuous attack surface validation rather than annual point-in-time tests.\n\n## Limitations\n\nXBOW covers web application attack surfaces. It doesn't replace network pentests, cloud configuration reviews, or mobile app assessments. For organizations with complex business logic or proprietary protocols, a human-led engagement may catch things XBOW misses.",
-    "known_issues": "AI agents may miss complex business logic flaws that require understanding of application-specific workflows. Scope is limited to web applications.",
-    "avoid_if": "You need network, mobile, or cloud infrastructure pentesting. XBOW is web application focused. Also not the right fit if your compliance framework requires a named human tester to sign the report.",
-    "last_updated": "2026-05-29"
+    "known_issues": "AI agents may miss complex business logic flaws that require understanding of application-specific workflows. Scope is limited to web applications. Pentest On-Demand launched November 2025; entry tier maps to roughly a 2-week manual pentest, higher tiers to ~4 weeks. Reports are designed to meet SOC 2 and ISO 27001 pentest requirements.",
+    "avoid_if": "You need network, mobile, or cloud infrastructure pentesting — XBOW is web application focused. Also reconsider if your compliance framework strictly requires a named human tester to sign the report (XBOW reports target SOC 2 / ISO 27001 requirements but the testing is autonomous).",
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Bytebase",
@@ -4812,16 +4812,16 @@
     "short_description": "Open-source database DevSecOps platform — often described as GitHub for databases.",
     "vendor": "Bytebase",
     "pricing_model": "Freemium",
-    "starting_price": "Free (self-hosted, up to 20 users); Pro $20/user/month",
+    "starting_price": "Free (self-hosted Community, up to 20 users); Pro from $20/user/month (cloud-only); self-hosted paid features require Enterprise",
     "website_url": "https://bytebase.com",
     "affiliate_url": "",
     "pros": "Only database CI/CD project in the CNCF Landscape, Supports 20+ databases including MySQL, PostgreSQL, MongoDB, SQL Server, Oracle, GitOps-native: database changes triggered by git commits like application code, Dynamic data masking protects sensitive data without changing underlying schema, Just-in-time database access with full audit trail for compliance",
     "cons": "Self-hosting requires operational overhead for smaller teams, 20-user limit on the free tier can be restrictive for larger engineering orgs, Less feature overlap with application security tools — covers a narrow but important niche, Learning curve for teams accustomed to running database changes manually",
     "status": "Published",
     "content": "## What Bytebase does\n\nMost DevSecOps tooling focuses on application code. Database changes — schema migrations, permission grants, data access — usually happen through a separate, less controlled process: someone connects to production and runs a SQL script, or changes go through a ticketing system disconnected from the deployment pipeline.\n\nBytebase brings database changes into the same review-and-approval workflow as code changes. Engineers open a \"database change request\" instead of a PR, it goes through SQL lint checks (100+ built-in rules), gets reviewed by a DBA or senior engineer, and merges via GitOps when approved.\n\n## Security controls\n\nBeyond change management, Bytebase handles the security controls that databases specifically need:\n\n- **Dynamic data masking**: Sensitive columns (PII, financial data) are masked in query results for users who don't have access, without changing the underlying data\n- **Just-in-time access**: Grant temporary database access that expires automatically, with a full audit log of what was accessed\n- **SQL review policies**: Block destructive operations (DROP TABLE without WHERE, DELETE without WHERE) from reaching production\n\n## Why it's in the CNCF\n\nBytebase is the only database DevOps project in the CNCF Landscape as of 2026 — which reflects how underserved this problem is. Most cloud-native tooling treats databases as a black box. Bytebase treats them as a first-class part of the deployment pipeline.\n\n## Pricing\n\nCommunity edition is free for self-hosted deployments with up to 20 users. Pro plan at $20/user/month adds SSO, advanced masking policies, and priority support. Enterprise pricing for larger deployments.",
-    "known_issues": "Self-hosted setup requires a dedicated instance. The 20-user free tier limit means growing teams will need to upgrade or self-manage licensing.",
+    "known_issues": "The Pro plan is now cloud-only — self-hosted deployments that need paid features require an Enterprise license (annual). The free self-hosted Community tier is capped at 20 users, so growing teams will need to upgrade. A 14-day Enterprise trial is available for self-hosted instances.",
     "avoid_if": "Your database changes are handled entirely by DBAs with no developer involvement, or you're on a fully managed database service where schema access is already tightly controlled.",
-    "last_updated": "2026-05-29"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Bugbot",
@@ -4830,16 +4830,16 @@
     "short_description": "Cursor's AI code review agent that runs 8 parallel review passes on every pull request, with randomized diff ordering to catch logic bugs that...",
     "vendor": "Cursor",
     "pricing_model": "Freemium",
-    "starting_price": "Included in Cursor plans; Pro from $20/month",
+    "starting_price": "Usage-based (avg ~$1.00-$1.50 per review run); Individuals bill from included Cursor usage, Teams from on-demand spend",
     "website_url": "https://cursor.com/bugbot",
     "affiliate_url": "",
     "pros": "8 parallel review passes with randomized diff order catches more bugs than sequential review, Fix in Cursor button reduces time from review comment to code fix, Reviews 2M+ PRs per month — one of the highest-volume AI code review tools, Supports .cursor repo files to encode team-specific review standards, No separate subscription required if team already uses Cursor",
     "cons": "Requires Cursor subscription — not available as a standalone tool, Less useful for teams on other editors like VS Code or JetBrains, Review quality varies for complex business logic or domain-specific code, Parallel passes may generate redundant comments on the same issue",
     "status": "Published",
     "content": "## What Bugbot does\n\nBugbot launched in July 2025 as Cursor's answer to the question: what if AI reviewed your PRs the way a thorough senior engineer would, not just the way a linter does?\n\nThe key design decision is running 8 parallel review passes on every PR, each with a randomized diff order. Most AI reviewers process a diff linearly — they see the early context, form assumptions, and those assumptions carry through the rest of the review. Randomizing the order means each pass builds context differently, which helps catch logic bugs that linear review consistently misses.\n\n## Fix in Cursor\n\nThe workflow integration is where Bugbot earns its keep. When Bugbot flags an issue, there's a \"Fix in Cursor\" button in the GitHub comment. Clicking it opens Cursor directly at the relevant line with the suggested fix pre-loaded. The round-trip from \"this review comment\" to \"code change in my editor\" takes seconds rather than minutes.\n\n## Scale\n\nBugbot reviews over 2 million PRs per month as of 2026 — making it one of the highest-volume AI code review tools available. Cursor acquired Graphite in December 2025 and integrated its code review workflows, which contributed significantly to adoption.\n\n## Team configuration\n\nTeams can add a `.cursor` file to their repo to encode team-specific standards: naming conventions, architectural patterns, things that matter to this codebase but wouldn't appear in a generic ruleset. Bugbot applies these on every review.\n\n## Pricing\n\nIncluded in Cursor plans. If your team already pays for Cursor Pro ($20/month), Bugbot is part of the package — no separate subscription.",
-    "known_issues": "Parallel passes can generate duplicate comments on the same issue from different angles. Teams sometimes find the volume of comments overwhelming without tuning the .cursor config.",
+    "known_issues": "Moved from $40/seat/month to usage-based billing for Individual and Team plans, rolling out at the next renewal after June 8, 2026 (avg ~$1.00-$1.50 per run). A June 2026 update made it ~3x faster, 22% cheaper, and ~10% better at finding bugs. Parallel passes can still generate duplicate comments; tune the .cursor config to manage volume. GitHub-only — no GitLab or Bitbucket support.",
     "avoid_if": "Your team doesn't use Cursor as a primary editor. Bugbot is tightly integrated with Cursor's ecosystem and isn't available as a standalone GitHub App for other editor workflows.",
-    "last_updated": "2026-05-29"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "NudgeBee",
@@ -4848,16 +4848,16 @@
     "short_description": "AI-SRE and AI-FinOps platform that triages alerts, correlates logs and metrics with recent deployments, and surfaces root cause with a suggested fix.",
     "vendor": "NudgeBee",
     "pricing_model": "Freemium",
-    "starting_price": "Free (self-hosted); Cloud from $150/month for 10 hosts",
+    "starting_price": "Free plan (2 clusters/20 nodes); Troubleshoot or FinOps $5/cluster/day; CloudOps $100/mo per 1,000 runs; full Platform $10/cluster/day",
     "website_url": "https://nudgebee.com",
     "affiliate_url": "",
     "pros": "Combines AIOps and FinOps in a single platform — fewer tools to maintain, Free self-hosted tier makes it accessible for cost-conscious teams, 500+ FinOps rules covering AWS, Azure, GCP, and Kubernetes, Generates rightsizing PRs automatically rather than just recommendations, Human approval required before fixes execute — keeps engineers in control",
     "cons": "Smaller ecosystem and community than established players like PagerDuty, Self-hosted tier requires operational overhead to manage and update, FinOps and AIOps combination may feel unfocused compared to best-of-breed tools, Limited integrations compared to mature incident management platforms",
     "status": "Published",
     "content": "## What NudgeBee does\n\nNudgeBee combines two functions that engineering teams usually handle with separate tools: incident response (AIOps) and cloud cost optimization (FinOps).\n\nOn the AIOps side, it ingests alerts from monitoring tools, correlates them with recent deployments and log data, and generates a root cause analysis with a suggested fix. Engineers review and approve before anything executes — the AI does the triage, the human makes the call.\n\nOn the FinOps side, it scans cloud infrastructure across AWS, Azure, GCP, and Kubernetes using 500+ rules scored by a FinOps Score. When it finds waste — oversized instances, unused resources, unoptimized storage — it generates a pull request with the specific configuration change, ready for review.\n\n## The combination matters\n\nMost teams treating these as separate problems end up with an incident management tool and a cloud cost tool that don't talk to each other. NudgeBee's position is that they're related: infrastructure waste often correlates with misconfigurations that also cause incidents. Having both views in one place speeds up root cause analysis.\n\n## Self-hosted option\n\nNudgeBee offers a free self-hosted tier, which is unusual for AIOps tools. For startups and mid-market teams that need the capabilities but can't commit to SaaS pricing, this is a meaningful option. Backed by Kalaari Capital.\n\n## Pricing\n\nSelf-hosted is free. Cloud-managed starts at $150/month for 10 hosts. Enterprise pricing available for larger deployments.",
-    "known_issues": "As a smaller vendor, NudgeBee has fewer pre-built integrations than established incident management platforms. Teams with complex multi-tool stacks may need custom webhook configuration.",
+    "known_issues": "Now has published per-cluster/day pricing (previously quote-only). As a smaller, seed-stage vendor it has fewer pre-built integrations than established incident-management platforms, so complex multi-tool stacks may need custom webhook configuration.",
     "avoid_if": "You need deep integrations with enterprise ITSM systems like ServiceNow or a mature on-call scheduling system. NudgeBee's strength is cost optimization + alert triage, not full incident lifecycle management.",
-    "last_updated": "2026-05-29"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "ControlMonkey",
@@ -4875,7 +4875,7 @@
     "content": "## Overview\n\nControlMonkey is an Infrastructure-as-Code automation and governance platform built around Terraform and OpenTofu. It manages the full delivery lifecycle, from CI/CD pipelines for infrastructure changes to drift detection and remediation, with a built-in policy engine that enforces guardrails across both code and live cloud accounts. In November 2025 the company expanded the platform to unify cloud and on-prem infrastructure automation under a single control plane.\n\n## KoMo AI\n\nThe headline feature is KoMo AI, a GenAI agent launched in September 2025 that targets the Infrastructure-as-Code skills gap. KoMo connects to your Git repositories and cloud accounts so it understands your modules, policies, and real infrastructure state. It can generate Terraform that is context-aware, policy-compliant, and secure by default, explain existing Terraform code in plain language, trace dependencies, and flag misconfigurations before they ship.\n\n## Pricing and Plans\n\nControlMonkey offers a free resilience assessment as an entry point, which provides read-only discovery, drift detection, and a disaster-recovery readiness report. Paid Pro and Enterprise tiers are priced on the number of stacks (state files) rather than resources under management, and require contacting sales for a quote. KoMo AI is included for all customers at no extra cost.\n\n## Who It's For\n\nThe platform fits platform engineering and DevOps teams that already standardize on Terraform or OpenTofu and want managed automation, governance, and an AI copilot in one place. It is especially useful for teams trying to scale IaC adoption beyond a small group of specialists.",
     "known_issues": "Pricing transparency is limited for the paid tiers, with Pro and Enterprise both requiring a sales conversation. The per-stack pricing model can make costs harder to forecast for organizations with many state files. As a newer entrant, it has a smaller community and integration ecosystem than long-established tools like HashiCorp's Terraform Cloud.",
     "avoid_if": "You want fully self-serve, published pricing with no sales call, or you are a very small team that just needs basic Terraform runs and does not need governance, drift remediation, or an AI copilot. Teams deeply invested in a competing managed IaC platform may not see enough to justify switching.",
-    "last_updated": "2026-06-19"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Intruder AI Pentesting",
@@ -4893,13 +4893,13 @@
     "content": "## Overview\n\nIntruder is a London-based cybersecurity company, a graduate of GCHQ's Cyber Accelerator, that provides continuous attack surface management and vulnerability scanning. In April 2026 it launched AI pentesting agents that bring autonomous, pentester-style investigation to its platform, aiming to deliver the depth of a penetration test on demand.\n\n## AI Pentesting Agents\n\nIn this initial release, the agents actively investigate vulnerability findings surfaced by Intruder's scanner using the same methods a human pen tester or security expert would apply, confirming whether issues are genuinely exploitable rather than leaving teams with a raw list of potential vulnerabilities. The platform unifies attack surface management, vulnerability scanning, and AI-driven investigation in a single interface, with full web application pentesting expected to follow over the subsequent quarter.\n\n## Pricing and Plans\n\nIntruder sells four subscription tiers: Essential from $149 per month, Cloud from $299 per month, Pro from $499 per month, and Enterprise with custom pricing. The AI pentesting agents are available on the Cloud, Pro, and Enterprise plans. The company explicitly targets the midmarket, organizations large enough to face serious cyber risk but too small to fund the roughly $50,000 manual pentests and dedicated security teams that enterprises rely on.\n\n## Who It's For\n\nIntruder AI Pentesting is a good fit for midmarket and cloud-native teams that need continuous, validated security coverage without a large in-house security function. It is best treated as a force multiplier for triage and validation rather than a full substitute for periodic expert-led manual penetration testing on the most sensitive systems.",
     "known_issues": "The AI pentesting capability is not available on the entry-level Essential plan, so the lowest-cost tier does not include it. At launch, full web application pentesting was still being rolled out, so coverage is narrower than the eventual roadmap. Like all AI-driven testing, it should complement rather than fully replace deep manual pentests for high-risk assets.",
     "avoid_if": "You need a formal, human-led penetration test for compliance attestation that explicitly requires a named human tester, or you only want the cheapest scanning tier without the AI agents. Very large enterprises with mature internal red teams may find it overlaps with existing capabilities.",
-    "last_updated": "2026-06-19"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "formae",
     "slug": "formae",
     "category": "IaC",
-    "short_description": "An open-source Infrastructure-as-Code platform that treats live infrastructure reality, not separate state files, as the source of truth, automatically...",
+    "short_description": "An open-source Infrastructure-as-Code platform that treats live infrastructure reality, not separate state files, as the source of truth, automatically discovering and codifying existing resources. Multi-cloud since early 2026.",
     "vendor": "Platform Engineering Labs",
     "pricing_model": "Open Source",
     "starting_price": "Free (open source, Functional Source License)",
@@ -4909,9 +4909,9 @@
     "cons": "Uses Apple's PKL configuration language instead of familiar HCL, Very new with a small community and ecosystem, Competing against mature, entrenched tools, Functional Source License is not a standard OSI-approved license",
     "status": "Published",
     "content": "## Overview\n\nformae is an open-source Infrastructure-as-Code platform from New York-based Platform Engineering Labs, announced on October 22, 2025. It is positioned as a rethink of the IaC model pioneered by Terraform, with the central idea that the live state of your infrastructure, rather than a separate state file, should be the source of truth.\n\n## How It Works\n\nformae operates in two modes: a reconcile mode that aligns your desired environment with production reality, and a patch mode that applies incremental changes. It automatically discovers and maps running resources across a cloud estate, regardless of whether they were created by Terraform, OpenTofu, Pulumi, manual console operations, or legacy scripts. Its agent-based architecture decouples state management from clients, and configuration is written in PKL, the configuration language originally developed by Apple.\n\n## Open Source and Licensing\n\nThe project is published under a Functional Source License and is available on GitHub, with community discussion happening on Discord. That makes it free to adopt, though the Functional Source License is a source-available license rather than a standard OSI-approved open-source license, which some teams will want to evaluate before committing.\n\n## Who It's For\n\nformae appeals to platform engineers frustrated by state-file drift and by infrastructure that was created outside of code. Its automatic discovery is the standout differentiator. The main trade-offs are maturity and the choice of PKL over HCL, so it is best suited to teams willing to bet on a new approach rather than those who need the deep community support and ecosystem of established tools.",
-    "known_issues": "Adoption requires learning PKL instead of HashiCorp Configuration Language, which some practitioners view as a barrier. As a tool launched in late 2025, it has a small community, limited third-party integrations, and a short production track record. It also enters a crowded space dominated by mature tools with large ecosystems.",
+    "known_issues": "Adoption requires learning PKL instead of HashiCorp Configuration Language, which some practitioners view as a barrier. Multi-cloud support (GCP, Azure, OCI, OVHcloud) was added in beta on January 28, 2026, expanding beyond the initial AWS-only launch (October 2025) — non-AWS providers are still beta. As a recently launched tool it has a small community, limited third-party integrations, and a short production track record.",
     "avoid_if": "You need a battle-tested tool with a large community, extensive provider ecosystem, and long production history, or your team is unwilling to adopt PKL over HCL. Organizations that require a strictly OSI-approved open-source license should review the Functional Source License terms first.",
-    "last_updated": "2026-06-19"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Macroscope",
@@ -4919,35 +4919,35 @@
     "category": "AI Code Review",
     "short_description": "AI code review and codebase intelligence platform that uses AST analysis and LLMs to detect bugs in PRs, auto-generate PR summaries, and answer natural...",
     "vendor": "Macroscope",
-    "pricing_model": "Paid",
-    "starting_price": "$30/developer/month (minimum 5 seats)",
+    "pricing_model": "Usage-based",
+    "starting_price": "Usage-based: $0.05/KB reviewed (no seats), ~$0.95 per review on average; $100 free usage for new workspaces",
     "website_url": "https://macroscope.com",
     "affiliate_url": "",
     "pros": "Claims 48% bug detection rate — among the highest for AI code review tools, Combines engineering insights with product-level visibility into dev activity, AST-based analysis provides deeper code understanding than text-only approaches, Auto-generated PR summaries save review time for larger diffs, Founded by high-profile team with deep ML credentials",
     "cons": "Minimum 5-seat requirement limits solo developers and very small teams, $30/developer/month is on the expensive side for early-stage teams, Newer platform with shorter track record than established competitors, Product manager features may feel unnecessary for pure engineering teams",
     "status": "Published",
     "content": "## What Macroscope does\n\nMacroscope is an AI code review tool built by Kayvon Beykpour (co-founder of Periscope, former Twitter VP) and the team behind Magic Pony AI. It integrates with GitHub and uses a combination of AST walking and large language models to analyze pull requests and codebases.\n\nThe core review feature flags bugs in PRs with explanations and suggested fixes. But Macroscope extends beyond code review into codebase intelligence: it can answer natural language questions about development activity (\"what changed in the auth module this month?\"), generate PR summaries automatically, and track how the codebase evolves over time.\n\n## Bug detection\n\nMacroscope claims a 48% bug detection rate, which is notably higher than most AI code review tools that cluster around 20-35%. The AST-based approach — parsing code into its abstract syntax tree before applying LLMs — gives it more structural context than tools that treat code as plain text.\n\n## Who uses it\n\nEngineering teams that want both code review automation and visibility into how their codebase is evolving. The product manager-facing features (natural language queries about dev activity) make it useful beyond just the engineering team, which is a different angle than most code review tools.\n\n## Pricing\n\n$30 per active developer per month with a minimum of 5 seats. Enterprise pricing available for larger organizations.",
-    "known_issues": "Newer platform — less community feedback and integrations than more established tools. Some teams find the product management features unnecessary overhead.",
-    "avoid_if": "You're a solo developer or team of fewer than 5. The minimum seat requirement and per-developer pricing make it expensive for small setups.",
-    "last_updated": "2026-06-20"
+    "known_issues": "Switched from $30/developer/month seats to usage-based pricing — new customers since March 27, 2026 and all existing customers migrated April 27, 2026. Default caps are $10/review and $50/PR (adjustable). Agent usage bills at $0.01/credit with 1,000 free credits/month. Newer platform with less community feedback than established tools.",
+    "avoid_if": "You prefer predictable flat per-seat pricing — Macroscope is now purely usage-based, so costs scale with how much code you review. Very high-volume monorepo reviews can hit the default per-PR caps without tuning.",
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Amp",
     "slug": "amp-sourcegraph",
     "category": "Code Assistant",
-    "short_description": "Agentic coding tool from Sourcegraph, built to replace Cody with a more autonomous approach to multi-file tasks.",
+    "short_description": "Agentic coding tool from Sourcegraph (VS Code extension + CLI) that replaced the now-retired Cody, with a more autonomous approach to multi-file tasks.",
     "vendor": "Sourcegraph",
     "pricing_model": "Freemium",
-    "starting_price": "Free (individual); Team and Enterprise plans available",
+    "starting_price": "Free for individuals (testing an ad-supported model); Enterprise/Custom plans available",
     "website_url": "https://sourcegraph.com/amp",
     "affiliate_url": "",
     "pros": "Built on Sourcegraph's decade of code search and intelligence infrastructure, Handles large codebases better than most tools due to deep code indexing, Team plan enables shared thread history and prompt libraries across the organization, Supports multiple frontier models for flexibility, Free forever individual tier with no time limit",
     "cons": "Sourcegraph Cody (predecessor) is being wound down, causing some user confusion, Less polished UI than Cursor or Copilot for day-to-day inline editing, Credit-based usage on paid plans can be unpredictable for heavy users, Smaller community and fewer integrations than market leaders",
     "status": "Published",
     "content": "## What Amp does\n\nAmp is Sourcegraph's agentic coding tool, launched after the company wound down free Cody plans in July 2025. It's built on top of Sourcegraph's core capability: deep code search and understanding across entire repositories, including large enterprise codebases with millions of lines of code.\n\nWhere Cody focused on chat-based code assistance, Amp emphasizes autonomous multi-file tasks. Give it a goal, and it navigates the codebase, makes the necessary changes across files, and explains what it did.\n\n## The Sourcegraph advantage\n\nSourcegraph has been building code intelligence since 2013. That means Amp starts with a foundation of accurate, fast code search that most newer AI coding tools don't have. For tasks that require understanding how a function is used across 50 files, or tracing a data flow through multiple services, this depth of indexing makes a measurable difference.\n\n## Team features\n\nThe Team plan adds shared thread history — so your entire team can see and learn from past Amp sessions — and a shared prompt library for encoding team-specific patterns and standards. For organizations trying to standardize how AI coding is used, this is more structured than most tools offer.\n\n## Pricing\n\nFree forever for individual developers. Team and Enterprise plans use a credit-based model. Pricing details require contacting Sourcegraph.",
-    "known_issues": "Users transitioning from Cody may experience a learning curve. The credit-based model on paid plans can make monthly costs harder to predict.",
+    "known_issues": "Cody Free and Pro were fully shut down in July 2025; Amp is the replacement (affected Cody users received $40 in Amp credits). Amp is currently free for individuals while Sourcegraph tests an ad-supported model, so the monetization approach may still change. CLI/extension-focused rather than a polished standalone GUI.",
     "avoid_if": "You want a polished, GUI-first experience like Cursor. Amp is more CLI and extension-focused, which suits developers who prefer working in their existing editor without switching contexts.",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Kloudfuse",
@@ -4956,16 +4956,16 @@
     "short_description": "Unified observability platform built on Apache Pinot and Kafka with AI/ML anomaly detection and forecasting.",
     "vendor": "Kloudfuse",
     "pricing_model": "Enterprise",
-    "starting_price": "Contact for pricing (claims 60-80% cost savings vs incumbents)",
+    "starting_price": "Contact for pricing; fixed bucket tiers (S/M/L/XL/XXL) that scale with compute/storage (claims 60-80% cost savings vs incumbents)",
     "website_url": "https://kloudfuse.com",
     "affiliate_url": "",
     "pros": "Self-SaaS model keeps data in your own cloud — no data leaves your environment, FIPS 140-2/3 validated for regulated industries and government workloads, Built on open standards (Apache Pinot, Kafka, OpenTelemetry) — no proprietary lock-in, AI/ML anomaly detection with forecasting built in, Gartner Honorable Mention 2025 provides third-party validation",
     "cons": "Enterprise-only pricing with no self-serve or free tier, Smaller ecosystem and community than Datadog, New Relic, or Dynatrace, Primarily targets larger organizations — less accessible for startups, Self-SaaS model requires your own cloud infrastructure to run it",
     "status": "Published",
     "content": "## What Kloudfuse does\n\nKloudfuse is a unified observability platform — metrics, logs, traces — built on Apache Pinot and Apache Kafka. Its defining characteristic is the deployment model: self-SaaS. Instead of sending your observability data to a vendor's cloud, you run Kloudfuse in your own AWS, GCP, or Azure account. The vendor manages the software; you own the data.\n\nThis matters for organizations with data residency requirements, regulated industries, or simply teams that are uncomfortable with how much operational data leaves their environment with traditional SaaS observability tools.\n\n## AI and ML capabilities\n\nKloudfuse version 3.5 (December 2025) added an AI observability module for monitoring AI workloads — tracking model performance, inference latency, and drift alongside traditional infrastructure metrics. The platform includes ML-based anomaly detection and forecasting, which surfaces issues before they become incidents.\n\n## Compliance\n\nKloudfuse holds FIPS 140-2 and FIPS 140-3 validation, making it one of the few observability platforms that can be deployed in government and defense environments. Customers include Zscaler, GE Healthcare, and Automation Anywhere.\n\n## Pricing\n\nEnterprise pricing via sales. Kloudfuse claims 60-80% cost savings compared to Datadog or New Relic at equivalent scale, primarily because the self-SaaS model avoids per-GB data ingestion charges.",
-    "known_issues": "No free tier or self-serve trial. Evaluation requires a sales engagement. The self-SaaS model adds operational overhead compared to fully managed alternatives.",
+    "known_issues": "Pricing is now published as fixed S-XXL buckets rather than purely usage-metered, but there is still no free tier or self-serve trial — evaluation requires a sales engagement. The self-managed/self-SaaS model (runs inside your own Kubernetes on AWS/GCP/Azure or self-hosted) adds operational overhead compared to fully managed alternatives.",
     "avoid_if": "You're a startup or small team that needs to get started quickly without sales calls. Kloudfuse is built for enterprises with specific data residency or compliance requirements.",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Datadog Bits AI",
@@ -4974,7 +4974,7 @@
     "short_description": "Datadog's autonomous AIOps module that triages alerts, performs root cause analysis, writes remediation code, and automates incident post-mortems.",
     "vendor": "Datadog",
     "pricing_model": "Paid",
-    "starting_price": "$25-30 per investigation (consumption-based)",
+    "starting_price": "Consumption-based: from $500/mo per 20 investigations (annual) / $600 monthly — roughly $25-30 per investigation",
     "website_url": "https://www.datadoghq.com/product/ai/bits-ai-agents",
     "affiliate_url": "",
     "pros": "Natively embedded in Datadog — no separate tool or integration required, Correlates alerts with the full Datadog observability context (metrics, logs, traces), Autonomous root cause analysis with suggested remediation code, Connects DevSecOps teams through a shared Security Command Center, No new learning curve for existing Datadog users",
@@ -4983,7 +4983,7 @@
     "content": "## What Datadog Bits AI does\n\nBits AI is Datadog's AIOps layer, announced at DASH 2025 and generally available since December 2025. It sits on top of Datadog's existing observability stack and adds autonomous investigation capabilities: when an alert fires, Bits AI triages it, correlates it with relevant metrics and logs, identifies the probable root cause, and suggests a fix — sometimes writing the remediation code directly.\n\nFor teams already running Datadog, this is meaningfully different from a standalone AIOps tool. Bits AI has access to the full observability context that Datadog already collects: APM traces, infrastructure metrics, log patterns, deployment history. That context is what makes root cause analysis accurate.\n\n## Incident post-mortems\n\nBits AI automates the post-mortem process. After an incident resolves, it generates a timeline, identifies contributing factors, and drafts the post-mortem document. For teams running many services, this saves hours of manual work per incident.\n\n## Pricing\n\nConsumption-based at $25-30 per investigation. An investigation is triggered when Bits AI autonomously analyzes an alert or incident. Teams with 20 investigations per month should budget roughly $500/month on top of their existing Datadog spend.\n\n## Important note\n\nThis is a distinct product from Datadog's standard monitoring capabilities (listed separately on Stackpick as Datadog AI). Bits AI specifically covers the autonomous AIOps use case.",
     "known_issues": "Only available as part of a Datadog subscription — no standalone purchase. Per-investigation pricing can be hard to predict in environments with variable incident rates.",
     "avoid_if": "You don't already use Datadog. Bits AI has no value outside the Datadog ecosystem. If you're evaluating AIOps tools independently, look at standalone options instead.",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "Revyl",
@@ -5001,7 +5001,7 @@
     "content": "## What Revyl does\n\nRevyl is an agentic E2E testing platform that runs tests the way a human tester would — by understanding what the application is trying to do, not just where buttons are on the screen. When the UI changes, Revyl's tests adapt without breaking, which eliminates the biggest source of maintenance overhead in traditional test automation.\n\nThe platform covers both web and mobile applications, which is less common than tools that specialize in one or the other.\n\n## The team\n\nRevyl's CTO previously built an LLM-based testing framework at Uber that the company credits with saving $25M in four months by catching regressions earlier. That experience shapes how Revyl approaches the problem: testing as a continuous, intelligent layer rather than a brittle script that needs constant babysitting.\n\nRevyl was backed by Y Combinator in the F24 batch and raised $1.5M CAD in seed funding.\n\n## Revyl Bot\n\nIn August 2025, Revyl added Revyl Bot — a code review integration that surfaces relevant tests at PR review time. When a developer opens a PR, Revyl Bot identifies which tests are relevant to the changes and surfaces them in the review, making it easier to catch regressions before merge.\n\n## Pricing\n\nFreemium model with a free tier for smaller teams. Detailed pricing requires contacting the team directly.",
     "known_issues": "As an early-stage product, some enterprise features and integrations are still being built. Pricing transparency is limited.",
     "avoid_if": "You need a mature, enterprise-grade platform with an established support network and deep integration catalog. Revyl is best for teams willing to work with an early-stage product in exchange for a more intelligent testing approach.",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-06-24"
   },
   {
     "tool_name": "FinalRun",
@@ -5010,15 +5010,15 @@
     "short_description": "AI testing platform where tests are written as plain-English YAML files that live alongside code in the repo.",
     "vendor": "FinalRun",
     "pricing_model": "Freemium",
-    "starting_price": "Free tier for individuals; team plans available",
+    "starting_price": "Free / open-source CLI; bring-your-own AI provider API key (you pay your model provider directly for token usage)",
     "website_url": "https://finalrun.io",
     "affiliate_url": "",
     "pros": "Tests written in plain English YAML — no programming knowledge required to write tests, No selectors or XPath — AI vision finds elements by appearance and description, Tests live in the repo alongside code, treated as first-class artifacts, Works for web and mobile from a single test definition, Zero framework dependencies — no Selenium, Playwright, or Appium to configure",
     "cons": "AI vision-based execution is slower than selector-based test runners, Early-stage product with limited integrations and community resources, Free tier may have limitations on test volume or parallelization, Less suitable for performance testing or highly complex assertion chains",
     "status": "Published",
     "content": "## What FinalRun does\n\nFinalRun takes a different approach to test automation: instead of writing code that clicks on specific CSS selectors, you describe what to test in plain English, saved as YAML files. The FinalRun CLI reads those files, uses AI vision to find the relevant UI elements by appearance and description, and executes the test.\n\nThe result is that non-engineers can write tests, tests don't break when CSS classes change, and the entire test suite reads like documentation rather than code.\n\n## How tests look\n\nA FinalRun test file describes user flows in natural language:\n```yaml\ntest: User login flow\nsteps:\n  - Go to the login page\n  - Enter email 'test@example.com' in the email field\n  - Enter the password\n  - Click the Sign In button\n  - Verify the dashboard is shown\n```\n\nThe CLI handles the rest — launching a browser or device, finding elements visually, executing the steps, and reporting results.\n\n## Why it matters\n\nThe biggest problem with traditional test automation isn't writing the first test — it's maintaining tests as the application changes. Selector-based tests break every time a developer renames a CSS class or restructures the DOM. FinalRun's AI vision approach makes tests resilient to these changes by design.\n\n## Pricing\n\nFree tier for individual developers. Team plans available with higher test volume and parallel execution.",
-    "known_issues": "AI vision execution is inherently slower than direct selector-based testing. For large test suites requiring fast feedback, this can be a bottleneck.",
+    "known_issues": "FinalRun is an open-source, BYO-API-key tool — you supply your own vision-capable model key (Gemini, OpenAI, Claude, etc.) and pay standard API billing rather than a platform subscription. AI vision execution is inherently slower than direct selector-based testing, which can bottleneck large suites needing fast feedback.",
     "avoid_if": "You need high-speed test execution for a large suite or complex performance testing. FinalRun's AI vision approach trades speed for resilience and simplicity.",
-    "last_updated": "2026-06-20"
+    "last_updated": "2026-06-24"
   }
 ]
