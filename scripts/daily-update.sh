@@ -37,10 +37,28 @@ STATUS=$?
 
 AFTER=$(git rev-parse HEAD)
 
+# A failure here is silent by nature — nobody is watching at 09:30. The first
+# outage ran for 11 days before anyone noticed, so surface it instead.
+STREAK_FILE="$LOG_DIR/.fail-streak"
+notify() {
+  osascript -e "display notification \"$1\" with title \"Stackpick daily update\"" >/dev/null 2>&1 || true
+}
+
+if [ $STATUS -ne 0 ] || [ "$BEFORE" = "$AFTER" ]; then
+  STREAK=$(( $(cat "$STREAK_FILE" 2>/dev/null || echo 0) + 1 ))
+  echo "$STREAK" >"$STREAK_FILE"
+else
+  STREAK=0
+  rm -f "$STREAK_FILE"
+fi
+
 if [ $STATUS -ne 0 ]; then
-  say "update-check.sh exited $STATUS"
+  say "FAILED: update-check.sh exited $STATUS (consecutive: $STREAK)"
+  notify "Failed $STREAK day(s) in a row — see logs/daily-update.log"
 elif [ "$BEFORE" = "$AFTER" ]; then
-  say "finished — no commit created (nothing changed, or the run stopped early)"
+  say "no commit created — nothing changed, or the run stopped early (consecutive: $STREAK)"
+  # One quiet day is normal; several in a row means it is not really working.
+  [ "$STREAK" -ge 3 ] && notify "No update committed for $STREAK days — see logs/daily-update.log"
 else
   say "finished — committed $(git log --oneline -1 --format='%h %s')"
 fi
