@@ -16,6 +16,23 @@ say() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >>"$LOG"; }
 
 say "=== run start ==="
 
+# launchd starts with a bare environment and the CLI's interactive OAuth session
+# is not available to it, so the long-lived token from `claude setup-token` is
+# read from a 0600 file outside the repo — never from the working tree, so it
+# cannot be committed by accident.
+CRED_FILE="$HOME/.config/stackpick/credentials"
+if [ -r "$CRED_FILE" ]; then
+  # shellcheck source=/dev/null
+  . "$CRED_FILE"
+  export CLAUDE_CODE_OAUTH_TOKEN
+fi
+
+if [ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
+  say "ABORT: no CLAUDE_CODE_OAUTH_TOKEN — run 'claude setup-token' and put it in $CRED_FILE"
+  osascript -e 'display notification "Auth token missing — see logs/daily-update.log" with title "Stackpick daily update"' >/dev/null 2>&1 || true
+  exit 0
+fi
+
 # The Mac may be asleep or off the network when launchd fires.
 if ! curl -sf --max-time 10 -o /dev/null https://stackpick.net; then
   say "ABORT: no network (stackpick.net unreachable)"
