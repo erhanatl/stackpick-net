@@ -24,13 +24,19 @@ CRED_FILE="$HOME/.config/stackpick/credentials"
 if [ -r "$CRED_FILE" ]; then
   # shellcheck source=/dev/null
   . "$CRED_FILE"
-  export CLAUDE_CODE_OAUTH_TOKEN
 fi
 
-if [ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
-  say "ABORT: no CLAUDE_CODE_OAUTH_TOKEN — run 'claude setup-token' and put it in $CRED_FILE"
-  osascript -e 'display notification "Auth token missing — see logs/daily-update.log" with title "Stackpick daily update"' >/dev/null 2>&1 || true
-  exit 0
+# A token here is an override for unattended runs. When it is absent the CLI
+# falls back to its own signed-in session, which works as long as launchd can
+# reach the credential store — so an empty file is not a reason to refuse to
+# run. Exporting an empty value would shadow that session, so only export a
+# real one.
+if [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
+  export CLAUDE_CODE_OAUTH_TOKEN
+  say "using long-lived token from $CRED_FILE"
+else
+  unset CLAUDE_CODE_OAUTH_TOKEN 2>/dev/null || true
+  say "no token file — relying on the CLI's own session"
 fi
 
 # The Mac may be asleep or off the network when launchd fires.

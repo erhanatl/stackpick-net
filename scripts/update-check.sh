@@ -1,4 +1,5 @@
 #!/bin/bash
+CLAUDE=/Users/erhan/.local/bin/claude
 # Stackpick — Tool Update Checker
 # Checks 15 oldest tools for pricing/status changes and updates tools.json
 # Usage: ./scripts/update-check.sh
@@ -9,7 +10,18 @@ cd "$(dirname "$0")/.."
 echo "Pulling latest changes..."
 git pull origin main
 
-claude "You are maintaining a DevOps AI tools directory called Stackpick.
+# Run non-interactively with edits pre-approved. Without these flags the run
+# researches the tools, then stops without touching anything: a prompt-mode
+# session refuses Edit and any file-modifying Bash, so nothing is ever written.
+# The allowlist is scoped to what this job needs rather than skipping
+# permissions altogether.
+# The prompt goes in on stdin: --allowedTools is variadic, so a prompt passed as
+# a positional argument gets swallowed as another tool name and the CLI then
+# complains that no input was provided.
+$CLAUDE -p \
+  --permission-mode acceptEdits \
+  --allowedTools "Edit Read WebSearch WebFetch Bash(git *) Bash(npm *)" <<'PROMPT'
+You are maintaining a DevOps AI tools directory called Stackpick.
 
 Read the file src/data/tools.json.
 
@@ -31,4 +43,5 @@ git add src/data/tools.json
 git commit -m 'Update tool data - weekly check'
 git push origin main
 
-Report a brief summary of what changed and what stayed the same."
+Report a brief summary of what changed and what stayed the same.
+PROMPT
