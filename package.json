@@ -10,10 +10,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
+    "validate": "node scripts/validate-data.js",
     "generate": "node scripts/generate-tools.js",
     "add": "node scripts/add-tool.js",
     "compare": "node scripts/add-comparison.js",
-    "guide": "node scripts/add-guide.js"
+    "guide": "node scripts/add-guide.js",
+    "check-content": "node scripts/check-new-content.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
@@ -29,6 +32,8 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
-    "@fontsource/inter": "^5.2.8"
+    "@astrojs/check": "^0.9.9",
+    "@fontsource/inter": "^5.2.8",
+    "typescript": "^5.9.3"
   }
 }
