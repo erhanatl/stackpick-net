@@ -4,24 +4,37 @@
     "title": "Reduce Mean Time to Recovery (MTTR)",
     "headline": "Cut incident resolution time from hours to minutes",
     "description": "The right AIOps and observability stack can reduce MTTR by 70%+. Here's the toolchain elite SRE teams use to detect, diagnose, and resolve incidents faster in 2026.",
-    "icon": "⚡",
     "accentColor": "amber",
     "problem": "Production incidents are inevitable — but long incident resolution times are not. Teams stuck at MTTR > 4 hours typically have three problems: alerts buried in noise, slow root cause analysis, and uncoordinated incident response. AI-powered tools fix all three.",
     "stages": [
       {
         "name": "Detect",
         "description": "Smart alerting that surfaces real problems instead of noise",
-        "tools": ["datadog-ai", "dynatrace", "sentry", "bigpanda"]
+        "tools": [
+          "datadog-ai",
+          "dynatrace",
+          "sentry",
+          "bigpanda"
+        ]
       },
       {
         "name": "Diagnose",
         "description": "AI root cause analysis instead of hours of log digging",
-        "tools": ["dynatrace", "datadog-ai", "k8sgpt", "robusta"]
+        "tools": [
+          "dynatrace",
+          "datadog-ai",
+          "k8sgpt",
+          "robusta"
+        ]
       },
       {
         "name": "Respond",
         "description": "Incident management platforms that coordinate the response",
-        "tools": ["pagerduty", "firehydrant", "rootly"]
+        "tools": [
+          "pagerduty",
+          "firehydrant",
+          "rootly"
+        ]
       }
     ],
     "topTools": [
@@ -65,24 +78,34 @@
     "title": "Shift Security Left",
     "headline": "Catch vulnerabilities before they reach production",
     "description": "Shifting security left means finding vulnerabilities in the IDE and PR — not the security audit before launch. Here's the AI-powered DevSecOps stack that makes it work without slowing developers down.",
-    "icon": "🛡️",
     "accentColor": "red",
     "problem": "The cost of fixing a vulnerability in production is 100x what it costs in development. But traditional security scanning is slow, noisy, and gets ignored. Modern AI-powered tools find real issues fast enough to fix at PR time — and quiet enough that developers actually pay attention.",
     "stages": [
       {
         "name": "IDE / Pre-commit",
         "description": "Catch secrets and obvious issues before code is committed",
-        "tools": ["gitleaks", "semgrep"]
+        "tools": [
+          "gitleaks",
+          "semgrep"
+        ]
       },
       {
         "name": "PR / CI",
         "description": "AI-powered SAST and dependency scanning at PR time",
-        "tools": ["snyk", "semgrep", "checkmarx"]
+        "tools": [
+          "snyk",
+          "semgrep",
+          "checkmarx"
+        ]
       },
       {
         "name": "Container / Cloud",
         "description": "Container image scanning and cloud posture management",
-        "tools": ["aqua-security-ai", "wiz-ai", "prisma-cloud"]
+        "tools": [
+          "aqua-security-ai",
+          "wiz-ai",
+          "prisma-cloud"
+        ]
       }
     ],
     "topTools": [
@@ -126,24 +149,32 @@
     "title": "Set Up AI Pair Programming",
     "headline": "Boost developer productivity 30-50% with AI assistance",
     "description": "AI pair programming is no longer experimental — it's table stakes for competitive engineering teams. Here's the modern AI coding stack: assistants, reviewers, and the tools that make them work together.",
-    "icon": "🤖",
     "accentColor": "violet",
     "problem": "Elite engineering teams report 30-50% productivity gains from AI assistance. But picking the wrong tool — or not integrating multiple tools well — leaves most of that gain on the table. The full AI pair programming stack covers writing, reviewing, and validating code.",
     "stages": [
       {
         "name": "Write",
         "description": "AI code assistants in the IDE for completion and chat",
-        "tools": ["github-copilot", "cursor", "codeium"]
+        "tools": [
+          "github-copilot",
+          "cursor",
+          "codeium"
+        ]
       },
       {
         "name": "Review",
         "description": "AI code review on every pull request",
-        "tools": ["coderabbit"]
+        "tools": [
+          "coderabbit"
+        ]
       },
       {
         "name": "Privacy-First Options",
         "description": "Self-hosted or local-model alternatives for sensitive codebases",
-        "tools": ["tabnine", "continue-dev"]
+        "tools": [
+          "tabnine",
+          "continue-dev"
+        ]
       }
     ],
     "topTools": [
@@ -187,24 +218,33 @@
     "title": "Manage Kubernetes with AI",
     "headline": "AI-augmented Kubernetes operations for lean teams",
     "description": "Kubernetes is powerful but complex. AI tools change the equation — making cluster management, troubleshooting, and deployment accessible to teams without a dedicated platform engineering staff.",
-    "icon": "☸️",
     "accentColor": "blue",
     "problem": "Kubernetes troubleshooting traditionally requires deep expertise: kubectl, logs, events, metrics, networking. AI tools collapse this expertise gap — explaining errors in plain English, suggesting fixes, and automating common operations. Suddenly a 2-person team can run what used to need a platform engineering function.",
     "stages": [
       {
         "name": "Troubleshoot",
         "description": "AI assistants that diagnose cluster issues",
-        "tools": ["k8sgpt", "robusta", "botkube"]
+        "tools": [
+          "k8sgpt",
+          "robusta",
+          "botkube"
+        ]
       },
       {
         "name": "Deploy",
         "description": "GitOps platforms for declarative deployments",
-        "tools": ["argo-cd", "flux-cd"]
+        "tools": [
+          "argo-cd",
+          "flux-cd"
+        ]
       },
       {
         "name": "AI Agents",
         "description": "Autonomous agents that operate Kubernetes",
-        "tools": ["kagent", "kuberns"]
+        "tools": [
+          "kagent",
+          "kuberns"
+        ]
       }
     ],
     "topTools": [
@@ -246,24 +286,32 @@
     "title": "Optimize Cloud Costs",
     "headline": "Cut your AWS/GCP/Azure bill by 30% with AI",
     "description": "Cloud costs spiral fast — but most teams can cut them 20-30% with the right AI-powered optimization tools. Here's the FinOps stack that does the work for you, without forcing developers to become cost analysts.",
-    "icon": "💰",
     "accentColor": "emerald",
     "problem": "Most cloud bills have 20-30% waste: oversized instances, idle resources, suboptimal commitment plans, and forgotten dev environments. Manual FinOps is exhausting and unsustainable. AI tools automate the analysis and, increasingly, the remediation — turning cost optimization into a continuous background process.",
     "stages": [
       {
         "name": "Compute Optimization",
         "description": "Right-sizing, scheduling, and spot instance management",
-        "tools": ["sedai", "spot-by-netapp", "cloudpilot-ai"]
+        "tools": [
+          "sedai",
+          "spot-by-netapp",
+          "cloudpilot-ai"
+        ]
       },
       {
         "name": "Workload Optimization",
         "description": "Application-level optimization across resources",
-        "tools": ["ibm-turbonomic", "revefi"]
+        "tools": [
+          "ibm-turbonomic",
+          "revefi"
+        ]
       },
       {
         "name": "Visibility & Governance",
         "description": "Showback, chargeback, and budget controls",
-        "tools": ["north-cloud"]
+        "tools": [
+          "north-cloud"
+        ]
       }
     ],
     "topTools": [

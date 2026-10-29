@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ToolCard from '../components/ToolCard.astro';
 import tools from '../data/tools.json';
 import categories from '../data/categories.json';
+import { categoryIcon } from '../lib/categories';
 import guides from '../data/guides.json';
 
 const publishedTools = tools.filter(t => t.status === 'Published');
@@ -14,16 +15,9 @@ const latestGuides = [...guides]
 // We take 6 to fill a 3-column grid on 2 rows.
 const recentlyAddedTools = [...publishedTools].slice(-6).reverse();
 
-const categoryConfig: Record<string, { color: string; border: string; icon: string }> = {
-  'CI/CD':          { color: 'bg-blue-50 text-blue-700',      border: 'border-l-blue-400',   icon: '⚙️' },
-  'Code Assistant': { color: 'bg-violet-50 text-violet-700',  border: 'border-l-violet-400', icon: '🤖' },
-  'Monitoring':     { color: 'bg-emerald-50 text-emerald-700',border: 'border-l-emerald-400',icon: '📡' },
-  'Testing':        { color: 'bg-orange-50 text-orange-700',  border: 'border-l-orange-400', icon: '🧪' },
-  'Security':       { color: 'bg-red-50 text-red-700',        border: 'border-l-red-400',    icon: '🛡️' },
-  'IaC':            { color: 'bg-cyan-50 text-cyan-700',      border: 'border-l-cyan-400',   icon: '🏗️' },
-  'AI Code Review': { color: 'bg-indigo-50 text-indigo-700',  border: 'border-l-indigo-400', icon: '🔍' },
-  'AIOps':          { color: 'bg-amber-50 text-amber-700',    border: 'border-l-amber-400',  icon: '⚡' },
-};
+// Category presentation now comes from src/lib/categories.ts — stroke icons
+// instead of emoji, and no per-category hue. Eight categories carrying eight
+// colours spent the palette on a distinction the label already makes.
 
 function estimateReadingTime(content: string): number {
   const words = content.split(/\s+/).length;
@@ -120,12 +114,9 @@ function estimateReadingTime(content: string): number {
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {categories.map((cat) => {
           const toolCount = publishedTools.filter(t => t.category === cat.name).length;
-          const cfg = categoryConfig[cat.name] || { color: 'bg-gray-50 text-gray-700', border: 'border-l-gray-300', icon: '📦' };
           return (
-            <a href={`/category/${cat.slug}/`} class={`cat-card bg-white rounded-xl p-5 border border-border ${cfg.border} group flex flex-col`}>
-              <div class={`w-10 h-10 rounded-lg ${cfg.color} flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition-transform`}>
-                {cfg.icon}
-              </div>
+            <a href={`/category/${cat.slug}/`} class="cat-card bg-white rounded-xl p-5 border border-border group flex flex-col hover:border-primary/40 transition-colors">
+              <div class="w-10 h-10 rounded-lg bg-gray-50 text-text-muted flex items-center justify-center mb-3 group-hover:text-primary group-hover:bg-primary/5 transition-colors [&>svg]:w-5 [&>svg]:h-5" set:html={categoryIcon(cat.name)} />
               <h3 class="font-semibold group-hover:text-primary transition-colors text-sm">{cat.name}</h3>
               <p class="text-xs text-text-muted mt-1 mono">{toolCount} tools</p>
             </a>
@@ -236,7 +227,7 @@ function estimateReadingTime(content: string): number {
         try { domain = t.website ? new URL(t.website).hostname : ''; } catch {}
         return `
         <a href="/tools/${t.slug}/" data-index="${i}" class="search-item flex items-center gap-3 px-4 py-3 hover:bg-violet-50 transition-colors border-b border-gray-50 last:border-0">
-          <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" class="w-6 h-6 rounded" alt="" onerror="this.style.display='none'" />
+          <img src="https://icons.duckduckgo.com/ip3/${domain}.ico" class="w-6 h-6 rounded" alt="" onerror="this.style.display='none'" />
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-gray-900 truncate">${t.name}</p>
             <p class="text-xs text-gray-400">${t.category}</p>
@@ -284,8 +275,12 @@ function estimateReadingTime(content: string): number {
   <!-- Suggest Tool Section -->
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 text-center">
-      <div class="bg-gradient-to-br from-violet-50 to-cyan-50 border border-violet-100 rounded-2xl p-10">
-        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-2xl mx-auto mb-4">💡</div>
+      <div class="bg-gray-50 border border-border rounded-2xl p-10">
+        <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true">
+            <path d="M12 5v14" /><path d="M5 12h14" />
+          </svg>
+        </div>
         <h2 class="text-2xl font-bold mb-3">Know a tool we're missing?</h2>
         <p class="text-text-muted mb-6 max-w-md mx-auto">
           We review every submission. If it's a genuine AI DevOps tool, we'll add it.

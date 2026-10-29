@@ -1,14 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useCaseIcon } from '../../lib/categories';
 import useCases from '../../data/use-cases.json';
 
-const accentClasses: Record<string, { bg: string; text: string; border: string; ring: string }> = {
-  amber:   { bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-l-amber-400',   ring: 'group-hover:ring-amber-200' },
-  red:     { bg: 'bg-red-50',     text: 'text-red-700',     border: 'border-l-red-400',     ring: 'group-hover:ring-red-200' },
-  violet:  { bg: 'bg-violet-50',  text: 'text-violet-700',  border: 'border-l-violet-400',  ring: 'group-hover:ring-violet-200' },
-  blue:    { bg: 'bg-blue-50',    text: 'text-blue-700',    border: 'border-l-blue-400',    ring: 'group-hover:ring-blue-200' },
-  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-l-emerald-400', ring: 'group-hover:ring-emerald-200' },
-};
+// See the note in use-case/[slug].astro — per-use-case accent colours removed.
+const cfg = { bg: 'bg-gray-50', text: 'text-text-muted', border: '', ring: 'group-hover:ring-primary/20' };
 ---
 
 <BaseLayout
@@ -30,7 +26,6 @@ const accentClasses: Record<string, { bg: string; text: string; border: string; 
 
       <div class="grid gap-4">
         {useCases.map((uc) => {
-          const cfg = accentClasses[uc.accentColor] || accentClasses.violet;
           return (
             <a
               href={`/use-case/${uc.slug}/`}
@@ -38,7 +33,7 @@ const accentClasses: Record<string, { bg: string; text: string; border: string; 
             >
               <div class="flex items-start gap-4">
                 <div class={`flex-shrink-0 w-12 h-12 rounded-xl ${cfg.bg} flex items-center justify-center text-2xl`}>
-                  {uc.icon}
+                  <span class="text-text-muted [&>svg]:w-6 [&>svg]:h-6" set:html={useCaseIcon(uc.slug)} />
                 </div>
                 <div class="flex-1 min-w-0">
                   <h2 class="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{uc.title}</h2>

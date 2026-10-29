@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useCaseIcon } from '../../lib/categories';
 import useCases from '../../data/use-cases.json';
 import tools from '../../data/tools.json';
 import comparisons from '../../data/comparisons.json';
@@ -14,14 +15,19 @@ export function getStaticPaths() {
 
 const { uc } = Astro.props;
 
-const accentClasses: Record<string, { bg: string; text: string; border: string; pill: string; dot: string; ring: string; gradient: string }> = {
-  amber:   { bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-l-amber-400',   pill: 'bg-amber-50 text-amber-700 border-amber-100',     dot: 'bg-amber-400',   ring: 'hover:border-amber-300',   gradient: 'from-amber-50 to-orange-50' },
-  red:     { bg: 'bg-red-50',     text: 'text-red-700',     border: 'border-l-red-400',     pill: 'bg-red-50 text-red-700 border-red-100',           dot: 'bg-red-400',     ring: 'hover:border-red-300',     gradient: 'from-red-50 to-orange-50' },
-  violet:  { bg: 'bg-violet-50',  text: 'text-violet-700',  border: 'border-l-violet-400',  pill: 'bg-violet-50 text-violet-700 border-violet-100',  dot: 'bg-violet-400',  ring: 'hover:border-violet-300',  gradient: 'from-violet-50 to-purple-50' },
-  blue:    { bg: 'bg-blue-50',    text: 'text-blue-700',    border: 'border-l-blue-400',    pill: 'bg-blue-50 text-blue-700 border-blue-100',        dot: 'bg-blue-400',    ring: 'hover:border-blue-300',    gradient: 'from-blue-50 to-cyan-50' },
-  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-l-emerald-400', pill: 'bg-emerald-50 text-emerald-700 border-emerald-100', dot: 'bg-emerald-400', ring: 'hover:border-emerald-300', gradient: 'from-emerald-50 to-teal-50' },
+// Use cases previously each picked an accent colour from an `accentColor` field
+// in use-cases.json, so the five pages read as the amber one, the red one and so
+// on. The colour tracked nothing a reader needs; neutral throughout, with the
+// brand colour for emphasis.
+const cfg = {
+  bg: 'bg-gray-50',
+  text: 'text-text-muted',
+  border: '',
+  pill: 'bg-gray-50 text-text-muted border-border',
+  dot: 'bg-gray-300',
+  ring: 'hover:border-primary/40',
+  gradient: 'from-gray-50 to-gray-50',
 };
-const cfg = accentClasses[uc.accentColor] || accentClasses.violet;
 
 // Resolve tool data for top tools and stages
 const topToolsResolved = uc.topTools.map((t) => {
@@ -69,7 +75,7 @@ const canonicalUrl = `${siteUrl}/use-case/${uc.slug}/`;
       <header class={`relative rounded-2xl bg-gradient-to-br ${cfg.gradient} p-8 mb-10 overflow-hidden`}>
         <div class="relative z-10">
           <div class="flex items-center gap-3 mb-4">
-            <span class="text-4xl">{uc.icon}</span>
+            <span class="text-primary [&>svg]:w-10 [&>svg]:h-10" set:html={useCaseIcon(uc.slug)} />
             <span class={`text-xs font-medium px-2.5 py-1 rounded-full border flex items-center gap-1.5 ${cfg.pill}`}>
               <span class={`w-1.5 h-1.5 rounded-full ${cfg.dot}`}></span>
               Use Case
@@ -106,7 +112,7 @@ const canonicalUrl = `${siteUrl}/use-case/${uc.slug}/`;
                       href={`/tools/${t.slug}/`}
                       class={`flex items-center gap-3 bg-surface border border-border rounded-lg p-3 transition-all ${cfg.ring}`}
                     >
-                      {domain && <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" class="w-5 h-5 rounded shrink-0" loading="lazy" />}
+                      {domain && <img src={`https://icons.duckduckgo.com/ip3/${domain}.ico`} alt="" class="w-5 h-5 rounded shrink-0" loading="lazy" />}
                       <div class="min-w-0">
                         <p class="font-medium text-sm truncate">{t.tool_name}</p>
                         <p class="text-xs text-text-muted truncate">{t.starting_price}</p>
@@ -134,7 +140,7 @@ const canonicalUrl = `${siteUrl}/use-case/${uc.slug}/`;
                   </div>
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-3 mb-2 flex-wrap">
-                      {domain && <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" class="w-6 h-6 rounded" />}
+                      {domain && <img src={`https://icons.duckduckgo.com/ip3/${domain}.ico`} alt="" class="w-6 h-6 rounded" />}
                       <a href={`/tools/${tool.slug}/`} class="text-xl font-bold hover:text-primary transition-colors">{tool.tool_name}</a>
                       <span class="text-sm text-text-muted">by {tool.vendor}</span>
                     </div>

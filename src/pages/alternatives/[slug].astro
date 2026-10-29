@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import tools from '../../data/tools.json';
 import comparisons from '../../data/comparisons.json';
+import { pricingBadge } from '../../lib/pricing';
 
 export function getStaticPaths() {
   return tools
@@ -64,20 +65,14 @@ sameCategoryAlts.forEach(t => {
 });
 
 const toolDomain = getDomain(tool.website_url);
-const toolLogo = toolDomain ? `https://www.google.com/s2/favicons?domain=${toolDomain}&sz=64` : null;
+const toolLogo = toolDomain ? `https://icons.duckduckgo.com/ip3/${toolDomain}.ico` : null;
 
-const pricingColors: Record<string, string> = {
-  'Free': 'bg-green-100 text-green-800',
-  'Freemium': 'bg-blue-100 text-blue-800',
-  'Paid': 'bg-orange-100 text-orange-800',
-  'Enterprise': 'bg-purple-100 text-purple-800',
-  'Open Source': 'bg-emerald-100 text-emerald-800',
-};
 ---
 
 <BaseLayout
   title={`Best ${tool.tool_name} Alternatives 2026 | Top ${alternatives.length} Competitors`}
   description={`Looking for ${tool.tool_name} alternatives? Compare the top ${alternatives.length} ${tool.category} tools. Side-by-side feature comparison, pricing, and pros & cons.`}
+  noindex={true}
 >
   <article class="py-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,8 +148,9 @@ const pricingColors: Record<string, string> = {
         <div class="space-y-4">
           {alternatives.map((alt, index) => {
             const domain = getDomain(alt.website_url);
-            const logo = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null;
-            const colorClass = pricingColors[alt.pricing_model] || 'bg-gray-100 text-gray-800';
+            const logo = domain ? `https://icons.duckduckgo.com/ip3/${domain}.ico` : null;
+            const altBadge = pricingBadge(alt.pricing_model);
+            const colorClass = `${altBadge.bg} ${altBadge.text}`;
             const isCompared = comparedSlugs.has(alt.slug);
 
             return (

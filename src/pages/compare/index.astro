@@ -160,7 +160,7 @@ const comparisonsWithMeta = comparisons.map(comp => {
         toolButtons.innerHTML = categoryTools.map(t => {
           const domain = t.website_url ? new URL(t.website_url).hostname : null;
           const logoHtml = domain
-            ? `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" alt="" width="20" height="20" class="rounded shrink-0" loading="lazy">`
+            ? `<img src="https://icons.duckduckgo.com/ip3/${domain}.ico" alt="" width="20" height="20" class="rounded shrink-0" loading="lazy">`
             : `<span class="w-5 h-5 rounded bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-400 shrink-0">${t.tool_name.charAt(0)}</span>`;
           return `
             <button
@@ -234,7 +234,7 @@ const comparisonsWithMeta = comparisons.map(comp => {
 
       const headers = selected.map(t => {
         const d = t.website_url ? new URL(t.website_url).hostname : null;
-        const logo = d ? `<img src="https://www.google.com/s2/favicons?domain=${d}&sz=32" alt="" width="20" height="20" class="rounded inline-block mr-1 align-middle">` : '';
+        const logo = d ? `<img src="https://icons.duckduckgo.com/ip3/${d}.ico" alt="" width="20" height="20" class="rounded inline-block mr-1 align-middle">` : '';
         return `<th class="text-center p-4 font-semibold"><a href="/tools/${t.slug}/" class="hover:text-cyan-400 transition-colors">${logo}${t.tool_name}</a></th>`;
       }).join('');
 

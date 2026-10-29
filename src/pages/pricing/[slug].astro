@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import tools from '../../data/tools.json';
 import { marked } from 'marked';
+import { pricingBadge } from '../../lib/pricing';
 
 export function getStaticPaths() {
   return tools
@@ -31,24 +32,24 @@ const getDomain = (url: string | undefined) => {
 };
 
 const toolDomain = getDomain(tool.website_url);
-const toolLogo = toolDomain ? `https://www.google.com/s2/favicons?domain=${toolDomain}&sz=64` : null;
+const toolLogo = toolDomain ? `https://icons.duckduckgo.com/ip3/${toolDomain}.ico` : null;
 
 // Same category tools for comparison
 const categoryTools = tools
   .filter(t => t.category === tool.category && t.slug !== tool.slug && t.status === 'Published')
   .sort((a, b) => a.tool_name.localeCompare(b.tool_name));
 
-const pricingColors: Record<string, { bg: string; text: string; label: string }> = {
-  'Free': { bg: 'bg-green-50 border-green-200', text: 'text-green-700', label: 'Completely Free' },
-  'Freemium': { bg: 'bg-blue-50 border-blue-200', text: 'text-blue-700', label: 'Free Tier Available' },
-  'Paid': { bg: 'bg-orange-50 border-orange-200', text: 'text-orange-700', label: 'Paid Only' },
-  'Enterprise': { bg: 'bg-purple-50 border-purple-200', text: 'text-purple-700', label: 'Enterprise Pricing' },
-  'Open Source': { bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-700', label: 'Open Source' },
-};
 
-const pricingStyle = pricingColors[tool.pricing_model] || { bg: 'bg-gray-50 border-gray-200', text: 'text-gray-700', label: tool.pricing_model };
+const pricingStyle = pricingBadge(tool.pricing_model);
 
 const pricingContent = (tool as any).pricing_content || '';
+
+// A pricing page is only worth indexing when starting_price actually answers
+// "what does this cost?" — a figure, or a straight "free"/"open source".
+// Tools priced by quote ("Contact for pricing", "Custom pricing") have nothing
+// unique to say here, so they stay out of the index rather than adding
+// near-duplicate pages. Keep in sync with the sitemap filter in astro.config.mjs.
+const hasRealPrice = /\$\s?\d|\bfree\b|open source/i.test(tool.starting_price || '');
 
 const faqs = [
   {
@@ -77,6 +78,7 @@ const faqs = [
 <BaseLayout
   title={`${tool.tool_name} Pricing 2026 | Plans, Cost & Free Tier`}
   description={`${tool.tool_name} pricing breakdown for 2026. ${pricingStyle.label} — starting at ${tool.starting_price}. Compare plans and find the best value for your ${tool.category.toLowerCase()} needs.`}
+  noindex={!hasRealPrice}
 >
   <article class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -188,7 +190,7 @@ const faqs = [
                     <span class="text-xs text-text-muted ml-1">(this tool)</span>
                   </td>
                   <td class="p-3 text-center">
-                    <span class={`text-xs font-medium px-2.5 py-0.5 rounded-full ${pricingColors[tool.pricing_model]?.bg || 'bg-gray-100'} ${pricingColors[tool.pricing_model]?.text || 'text-gray-700'}`}>
+                    <span class={`text-xs font-medium px-2.5 py-0.5 rounded-full ${pricingBadge(tool.pricing_model).bg} ${pricingBadge(tool.pricing_model).text}`}>
                       {tool.pricing_model}
                     </span>
                   </td>
@@ -201,7 +203,7 @@ const faqs = [
                       <a href={`/pricing/${t.slug}/`} class="hover:text-primary">{t.tool_name}</a>
                     </td>
                     <td class="p-3 text-center">
-                      <span class={`text-xs font-medium px-2.5 py-0.5 rounded-full ${pricingColors[t.pricing_model]?.bg || 'bg-gray-100'} ${pricingColors[t.pricing_model]?.text || 'text-gray-700'}`}>
+                      <span class={`text-xs font-medium px-2.5 py-0.5 rounded-full ${pricingBadge(t.pricing_model).bg} ${pricingBadge(t.pricing_model).text}`}>
                         {t.pricing_model}
                       </span>
                     </td>
