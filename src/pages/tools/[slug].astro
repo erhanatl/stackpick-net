@@ -180,9 +180,11 @@ const faqs = [
         <!-- Description -->
         <p class="relative mt-5 pt-5 border-t border-gray-100 text-gray-700 leading-relaxed">{tool.short_description}</p>
 
-        {lastUpdated && (
-          <p class="mt-3 text-xs text-text-muted">Last verified: {lastUpdated}</p>
-        )}
+        <p class="mt-3 text-xs text-text-muted">
+          Reviewed by <a href="/about/" class="underline hover:text-primary">Stackpick Editorial</a>
+          {lastUpdated && <> · Last verified: {lastUpdated}</>}
+          <> · <a href="/methodology/" class="underline hover:text-primary">How we evaluate</a></>
+        </p>
       </div>
 
       <!-- Internal Link Bar -->
@@ -420,6 +422,36 @@ const faqs = [
           </div>
         </section>
       )}
+
+      <!-- JSON-LD: who published this review.
+           The SoftwareApplication block below describes the tool; this one
+           describes the page about it, so there is a machine-readable answer to
+           "who stands behind this assessment". Attribution is organisational
+           rather than a personal byline — no rating is asserted, matching the
+           no-star-ratings position set out in /methodology/. -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Review",
+        "url": `https://stackpick.net/tools/${tool.slug}/`,
+        "name": `${tool.tool_name} Review 2026`,
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": tool.tool_name,
+          "applicationCategory": "DeveloperApplication",
+          "url": tool.website_url
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Stackpick Editorial",
+          "url": "https://stackpick.net/about/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Stackpick",
+          "url": "https://stackpick.net"
+        },
+        ...(lastUpdated ? { "dateModified": (tool as any).last_updated } : {})
+      })} />
 
       <!-- JSON-LD: SoftwareApplication -->
       <script type="application/ld+json" set:html={JSON.stringify({

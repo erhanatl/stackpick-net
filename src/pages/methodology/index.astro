@@ -4,9 +4,18 @@ import tools from '../../data/tools.json';
 import comparisons from '../../data/comparisons.json';
 import guides from '../../data/guides.json';
 
-const toolCount = tools.filter(t => t.status === 'Published').length;
+const published = tools.filter(t => t.status === 'Published');
+const toolCount = published.length;
 const comparisonCount = comparisons.length;
 const guideCount = guides.length;
+
+// Counted rather than asserted, so the pricing section cannot drift away from
+// what the catalogue actually contains. Matches the indexability rule in
+// src/pages/pricing/[slug].astro: a figure, "free", or "open source" means the
+// price answers the question; anything else is quote-only.
+const quoteOnlyCount = published.filter(
+  t => !/\$\s?\d|\bfree\b|open source/i.test(t.starting_price || '')
+).length;
 ---
 
 <BaseLayout
@@ -69,7 +78,7 @@ const guideCount = guides.length;
               <strong>Availability</strong> — The tool must be commercially available or in public beta. Vaporware, private-access-only tools, or tools that have been discontinued are excluded or marked accordingly.
             </li>
             <li>
-              <strong>Verifiable pricing</strong> — Pricing must be publicly available or confirmable via the vendor's official documentation. We do not include tools where pricing is entirely opaque.
+              <strong>Stated pricing</strong> — Where a vendor publishes prices, we take the figures from their own pricing page rather than from secondary sources, and we record the conditions attached to free tiers rather than just the word "free". Plenty of enterprise tools are quote-only: {quoteOnlyCount} of the {toolCount} tools listed here publish no figure. We include them and label the price as quote-based, because leaving them out would misrepresent the category — but we never invent a number to fill the field.
             </li>
           </ol>
           <p>
