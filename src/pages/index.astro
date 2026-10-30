@@ -225,8 +225,11 @@ function estimateReadingTime(content: string): number {
       resultsBox.innerHTML = matches.map((t, i) => {
         let domain = '';
         try { domain = t.website ? new URL(t.website).hostname : ''; } catch {}
+        // href is assigned below rather than written into this string. Crawlers
+        // read the raw inline script as text, and an `href="/tools/${'$'}{t.slug}/"`
+        // in the source gets picked up as a literal URL to fetch, which 404s.
         return `
-        <a href="/tools/${t.slug}/" data-index="${i}" class="search-item flex items-center gap-3 px-4 py-3 hover:bg-violet-50 transition-colors border-b border-gray-50 last:border-0">
+        <a data-slug="${t.slug}" data-index="${i}" class="search-item flex items-center gap-3 px-4 py-3 hover:bg-violet-50 transition-colors border-b border-gray-50 last:border-0">
           <img src="https://icons.duckduckgo.com/ip3/${domain}.ico" class="w-6 h-6 rounded" alt="" onerror="this.style.display='none'" />
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-gray-900 truncate">${t.name}</p>
@@ -235,6 +238,9 @@ function estimateReadingTime(content: string): number {
           <svg class="w-4 h-4 text-gray-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </a>`
       }).join('');
+      resultsBox.querySelectorAll('a[data-slug]').forEach((a) => {
+        a.href = '/tools/' + a.dataset.slug + '/';
+      });
       resultsBox.classList.remove('hidden');
     }
 

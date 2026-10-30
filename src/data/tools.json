@@ -1152,7 +1152,7 @@
     "avoid_if": "You don't have large volumes of alerts from multiple monitoring tools — BigPanda's correlation is designed for enterprise-scale alert volumes."
   },
   {
-    "tool_name": "Claude",
+    "tool_name": "Claude Code",
     "slug": "claude-code",
     "category": "Code Assistant",
     "short_description": "Claude is an AI assistant developed by Anthropic that excels at code generation, debugging, and technical writing. Paid plans include access to the Claude Code CLI.",

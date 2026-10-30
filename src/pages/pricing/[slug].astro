@@ -44,13 +44,6 @@ const pricingStyle = pricingBadge(tool.pricing_model);
 
 const pricingContent = (tool as any).pricing_content || '';
 
-// A pricing page is only worth indexing when starting_price actually answers
-// "what does this cost?" — a figure, or a straight "free"/"open source".
-// Tools priced by quote ("Contact for pricing", "Custom pricing") have nothing
-// unique to say here, so they stay out of the index rather than adding
-// near-duplicate pages. Keep in sync with the sitemap filter in astro.config.mjs.
-const hasRealPrice = /\$\s?\d|\bfree\b|open source/i.test(tool.starting_price || '');
-
 const faqs = [
   {
     question: `How much does ${tool.tool_name} cost?`,
@@ -78,7 +71,6 @@ const faqs = [
 <BaseLayout
   title={`${tool.tool_name} Pricing 2026 | Plans, Cost & Free Tier`}
   description={`${tool.tool_name} pricing breakdown for 2026. ${pricingStyle.label} — starting at ${tool.starting_price}. Compare plans and find the best value for your ${tool.category.toLowerCase()} needs.`}
-  noindex={!hasRealPrice}
 >
   <article class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
