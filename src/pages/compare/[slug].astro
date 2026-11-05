@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { composeDescription, shortPrice } from '../../lib/meta';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import tools from '../../data/tools.json';
 import comparisons from '../../data/comparisons.json';
@@ -22,7 +23,7 @@ const toolNames = comparedTools.map(t => t.tool_name).join(' vs ');
 
 <BaseLayout
   title={`${toolNames} (2026)`}
-  description={comparison.description}
+  description={composeDescription([comparison.description])}
 >
   <article class="py-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

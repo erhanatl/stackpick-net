@@ -1,0 +1,11 @@
+# Cloudflare Pages redirect rules.
+#
+# www.stackpick.net was serving the site directly with a 200 rather than
+# redirecting, so both hostnames returned every page. The canonical tag points
+# at the apex everywhere, which is usually enough for Google to consolidate,
+# but a redirect removes the ambiguity instead of relying on it — and stops the
+# www host accumulating its own crawl history.
+#
+# 301 is permanent: the apex is the canonical host and that is not going to
+# change. :splat carries the rest of the path through.
+https://www.stackpick.net/* https://stackpick.net/:splat 301!

@@ -5,6 +5,7 @@ import comparisons from '../../data/comparisons.json';
 import guides from '../../data/guides.json';
 import { marked } from 'marked';
 import { parsePriceLines, pricingBadge } from '../../lib/pricing';
+import { composeDescription, shortPrice } from '../../lib/meta';
 import { categoryIcon } from '../../lib/categories';
 
 export function getStaticPaths() {
@@ -107,7 +108,10 @@ const faqs = [
 
 <BaseLayout
   title={`${tool.tool_name} Review 2026 | Pricing, Pros & Cons`}
-  description={`${tool.tool_name} by ${tool.vendor} — ${tool.short_description} Pricing: ${tool.starting_price} (${tool.pricing_model}).`}
+  description={composeDescription([
+    tool.short_description,
+    shortPrice(tool.starting_price) && `Pricing from ${shortPrice(tool.starting_price)}.`,
+  ])}
 >
   <article class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
