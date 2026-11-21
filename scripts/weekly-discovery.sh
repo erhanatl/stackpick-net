@@ -75,6 +75,10 @@ elif [ "$BEFORE" = "$AFTER" ]; then
   [ "$STREAK" -ge 2 ] && notify "No new tools for $STREAK weeks — candidate pool may be exhausted"
 else
   say "finished — committed $(git log --oneline -1 --format='%h %s')"
+  if ! ./scripts/check-deploy.sh "$(git rev-parse HEAD)" 900; then
+    say "DEPLOY DID NOT LAND — see logs/deploy-check.log"
+    notify "Discovery pushed but the site did not update — check Cloudflare Pages"
+  fi
 fi
 
 if [ "$(wc -l <"$LOG")" -gt 2000 ]; then

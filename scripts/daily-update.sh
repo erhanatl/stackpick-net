@@ -84,6 +84,12 @@ elif [ "$BEFORE" = "$AFTER" ]; then
   [ "$STREAK" -ge 3 ] && notify "No update committed for $STREAK days — see logs/daily-update.log"
 else
   say "finished — committed $(git log --oneline -1 --format='%h %s')"
+  # Committing is not publishing. Both past outages looked exactly like this
+  # point in the script: commit made, push accepted, site unchanged for days.
+  if ! ./scripts/check-deploy.sh "$(git rev-parse HEAD)" 900; then
+    say "DEPLOY DID NOT LAND — see logs/deploy-check.log"
+    notify "Commit pushed but the site did not update — check Cloudflare Pages"
+  fi
 fi
 
 # Keep the log from growing without bound.

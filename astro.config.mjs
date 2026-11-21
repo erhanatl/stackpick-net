@@ -11,7 +11,9 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/404') &&
         !page.includes('/thanks') &&
-        !page.includes('/og/'),
+        !page.includes('/og/') &&
+        // Deploy marker read by scripts/check-deploy.sh, not a page.
+        !page.includes('/build-info'),
     }),
   ],
   vite: {
