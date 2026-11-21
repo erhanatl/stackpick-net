@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { composeDescription, pricingSentence } from '../../lib/meta';
+import { parsePriceLines } from '../../lib/pricing';
 import tools from '../../data/tools.json';
 import { marked } from 'marked';
 import { pricingBadge } from '../../lib/pricing';
@@ -45,18 +46,20 @@ const pricingStyle = pricingBadge(tool.pricing_model);
 
 const pricingContent = (tool as any).pricing_content || '';
 
+const priceLines = parsePriceLines(tool.starting_price);
+
 const faqs = [
   {
     question: `How much does ${tool.tool_name} cost?`,
-    answer: `${tool.tool_name} uses a ${tool.pricing_model.toLowerCase()} pricing model. Plans start at ${tool.starting_price}.`
+    answer: `${tool.tool_name} uses ${tool.pricing_model.toLowerCase()} pricing. ${pricingSentence(tool.pricing_model, tool.starting_price)}`
   },
   {
     question: `Does ${tool.tool_name} have a free plan?`,
     answer: tool.pricing_model === 'Free' || tool.pricing_model === 'Open Source'
       ? `Yes, ${tool.tool_name} is completely free to use.`
       : tool.pricing_model === 'Freemium'
-        ? `Yes, ${tool.tool_name} offers a free tier with limited features. Paid plans start at ${tool.starting_price}.`
-        : `No, ${tool.tool_name} does not offer a free plan. Pricing starts at ${tool.starting_price}.`
+        ? `Yes, ${tool.tool_name} offers a free tier with limited features. ${pricingSentence(tool.pricing_model, tool.starting_price)}`
+        : `No, ${tool.tool_name} does not offer a free plan. ${pricingSentence(tool.pricing_model, tool.starting_price)}`
   },
   {
     question: `Is ${tool.tool_name} worth the price?`,
@@ -70,7 +73,16 @@ const faqs = [
 ---
 
 <BaseLayout
-  title={`${tool.tool_name} Pricing 2026 | Plans, Cost & Free Tier`}
+  {/* "Free Tier" was hardcoded into every title, including tools that have no
+      free tier — a promise the page then contradicts, which is worse in a
+      result listing than a plainer title. */}
+  title={`${tool.tool_name} Pricing 2026 | ${
+    tool.pricing_model === 'Free' || tool.pricing_model === 'Open Source'
+      ? 'Free & Open Source'
+      : tool.pricing_model === 'Freemium'
+        ? 'Plans, Cost & Free Tier'
+        : 'Plans & Cost'
+  }`}
   description={composeDescription([
     `${tool.tool_name} pricing for 2026.`,
     pricingSentence(tool.pricing_model, tool.starting_price),
@@ -113,7 +125,18 @@ const faqs = [
           <div>
             <span class={`text-sm font-semibold uppercase tracking-wide ${pricingStyle.text}`}>{pricingStyle.label}</span>
             <div class="mt-2">
-              <span class="text-4xl font-bold text-secondary">{tool.starting_price}</span>
+              {priceLines.length === 1 && !priceLines[0].label ? (
+                <span class="text-3xl font-bold text-secondary">{priceLines[0].value}</span>
+              ) : (
+                <dl class="text-sm max-w-md">
+                  {priceLines.map((line) => (
+                    <div class="flex items-baseline justify-between gap-4 py-1 border-b border-black/5 last:border-0">
+                      {line.label && <dt class="font-semibold text-secondary shrink-0">{line.label}</dt>}
+                      <dd class={`text-text-muted tabular-nums ${line.label ? 'text-right' : ''}`}>{line.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
             </div>
             <p class="text-text-muted mt-1">by {tool.vendor} · {tool.category}</p>
           </div>

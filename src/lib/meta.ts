@@ -85,7 +85,15 @@ export function pricingSentence(
 ): string {
   const price = clean(startingPrice || '');
   const figure = price.match(/\$\s?[\d.,]+(?:\s*\/\s*[\w/]+)?/);
-  const hasFreeEntry = /\bfree\b/i.test(price) || model === 'Free' || model === 'Open Source';
+
+  // A trial is not a free tier, and conflating them publishes a false claim
+  // about what a vendor charges. "14-day free trial; Team and Enterprise
+  // quoted" contains the word "free" but entitles nobody to a free plan, so
+  // strip trial wording before asking whether a free entry point exists.
+  const withoutTrial = price.replace(/\b(?:\d+[-\s]?(?:day|week|month)s?\s+)?free\s+trial\b/gi, '');
+  const hasTrial = /\bfree\s+trial\b/i.test(price);
+  const hasFreeEntry =
+    /\bfree\b/i.test(withoutTrial) || model === 'Free' || model === 'Open Source';
 
   if (model === 'Open Source') {
     return figure ? `Open source, with paid plans from ${clean(figure[0])}.` : 'Free and open source.';
@@ -94,5 +102,6 @@ export function pricingSentence(
   if (figure && hasFreeEntry) return `Free tier, paid plans from ${clean(figure[0])}.`;
   if (figure) return `Plans from ${clean(figure[0])}.`;
   if (hasFreeEntry) return 'Free tier available.';
+  if (hasTrial) return 'Free trial, then quote-based pricing.';
   return 'Quote-based pricing.';
 }
