@@ -6,6 +6,22 @@ import comparisons from '../../data/comparisons.json';
 const publishedTools = tools.filter(t => t.status === 'Published');
 const categories = [...new Set(publishedTools.map(t => t.category))].sort();
 
+// The comparison builder below runs in the browser and reads ten fields per
+// tool. Handing it the whole tool objects also shipped every tool's `content`
+// markdown — about 1.3 MB the page never reads — to every visitor.
+const compareTools = publishedTools.map(t => ({
+  slug: t.slug,
+  tool_name: t.tool_name,
+  vendor: t.vendor,
+  category: t.category,
+  website_url: t.website_url,
+  pricing_model: t.pricing_model,
+  starting_price: t.starting_price,
+  pros: t.pros,
+  cons: t.cons,
+  affiliate_url: t.affiliate_url,
+}));
+
 // Enrich each comparison with tool names + categories for client-side filtering
 const comparisonsWithMeta = comparisons.map(comp => {
   const compTools = comp.tools.map((s: string) => publishedTools.find(t => t.slug === s)).filter(Boolean);
@@ -135,8 +151,8 @@ const comparisonsWithMeta = comparisons.map(comp => {
   </section>
 
   <!-- Tools data for JavaScript -->
-  <script define:vars={{ publishedTools }}>
-    const allTools = publishedTools;
+  <script define:vars={{ compareTools }}>
+    const allTools = compareTools;
     let selectedCategory = null;
     let selectedTools = [];
 
