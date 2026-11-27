@@ -4,14 +4,26 @@
     {
       "name": "stackpick",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "4321"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "4321"
+      ],
       "port": 4321
     },
     {
       "name": "stackpick-dist",
-      "runtimeExecutable": "/Users/erhan/.npm/_npx/aab42732f01924e5/node_modules/.bin/serve",
-      "runtimeArgs": ["/Users/erhan/dev/stackpick-net-astro/dist", "-l", "4321"],
-      "port": 4321
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "--yes",
+        "serve@14.2.8",
+        "dist",
+        "-l",
+        "4322"
+      ],
+      "port": 4322
     }
   ]
 }
