@@ -34,8 +34,8 @@ function estimateReadingTime(content: string): number {
     <div class="absolute inset-0 dot-grid opacity-40"></div>
     <div class="absolute top-0 right-0 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
     <div class="absolute bottom-0 left-0 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
-    <!-- Particle swarm canvas — pointer-events:none so it never blocks clicks -->
-    <canvas id="hero-particles" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:1"></canvas>
+    <!-- Pointer-field canvas — pointer-events:none so it never blocks clicks -->
+    <canvas id="hero-field" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:1"></canvas>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative" style="z-index:2">
       <div class="animate-fade-up">
@@ -46,7 +46,7 @@ function estimateReadingTime(content: string): number {
 
         <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight">
           Find the Right AI Tools<br />
-          <span class="bg-gradient-to-r from-violet-300 via-cyan-300 to-violet-300 bg-clip-text text-transparent">for Your DevOps Stack</span>
+          <span class="text-cyan-300">for Your DevOps Stack</span>
         </h1>
         <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
           Independent, unsponsored comparisons. No affiliate rankings. Just honest picks to help your team cut through the noise.
@@ -298,138 +298,119 @@ function estimateReadingTime(content: string): number {
     </div>
   </section>
 
-  <!-- Confetti-dash particle effect — hero section only (Antigravity-style) -->
+  <!-- Pointer field — hero only. Short segments on a lattice, each aimed at the
+       cursor; a quadratic falloff keeps the bright core small while the rest of
+       the field still orients. Replaces the old particle swarm. -->
   <script>
-    // Must be a named function so astro:after-swap can re-trigger it
-    function initHeroParticles() {
-      if ((window as any).__heroParticles) return;
+    function initHeroField() {
+      if (window.__heroField) return;
 
-      const hero   = document.getElementById('hero-section') as HTMLElement;
-      const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
-      if (!hero || !canvas) return; // not on homepage, skip silently
+      const hero   = document.getElementById('hero-section');
+      const canvas = document.getElementById('hero-field');
+      if (!hero || !canvas) return; // not on the homepage, skip silently
 
-      (window as any).__heroParticles = true;
-      const ctx = canvas.getContext('2d')!;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      window.__heroField = true;
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const GAIN = 1.3;
+      const STEP = 46;
+      const REACH = 300;
+
+      let w = 0, h = 0;
+      let tx = 0, ty = 0;   // pointer target
+      let px = 0, py = 0;   // eased position the drawing follows
+      let engaged = false;  // has a real pointer entered the hero yet
+      let t0 = performance.now();
+      let raf = 0, visible = true;
 
       function resize() {
-        canvas.width  = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
-      }
-      resize();
-      const ro = new ResizeObserver(resize);
-      ro.observe(hero);
-
-      const COLORS = [
-        'rgba(167,139,250,',
-        'rgba(139,92,246,',
-        'rgba(196,181,253,',
-        'rgba(6,182,212,',
-        'rgba(103,232,249,',
-        'rgba(255,255,255,',
-      ];
-
-      interface Dash {
-        x: number; y: number;
-        ox: number; oy: number;   // home position — return target
-        vx: number; vy: number;
-        len: number; thick: number;
-        angle: number; spin: number;
-        alpha: number; color: string;
-      }
-
-      const COUNT = 45;           // %50 azaltıldı
-      const dashes: Dash[] = [];
-
-      function spawn(): Dash {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        return {
-          x, y, ox: x, oy: y,
-          vx:    (Math.random() - 0.5) * 0.6,
-          vy:    (Math.random() - 0.5) * 0.6,
-          len:   2.5 + Math.random() * 4.5,
-          thick: 1.5 + Math.random() * 1.5,
-          angle: Math.random() * Math.PI * 2,
-          spin:  (Math.random() - 0.5) * 0.025,
-          alpha: 0.35 + Math.random() * 0.45,
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        };
-      }
-      for (let i = 0; i < COUNT; i++) dashes.push(spawn());
-
-      // Mouse repulsion
-      let mx = -9999, my = -9999;
-      const REPEL_RADIUS = 140;
-      const REPEL_FORCE  = 0.35;  // yarı hız (önceki 0.7'nin yarısı)
-
-      hero.addEventListener('mousemove', (e: MouseEvent) => {
         const r = hero.getBoundingClientRect();
-        mx = e.clientX - r.left;
-        my = e.clientY - r.top;
-      });
-      hero.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
-
-      let rafId: number;
-
-      function frame() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const W = canvas.width, H = canvas.height;
-
-        for (const d of dashes) {
-          // Repulsion veya home'a dönüş
-          const dx = d.x - mx, dy = d.y - my;
-          const dist = Math.hypot(dx, dy);
-          if (dist < REPEL_RADIUS && dist > 0) {
-            // Cursor yakında → yarı hızda kaç
-            const f = (1 - dist / REPEL_RADIUS) * REPEL_FORCE;
-            d.vx += (dx / dist) * f;
-            d.vy += (dy / dist) * f;
-          } else {
-            // Cursor uzakta → çok yavaş home'a çek (spring force)
-            d.vx += (d.ox - d.x) * 0.0008;
-            d.vy += (d.oy - d.y) * 0.0008;
-          }
-
-          // Minimal random drift (organik his için küçük tutuldu)
-          d.vx += (Math.random() - 0.5) * 0.008;
-          d.vy += (Math.random() - 0.5) * 0.008;
-          d.vx *= 0.97;
-          d.vy *= 0.97;
-
-          d.x += d.vx; d.y += d.vy; d.angle += d.spin;
-
-          // Wrap edges
-          if (d.x < -20) d.x = W + 20; else if (d.x > W + 20) d.x = -20;
-          if (d.y < -20) d.y = H + 20; else if (d.y > H + 20) d.y = -20;
-
-          // Draw
-          ctx.save();
-          ctx.translate(d.x, d.y);
-          ctx.rotate(d.angle);
-          ctx.beginPath();
-          ctx.moveTo(-d.len / 2, 0);
-          ctx.lineTo(d.len / 2, 0);
-          ctx.strokeStyle = d.color + d.alpha + ')';
-          ctx.lineWidth   = d.thick;
-          ctx.lineCap     = 'round';
-          ctx.stroke();
-          ctx.restore();
-        }
-
-        rafId = requestAnimationFrame(frame);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = Math.max(1, Math.round(r.width));
+        h = Math.max(1, Math.round(r.height));
+        canvas.width  = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (!engaged) { px = tx = w * 0.5; py = ty = h * 0.5; }
       }
-      rafId = requestAnimationFrame(frame);
 
-      // Cleanup on navigation away — reset guard so re-init works on return
-      document.addEventListener('astro:before-preparation', () => {
-        cancelAnimationFrame(rafId);
-        ro.disconnect();
-        (window as any).__heroParticles = false;
-      }, { once: true });
+      // With no pointer the focus drifts, so the hero is never dead on a phone
+      // or before the first mouse move.
+      function drift(now) {
+        const s = (now - t0) / 1000;
+        tx = w * (0.5 + 0.30 * Math.sin(s * 0.27));
+        ty = h * (0.5 + 0.26 * Math.sin(s * 0.41 + 1.1));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        ctx.lineCap = 'round';
+        for (let y = STEP * 0.5; y < h; y += STEP) {
+          for (let x = STEP * 0.5; x < w; x += STEP) {
+            const dx = px - x, dy = py - y;
+            const d = Math.sqrt(dx * dx + dy * dy) || 1;
+            const kr = Math.max(0, 1 - d / REACH);
+            const k = kr * kr;
+            const len = (4 + k * 8) * (0.9 + GAIN * 0.2);
+            const ux = dx / d, uy = dy / d;
+            ctx.strokeStyle = 'rgba(' + Math.round(109 + k * 30) + ',' +
+                                        Math.round(40  + k * 52) + ',' +
+                                        Math.round(217 + k * 29) + ',' +
+                                        Math.min(0.95, (0.26 + k * 0.46) * GAIN).toFixed(3) + ')';
+            ctx.lineWidth = 0.9 + k * 0.5;
+            ctx.beginPath();
+            ctx.moveTo(x - ux * len * 0.5, y - uy * len * 0.5);
+            ctx.lineTo(x + ux * len * 0.5, y + uy * len * 0.5);
+            ctx.stroke();
+          }
+        }
+      }
+
+      function frame(now) {
+        if (!engaged) drift(now);
+        px += (tx - px) * 0.085;
+        py += (ty - py) * 0.085;
+        draw();
+        raf = requestAnimationFrame(frame);
+      }
+
+      function start() { if (!raf && visible && !reduced) raf = requestAnimationFrame(frame); }
+      function stop()  { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+      hero.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return;
+        const r = hero.getBoundingClientRect();
+        tx = e.clientX - r.left;
+        ty = e.clientY - r.top;
+        engaged = true;
+      }, { passive: true });
+
+      hero.addEventListener('pointerleave', () => {
+        engaged = false;
+        t0 = performance.now();
+      }, { passive: true });
+
+      if ('ResizeObserver' in window) new ResizeObserver(resize).observe(hero);
+      else window.addEventListener('resize', resize);
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver((es) => {
+          visible = es[0].isIntersecting;
+          visible ? start() : stop();
+        }, { threshold: 0 }).observe(hero);
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        document.hidden ? stop() : start();
+      });
+
+      resize();
+      if (reduced) draw();   // one still frame, no loop
+      else start();
     }
 
-    // Run on first load and after every View Transitions swap
-    initHeroParticles();
-    document.addEventListener('astro:after-swap', initHeroParticles);
+    initHeroField();
   </script>
 </BaseLayout>
